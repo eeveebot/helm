@@ -375,8 +375,13 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   labels:
+    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: eevee
   {{- include "eevee-operator.labels" . | nindent 4 }}
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.15.0
+    meta.helm.sh/release-name: eevee
+    meta.helm.sh/release-namespace: default
   name: eevee-operator-leader-election-rolebinding
   namespace: {{ .Values.operatorNamespace | default "eevee-system" }}
 roleRef:
@@ -393,8 +398,13 @@ kind: ClusterRoleBinding
 metadata:
   name: eevee-operator-metrics-auth-rolebinding
   labels:
+    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: eevee
   {{- include "eevee-operator.labels" . | nindent 4 }}
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.15.0
+    meta.helm.sh/release-name: eevee
+    meta.helm.sh/release-namespace: default
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -408,8 +418,13 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   labels:
+    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: eevee
   {{- include "eevee-operator.labels" . | nindent 4 }}
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.15.0
+    meta.helm.sh/release-name: eevee
+    meta.helm.sh/release-namespace: default
   name: eevee-operator-rolebinding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -424,9 +439,14 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
+    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: eevee
-  {{- include "eevee-operator.labels" . | nindent 4 }}
     control-plane: eevee
+  {{- include "eevee-operator.labels" . | nindent 4 }}
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.15.0
+    meta.helm.sh/release-name: eevee
+    meta.helm.sh/release-namespace: default
   name: eevee-operator-metrics-service
   namespace: {{ .Values.operatorNamespace | default "eevee-system" }}
 spec:
@@ -444,7 +464,12 @@ metadata:
   labels:
     app.kubernetes.io/name: eevee-operator
     control-plane: eevee
+    app.kubernetes.io/managed-by: Helm
   {{- include "eevee-operator.labels" . | nindent 4 }}
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.15.0
+    meta.helm.sh/release-name: eevee
+    meta.helm.sh/release-namespace: default
   name: eevee-operator
   namespace: {{ .Values.operatorNamespace | default "eevee-system" }}
 spec:
