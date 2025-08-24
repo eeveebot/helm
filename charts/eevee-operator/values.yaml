@@ -7,6 +7,9 @@ operatorNamespace: eevee-system
 metrics:
   enabled: true
 
+crds:
+  install: true
+
 # Deploy the eevee-bot operator
 operator:
   enabled: true

@@ -60,3 +60,12 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{- define "eevee-operator.crdInstall" -}}
+{{- printf "%s-%s" ( include "eevee-operator.name" . ) "crd-install" | replace "+" "_" | trimSuffix "-" -}}
+{{- end -}}
+
+{{- define "eevee-operator.CRDInstallAnnotations" -}}
+"helm.sh/hook": "pre-install,pre-upgrade"
+"helm.sh/hook-delete-policy": "before-hook-creation,hook-succeeded,hook-failed"
+{{- end -}}
