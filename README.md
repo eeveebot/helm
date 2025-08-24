@@ -37,6 +37,14 @@ See [charts/eevee/values.yaml](charts/eevee/values.yaml) for details
 helm upgrade --install eevee eevee/eevee --values eevee-values.yaml
 ```
 
+## Version Info
+
+Due to weirdnesses in how github handles helm chart releases, we do the following:
+
+- Component charts skip odd minor revs
+- Meta chart odd minor rev points to old component charts
+- Meta chart even minor rev points to same ver components
+
 ## License
 
 All eevee components are covered under `Attribution-NonCommercial-ShareAlike 4.0 International`
