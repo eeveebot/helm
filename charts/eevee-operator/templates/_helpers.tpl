@@ -69,3 +69,13 @@ Create the name of the service account to use
 "helm.sh/hook": "pre-install,pre-upgrade"
 "helm.sh/hook-delete-policy": "before-hook-creation,hook-succeeded,hook-failed"
 {{- end -}}
+
+{{/* Create a label which can be used to select any orphaned crd-install hook resources */}}
+{{- define "eevee-operator.CRDInstallSelector" -}}
+{{- printf "%s" "crd-install-hook" -}}
+{{- end -}}
+
+{{- define "eevee-operator.selectorLabels" -}}
+app.kubernetes.io/name: "{{ template "eevee-operator.name" . }}"
+app.kubernetes.io/instance: "{{ template "eevee-operator.name" . }}"
+{{- end -}}
