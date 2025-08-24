@@ -13,22 +13,22 @@ type: application
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: "0.0.60"
+version: "0.0.61"
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
 appVersion: "0.0.1"
 dependencies:
-  - name: eevee-bot
-    repository: file://../eevee-bot
-    version: '0.0.60'
-    condition: eevee-bot.enabled
+  #  - name: eevee-crds
+  #    repository: file://../eevee-crds
+  #    version: '0.0.60'
+  #    condition: eevee-crds.enabled
   - name: eevee-operator
     repository: file://../eevee-operator
-    version: '0.0.60'
+    version: '0.0.61'
     condition: eevee-operator.enabled
-  - name: eevee-crds
-    repository: file://../eevee-crds
-    version: '0.0.60'
-    condition: eevee-crds.enabled
+  - name: eevee-bot
+    repository: file://../eevee-bot
+    version: '0.0.61'
+    condition: eevee-bot.enabled
