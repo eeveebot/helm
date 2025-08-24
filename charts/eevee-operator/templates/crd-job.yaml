@@ -1,3 +1,6 @@
+# Ganked most of this from https://github.com/giantswarm/eevee-operator-app/blob/a8315a8e89dc291f70f8c5fbc800598ae347835f/helm/prometheus-operator-app/templates/crd-install/crd-rbac.yaml
+# Consider their license to apply to this file in particular
+
 {{- if .Values.crds.install }}
 apiVersion: batch/v1
 kind: Job
@@ -78,4 +81,93 @@ metadata:
     {{- include "eevee-operator.selectorLabels" . | nindent 4 }}
     role: {{ include "eevee-operator.CRDInstallSelector" . | quote }}
 
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "eevee-operator.crdInstall" . }}
+  namespace: {{ .Release.Namespace | quote }}
+  annotations:
+    # create hook dependencies in the right order
+    "helm.sh/hook-weight": "-3"
+    {{- include "eevee-operator.CRDInstallAnnotations" . | nindent 4 }}
+  labels:
+    app.kubernetes.io/component: {{ include "eevee-operator.crdInstall" . | quote }}
+    {{- include "eevee-operator.selectorLabels" . | nindent 4 }}
+    role: {{ include "eevee-operator.CRDInstallSelector" . | quote }}
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - jobs
+  verbs:
+  - create
+  - delete
+- apiGroups:
+  - apiextensions.k8s.io
+  resources:
+  - customresourcedefinitions
+  verbs:
+  - create
+  - delete
+  - get
+  - patch
+- apiGroups:
+  - policy
+  resources:
+  - podsecuritypolicies
+  resourceNames:
+  - {{ include "eevee-operator.crdInstall" . }}
+  verbs:
+  - use
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "eevee-operator.crdInstall" . }}
+  namespace: {{ .Release.Namespace | quote }}
+  annotations:
+    # create hook dependencies in the right order
+    "helm.sh/hook-weight": "-2"
+    {{- include "eevee-operator.CRDInstallAnnotations" . | nindent 4 }}
+  labels:
+    app.kubernetes.io/component: {{ include "eevee-operator.crdInstall" . | quote }}
+    {{- include "eevee-operator.labels" . | nindent 4 }}
+    role: {{ include "eevee-operator.CRDInstallSelector" . | quote }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ include "eevee-operator.crdInstall" . }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "eevee-operator.crdInstall" . }}
+    namespace: {{ .Release.Namespace | quote }}
+
+---
+{{/*
+We have to create individual configmaps for each CRD - they exceed the total
+allowed length for a configmap if they are combined.
+*/}}
+{{ $currentScope := . }}
+  {{- range $path, $_ := .Files.Glob "crds/**" }}
+    {{- with $currentScope }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "eevee-operator.crdInstall" . }}-{{ $path | base | trimSuffix ".yaml" }}
+  namespace: {{ .Release.Namespace | quote }}
+  annotations:
+    # create hook dependencies in the right order
+    "helm.sh/hook-weight": "-5"
+    {{- include "eevee-operator.CRDInstallAnnotations" . | nindent 4 }}
+  labels:
+    app.kubernetes.io/component: {{ include "eevee-operator.crdInstall" . | quote }}
+    {{- include "eevee-operator.selectorLabels" . | nindent 4 }}
+    role: {{ include "eevee-operator.CRDInstallSelector" . | quote }}
+data:
+  content: |
+{{ .Files.Get $path | indent 4 }}
+    {{- end }}
+  {{- end }}
 {{- end }}
