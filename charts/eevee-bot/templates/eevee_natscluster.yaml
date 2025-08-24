@@ -4,10 +4,10 @@
 apiVersion: eevee.bot/v1alpha1
 kind: NatsCluster
 metadata:
-  name: {{ include "charts.fullname" . }}-nats-cluster
+  name: {{ include "eevee-bot.fullname" . }}-nats-cluster
   namespace: {{ .Values.botNamespace | default "eevee-bot" }}
   labels:
-  {{- include "charts.labels" . | nindent 4 }}
+  {{- include "eevee-bot.labels" . | nindent 4 }}
 spec:
   config:
     cluster:
