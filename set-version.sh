@@ -11,10 +11,13 @@ VERSION=$1
 
 export VERSION
 
-# Find all Chart.yaml files recursively and update the version
+# Use find to locate all Chart.yaml files recursively
 find . -name "Chart.yaml" | while IFS= read -r file; do
   echo "Updating $file to version $VERSION"
-  yq e -i '(.version) = env(VERSION)' "$file"
+
+  # Update the version field and dependencies in each document
+  yq e -i '(.. | select(tag == "!!map" and has("version"))).version = env(VERSION)' "$file"
+  yq e -i '(.. | select(tag == "!!map" and has("dependencies"))).dependencies[] |= select(has("version")).version = env(VERSION)' "$file"
 done
 
 echo "Updated version to $VERSION in all Chart.yaml files."

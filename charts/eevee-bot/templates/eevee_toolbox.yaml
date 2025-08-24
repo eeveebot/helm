@@ -1,4 +1,4 @@
-{{ if .Values.toolbox.enabled | default true }}
+{{ if .Values.toolbox.enabled }}
 ---
 apiVersion: eevee.bot/v1alpha1
 kind: Toolbox

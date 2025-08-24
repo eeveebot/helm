@@ -1,5 +1,5 @@
 
-{{ if .Values.nats.enabled | default true }}
+{{ if .Values.nats.enabled }}
 ---
 apiVersion: eevee.bot/v1alpha1
 kind: NatsCluster

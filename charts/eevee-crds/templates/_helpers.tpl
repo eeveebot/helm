@@ -2,7 +2,9 @@
 Expand the name of the chart.
 */}}
 {{- define "charts.name" -}}
-{{- default .Chart.Name .Values.nameOverride . | trunc 63 | trimSuffix "-" }}
+{{- $name := default .Chart.Name .Values.nameOverride . }}
+{{- else }}
+{{- printf "%ss" .Chart.Name | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
