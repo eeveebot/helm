@@ -24,10 +24,10 @@ appVersion: "0.0.1"
 dependencies:
 - name: eevee-bot
   repository: https://helm.eevee.bot/
-  version: '^.*$'
+  version: '~0.0.0'
 - name: eevee-operator
   repository: https://helm.eevee.bot/
-  version: '^.*$'
+  version: '~0.0.0'
 - name: eevee-crd
   repository: https://helm.eevee.bot/
-  version: '^.*$'
+  version: '~0.0.0'
