@@ -1,6 +1,9 @@
 ---
 # eevee Helm values
 
+nameOverride: false
+fullnameOverride: false
+
 # Deploy eevee-bot CRDs
 crds:
   enabled: true

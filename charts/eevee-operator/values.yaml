@@ -1,6 +1,9 @@
 ---
 # eevee Helm values
 
+nameOverride: false
+fullnameOverride: false
+
 # Namespace for the operator
 operatorNamespace: eevee-system
 
