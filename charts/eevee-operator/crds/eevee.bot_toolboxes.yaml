@@ -1,14 +1,9 @@
-{{ if .Values.crds.enabled }}
 ---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
-  labels:
-    {{- include "eevee-bot.labels" $ | nindent 4 }}
   annotations:
     controller-gen.kubebuilder.io/version: v0.15.0
-    meta.helm.sh/release-name: {{ .Release.Name }}
-    meta.helm.sh/release-namespace: {{ .Release.Namespace }}
   name: toolboxes.eevee.bot
 spec:
   group: eevee.bot
@@ -141,5 +136,3 @@ spec:
     storage: true
     subresources:
       status: {}
-
-{{ end }}
