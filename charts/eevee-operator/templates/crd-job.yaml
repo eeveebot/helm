@@ -46,7 +46,7 @@ spec:
           kubectl apply -f /data/ 2>&1
         volumeMounts:
 {{- range $path, $_ := .Files.Glob "crds/**" }}
-        - name: {{ $path | base | trimSuffix ".yaml" }}
+        - name: {{ $path | base | trimSuffix ".yaml" | replace "_" "-" }}
           mountPath: /data/{{ $path | base }}
           subPath: {{ $path | base }}
 {{- end }}
