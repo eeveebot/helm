@@ -55,7 +55,7 @@ spec:
 {{ $currentScope := . }}
 {{- range $path, $_ := .Files.Glob "crds/**" }}
     {{- with $currentScope }}
-      - name: {{ $path | base | trimSuffix ".yaml" }}
+      - name: {{ $path | base | trimSuffix ".yaml" | replace "_" "-" }}
         configMap:
           name: {{ include "eevee-operator.crdInstall" . }}-{{ $path | base | trimSuffix ".yaml" | replace "_" "-" }}
           items:
