@@ -24,11 +24,11 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
-      - name: Run chart-releaser for components
+      - name: Run chart-releaser for component charts
         uses: helm/chart-releaser-action@v1.7.0
         with:
           mark_as_latest: true
-          charts_dir: components
+          charts_dir: component-charts
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
