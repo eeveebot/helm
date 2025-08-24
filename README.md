@@ -8,6 +8,8 @@
 
 [**Helm Repo**](https://helm.eevee.bot)
 
+[**Helm Git Repo**](https://github.com/eeveebot/helm)
+
 [**Documentation**](https://eevee.bot/docs)
 
 [**MetaRepo**](https://github.com/eeveebot/eevee)
