@@ -31,7 +31,7 @@ spec:
         effect: NoSchedule
       containers:
       - name: kubectl
-        image: "docker.io/rancher/kubectl:latest"
+        image: "docker.io/rancher/kubectl:v1.33.4"
         command:
         - sh
         - -c
