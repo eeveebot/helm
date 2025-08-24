@@ -32,8 +32,11 @@ spec:
       containers:
       - name: kubectl
         image: "docker.io/rancher/kubectl:v1.33.4"
+        command:
+        - kubectl
         args:
-        - apply -f /data/ 2>&1
+        - apply 
+        - -f /data/
         volumeMounts:
 {{- range $path, $_ := .Files.Glob "crds/**" }}
         - name: {{ $path | base | trimSuffix ".yaml" | replace "_" "-" | replace "." "-"  }}
