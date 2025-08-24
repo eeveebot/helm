@@ -17,7 +17,7 @@ find . -name "Chart.yaml" | while IFS= read -r file; do
 
   # Update the version field and dependencies in each document
   yq e -i '(.. | select(tag == "!!map" and has("version"))).version = env(VERSION)' "$file"
-  yq e -i '(.. | select(tag == "!!map" and has("dependencies"))).dependencies[] |= select(has("version")).version = env(VERSION)' "$file"
+  # yq e -i '(.. | select(tag == "!!map" and has("dependencies"))).dependencies[] |= select(has("version")).version = env(VERSION)' "$file"
 done
 
 echo "Updated version to $VERSION in all Chart.yaml files."
