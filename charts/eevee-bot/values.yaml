@@ -11,9 +11,6 @@ natsAuthExistingSecret: false
 # Name of secret to use/create
 natsAuthSecret: nats-auth
 
-# Namespace for the operator
-operatorNamespace: eevee-system
-
 # Namespace for the bot
 botNamespace: eevee-bot
 

@@ -12,13 +12,10 @@ global:
   # Name of secret to use/create
   natsAuthSecret: nats-auth
 
+eevee-operator:
   # Namespace for the operator
   operatorNamespace: eevee-system
 
-  # Namespace for the bot
-  botNamespace: eevee-bot
-
-eevee-operator:
   # Deploy the eevee-bot operator
   operator:
     enabled: true
@@ -30,6 +27,9 @@ eevee-crds:
     enabled: true
 
 eevee-bot:
+  # Namespace for the bot
+  botNamespace: eevee-bot
+
   # Deploy NATS cluster (disable if you want to bring your own)
   nats:
     enabled: true

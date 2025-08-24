@@ -4,12 +4,6 @@
 fullnameOverride: ""
 nameOverride: ""
 
-# Namespace for the operator
-operatorNamespace: eevee-system
-
-# Namespace for the bot
-botNamespace: eevee-bot
-
 # Deploy eevee-bot CRDs
 crds:
   enabled: true
