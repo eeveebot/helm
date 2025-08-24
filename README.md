@@ -1,5 +1,13 @@
 # eevee Helm chart
 
+[github/eeveebot/helm](https://github.com/eeveebot/helm)
+
+[github/eeveebot/eevee](https://github.com/eeveebot/eevee)
+
+[eevee.bot](https://eevee.bot)
+
+[eevee.bot/docs](https://eevee.bot/docs)
+
 ## Add helm repo
 
 ```bash
