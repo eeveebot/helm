@@ -22,13 +22,13 @@ appVersion: "0.0.1"
 dependencies:
   - name: eevee-bot
     repository: https://helm.eevee.bot/
-    version: '0.0.8'
+    version: '0.0.12'
   - name: eevee-operator
     repository: https://helm.eevee.bot/
-    version: '0.0.8'
+    version: '0.0.12'
   - name: eevee-crd
     repository: https://helm.eevee.bot/
-    version: '0.0.8'
+    version: '0.0.12'
 ---
 apiVersion: v2
 name: eevee-bot
