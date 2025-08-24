@@ -34,7 +34,7 @@ See [charts/eevee/values.yaml](charts/eevee/values.yaml) for details
 ## Helm install
 
 ```bash
-helm install --upgrade eevee eevee/eevee --values eevee-values.yaml
+helm upgrade --install eevee eevee/eevee --values eevee-values.yaml
 ```
 
 ## License
