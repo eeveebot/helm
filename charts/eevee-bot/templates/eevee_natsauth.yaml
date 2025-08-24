@@ -6,8 +6,8 @@ metadata:
   name: {{ .Values.natsAuthSecret | default "nats-auth" }}
   namespace: {{ .Values.botNamespace | default "eevee-bot" }}
   labels:
-  {{- include "eevee-bot.labels" . | nindent 4 }}
+  {{- include "charts.labels" . | nindent 4 }}
 type: Opaque
 stringData:
-  token: {{ include "eevee-bot.natsToken" }}
+  token: {{ include "charts.natsToken" }}
 {{ end }}

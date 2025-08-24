@@ -3,10 +3,10 @@
 apiVersion: eevee.bot/v1alpha1
 kind: Toolbox
 metadata:
-  name: {{ include "eevee-bot.fullname" . }}-toolbox
+  name: {{ include "charts.fullname" . }}-toolbox
   namespace: {{ .Values.botNamespace | default "eevee-bot" }}
   labels:
-  {{- include "eevee-bot.labels" . | nindent 4 }}
+  {{- include "charts.labels" . | nindent 4 }}
 spec:
   {{- .Values.toolbox.spec | toYaml | nindent 2 }}
 {{ end }}
