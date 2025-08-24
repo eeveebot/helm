@@ -33,11 +33,7 @@ spec:
       - name: kubectl
         image: "docker.io/rancher/kubectl:v1.33.4"
         command:
-        - sh
-        - -c
-        - |
-          set -o errexit ; set -o xtrace ; set -o nounset
-          kubectl apply -f /data/ 2>&1
+        - kubectl apply -f /data/ 2>&1
         volumeMounts:
 {{- range $path, $_ := .Files.Glob "crds/**" }}
         - name: {{ $path | base | trimSuffix ".yaml" | replace "_" "-" | replace "." "-"  }}
