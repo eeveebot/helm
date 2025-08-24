@@ -10,6 +10,6 @@ cd "$SCRIPT_DIR" || exit 1
 git fetch \
   && git switch gh-pages \
   && git pull \
-  && git rebase main \
+  && git rebase main -i \
   && git push --force \
   && git switch main
