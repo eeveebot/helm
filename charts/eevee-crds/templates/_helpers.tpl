@@ -56,10 +56,3 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
-
-{{/*
-Generate a random alphanumeric token.
-*/}}
-{{- define "charts.natsToken" -}}
-{{- randAlphaNum 32 -}}
-{{- end }}
