@@ -3,8 +3,8 @@
 apiVersion: eevee.bot/v1alpha1
 kind: Toolbox
 metadata:
-  name: {{ include "eevee-bot.fullname" . }}-toolbox
-  namespace: {{ .Values.botNamespace | default "eevee-bot" }}
+  name: {{ include "eevee-bot.fullname" $ }}-toolbox
+  namespace: {{ include "eevee-bot.botNamespace" $ }}
   labels:
   {{- include "eevee-bot.labels" . | nindent 4 }}
 spec:

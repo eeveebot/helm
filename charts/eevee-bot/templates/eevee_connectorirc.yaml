@@ -1,14 +1,14 @@
-{{ if gt (len .Values.connectors.irc | default "[]") 0 }}
+{{ if gt (len .Values.connectors.irc ) 0 }}
 {{ range .Values.connectors.irc }}
 ---
 apiVersion: eevee.bot/v1alpha1
 kind: ConnectorIrc
 metadata:
-  name: {{ include "eevee-bot.fullname" . }}-{{ .name }}-connector-irc
-  namespace: {{ .Values.botNamespace | default "eevee-bot" }}
+  name: {{ include "eevee-bot.fullname" $ }}-{{ .name }}-connector-irc
+  namespace: {{ include "eevee-bot.botNamespace" $ }}
   labels:
-  {{- include "eevee-bot.labels" . | nindent 4 }}
+  {{- include "eevee-bot.labels" $ | nindent 4 }}
 spec:
-  {{- .spec | nindent 2 }}
+  {{- .spec | toYaml | nindent 2 }}
 {{ end }}
 {{ end }}

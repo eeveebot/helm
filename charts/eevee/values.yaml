@@ -8,6 +8,8 @@ global:
 
   # Name of secret to use/create
   natsAuthSecret: nats-auth
+  metrics:
+    enabled: true
 
 eevee-operator:
   # Namespace for the operator

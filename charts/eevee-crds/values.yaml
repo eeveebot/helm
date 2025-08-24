@@ -4,6 +4,9 @@
 nameOverride: false
 fullnameOverride: false
 
+metrics:
+  enabled: true
+
 # Deploy eevee-bot CRDs
 crds:
   enabled: true

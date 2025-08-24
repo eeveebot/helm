@@ -1,11 +1,10 @@
-
 {{ if .Values.nats.enabled }}
 ---
 apiVersion: eevee.bot/v1alpha1
 kind: NatsCluster
 metadata:
   name: {{ include "eevee-bot.fullname" . }}-nats-cluster
-  namespace: {{ .Values.botNamespace | default "eevee-bot" }}
+  namespace: {{ include "eevee-bot.botNamespace" $ }}
   labels:
   {{- include "eevee-bot.labels" . | nindent 4 }}
 spec:
@@ -61,9 +60,9 @@ spec:
   podDisruptionBudget:
     enabled: true
   promExporter:
-    enabled: {{ .Values.metrics | default false}}
+    enabled: {{ .Values.metrics.enabled }}
     podMonitor:
-      enabled: {{ .Values.metrics | default false }}
+      enabled: {{ .Values.metrics.enabled }}
   reloader:
     enabled: true
   service:

@@ -1,11 +1,11 @@
 ---
 # eevee Helm values
 
-nameOverride: false
-fullnameOverride: false
-
 # Namespace for the operator
 operatorNamespace: eevee-system
+
+metrics:
+  enabled: true
 
 # Deploy the eevee-bot operator
 operator:

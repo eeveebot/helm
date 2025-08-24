@@ -1,8 +1,5 @@
 ---
-# eevee Helm values
-
-nameOverride: false
-fullnameOverride: false
+# eevee-bot Helm values
 
 # Use an existing secret for nats token
 # Must have a key "token" with the desired token
@@ -13,6 +10,12 @@ natsAuthSecret: nats-auth
 
 # Namespace for the bot
 botNamespace: eevee-bot
+
+# Name of this bot
+name: eevee-bot
+
+metrics:
+  enabled: true
 
 # Deploy NATS cluster (disable if you want to bring your own)
 nats:
@@ -84,4 +87,8 @@ connectors:
             quitMsg: "eevee 0.4.20"
 
           # Actions to take after connecting
-          postConnect: {}
+          postConnect:
+            join:
+              - sequence: 1
+                channel: '#eevee'
+                key: ''

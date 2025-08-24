@@ -2,7 +2,14 @@
 Expand the name of the chart.
 */}}
 {{- define "eevee-bot.name" -}}
-{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
+{{- default .Chart.Name .Values.nameOverride $ | trunc 63 | trimSuffix "-" }}
+{{- end }}
+
+{{/*
+Expand the namespace of the chart.
+*/}}
+{{- define "eevee-bot.botNamespace" -}}
+{{- default .Values.botNamespace }}
 {{- end }}
 
 {{/*
@@ -65,5 +72,5 @@ Create the name of the service account to use
 Generate a random alphanumeric token.
 */}}
 {{- define "eevee-bot.natsToken" -}}
-{{- randAlphaNum 32 -}}
+{{- randAlphaNum 32 }}
 {{- end }}

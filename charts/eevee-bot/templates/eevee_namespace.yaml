@@ -2,6 +2,6 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: {{ .Values.botNamespace | default "eevee-bot" }}
+  name: {{ include "eevee-bot.botNamespace" $ }}
   labels:
   {{- include "eevee-bot.labels" . | nindent 4 }}
