@@ -1,6 +1,6 @@
 apiVersion: v2
-name: eevee
-description: A Helm chart for eevee.bot deployment
+name: eevee-crds
+description: A Helm chart for eevee.bot crds deployment
 # A chart can be either an 'application' or a 'library' chart.
 #
 # Application charts are a collection of templates that can be packaged into versioned archives
@@ -19,15 +19,3 @@ version: 0.0.1
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
 appVersion: "0.0.1"
-
-# We're tracking latest on subcharts until things stabilize
-dependencies:
-  - name: eevee-bot
-    repository: https://helm.eevee.bot/
-    version: latest
-  - name: eevee-operator
-    repository: https://helm.eevee.bot/
-    version: latest
-  - name: eevee-crd
-    repository: https://helm.eevee.bot/
-    version: latest
