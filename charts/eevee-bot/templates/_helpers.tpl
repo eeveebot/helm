@@ -64,6 +64,6 @@ Create the name of the service account to use
 {{/*
 Generate a random alphanumeric token.
 */}}
-{{- define "charts.natsToken" -}}
+{{- define "eevee-bot.natsToken" -}}
 {{- randAlphaNum 32 -}}
 {{- end }}
