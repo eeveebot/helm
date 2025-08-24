@@ -9,7 +9,7 @@ helm search repo eevee
 
 ## Configure values.yaml
 
-See [charts/eevee/values.yaml](charts/eevee/valyes.yaml) for details
+See [charts/eevee/values.yaml](charts/eevee/values.yaml) for details
 
 ## Helm install
 
