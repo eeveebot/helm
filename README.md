@@ -2,6 +2,11 @@
 
 > eevee, the lovable chatbot framework!
 
+## What is eevee?
+
+eevee is a microservices architecture chatbot framework that lives in k8s \
+and consists of independent modules that communicate through a common message bus, NATS
+
 ## Helpful Links
 
 | **Link**
