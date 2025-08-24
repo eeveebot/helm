@@ -1,4 +1,4 @@
-{{ if .Values.toolbox.enabled }}
+{{ if .Values.toolbox.enabled | default true }}
 ---
 apiVersion: eevee.bot/v1alpha1
 kind: Toolbox
@@ -8,5 +8,5 @@ metadata:
   labels:
   {{- include "charts.labels" . | nindent 4 }}
 spec:
-  {{- .Values.toolbox.containerSpec | nindent 2 }}
-{{ endif }}
+  {{- .Values.toolbox.spec | toYaml | nindent 2 }}
+{{ end }}

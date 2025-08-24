@@ -1,3 +1,6 @@
+
+{{ if .Values.nats.enabled | default true }}
+---
 apiVersion: eevee.bot/v1alpha1
 kind: NatsCluster
 metadata:
@@ -15,15 +18,7 @@ spec:
       enabled: false
     jetstream:
       enabled: true
-      fileStore:
-        dir: /data
-        enabled: true
-        pvc:
-          enabled: true
-          size: 10Gi
-          storageClassName: {{ .Values.natsCluster.storageClass }}
-      memoryStore:
-        enabled: false
+      {{ .Values.nats.jetstream | toYaml | nindent 6 }}
     leafnodes:
       enabled: false
     merge:
@@ -66,9 +61,9 @@ spec:
   podDisruptionBudget:
     enabled: true
   promExporter:
-    enabled: {{ .Values.metrics | bool }}
+    enabled: {{ .Values.metrics | default false}}
     podMonitor:
-      enabled: {{ .Values.metrics | bool }}
+      enabled: {{ .Values.metrics | default false }}
   reloader:
     enabled: true
   service:
@@ -92,3 +87,5 @@ spec:
         enabled: true
   serviceAccount:
     enabled: true
+
+{{ end }}

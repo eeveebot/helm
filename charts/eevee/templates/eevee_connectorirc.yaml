@@ -1,12 +1,14 @@
-{{ if .Values.connectors.irc.enabled }}
+{{ if gt (len .Values.connectors.irc | default "[]") 0 }}
+{{ range .Values.connectors.irc }}
 ---
 apiVersion: eevee.bot/v1alpha1
 kind: ConnectorIrc
 metadata:
-  name: {{ include "charts.fullname" . }}-connector-irc
-  namespace: {{ .Values.botNamespace }}
+  name: {{ include "charts.fullname" . }}-{{ .name }}-connector-irc
+  namespace: {{ .Values.botNamespace | default "eevee-bot" }}
   labels:
   {{- include "charts.labels" . | nindent 4 }}
 spec:
-  {{- .Values.connectors.irc.spec | nindent 2 }}
-{{ endif }}
+  {{- .spec | nindent 2 }}
+{{ end }}
+{{ end }}
