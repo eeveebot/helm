@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -exu
+
+# where this .sh file lives
+DIRNAME=$(dirname "$0")
+SCRIPT_DIR=$(cd "$DIRNAME" || exit 1; pwd)
+cd "$SCRIPT_DIR" || exit 1
+
+git switch gh-pages && git rebase main && git push --force && git switch main
