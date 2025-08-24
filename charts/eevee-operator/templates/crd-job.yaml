@@ -46,7 +46,7 @@ spec:
           kubectl apply -f /data/ 2>&1
         volumeMounts:
 {{- range $path, $_ := .Files.Glob "crds/**" }}
-        - name: {{ $path | base | trimSuffix ".yaml" | replace "_" "-" }}
+        - name: {{ $path | base | trimSuffix ".yaml" | replace "_" "-" | replace "." "-"  }}
           mountPath: /data/{{ $path | base }}
           subPath: {{ $path | base }}
 {{- end }}
@@ -55,9 +55,9 @@ spec:
 {{ $currentScope := . }}
 {{- range $path, $_ := .Files.Glob "crds/**" }}
     {{- with $currentScope }}
-      - name: {{ $path | base | trimSuffix ".yaml" | replace "_" "-" }}
+      - name: {{ $path | base | trimSuffix ".yaml" | replace "_" "-" | replace "." "-"  }}
         configMap:
-          name: {{ include "eevee-operator.crdInstall" . }}-{{ $path | base | trimSuffix ".yaml" | replace "_" "-" }}
+          name: {{ include "eevee-operator.crdInstall" . }}-{{ $path | base | trimSuffix ".yaml" | replace "_" "-" | replace "." "-" }}
           items:
           - key: content
             path: {{ $path | base }}
@@ -155,7 +155,7 @@ allowed length for a configmap if they are combined.
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "eevee-operator.crdInstall" . }}-{{ $path | base | trimSuffix ".yaml" | replace "_" "-" }}
+  name: {{ include "eevee-operator.crdInstall" . }}-{{ $path | base | trimSuffix ".yaml" | replace "_" "-" | replace "." "-" }}
   namespace: {{ .Release.Namespace | quote }}
   annotations:
     # create hook dependencies in the right order
