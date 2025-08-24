@@ -2,9 +2,6 @@
 # eevee Helm values
 
 global:
-  fullnameOverride: ""
-  nameOverride: ""
-
   # Use an existing secret for nats token
   # Must have a key "token" with the desired token
   natsAuthExistingSecret: false
