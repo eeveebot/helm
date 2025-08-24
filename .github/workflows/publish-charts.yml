@@ -28,5 +28,14 @@ jobs:
         uses: helm/chart-releaser-action@v1.7.0
         with:
           mark_as_latest: true
+          charts_dir: components
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Run chart-releaser for components
+        uses: helm/chart-releaser-action@v1.7.0
+        with:
+          mark_as_latest: true
+          charts_dir: charts
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
