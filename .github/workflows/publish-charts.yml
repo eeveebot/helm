@@ -26,9 +26,9 @@ jobs:
 
       - name: Helm Deps
         run: |
-          helm repo add eevee https://helm.eevee.bot/
-          helm repo update
-          helm search repo eevee
+          helm repo add eevee https://helm.eevee.bot/ || true
+          helm repo update || true
+          helm search repo eevee || true
           # for dir in $(ls -d charts/*); do
           #   helm dependency update $dir;
           # done
