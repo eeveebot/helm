@@ -31,18 +31,12 @@ spec:
         effect: NoSchedule
       containers:
       - name: kubectl
-        image: "docker.io/alpine:3.22"
+        image: "docker.io/rancher/kubectl:latest"
         command:
         - sh
         - -c
         - |
           set -o errexit ; set -o xtrace ; set -o nounset
-
-          apk add --no-cache kubectl
-
-          # piping stderr to stdout means kubectl's errors are surfaced
-          # in the pod's logs.
-
           kubectl apply -f /data/ 2>&1
         volumeMounts:
 {{- range $path, $_ := .Files.Glob "crds/**" }}
