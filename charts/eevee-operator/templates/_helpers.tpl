@@ -74,8 +74,3 @@ Create the name of the service account to use
 {{- define "eevee-operator.CRDInstallSelector" -}}
 {{- printf "%s" "crd-install-hook" -}}
 {{- end -}}
-
-{{- define "eevee-operator.selectorLabels" -}}
-app.kubernetes.io/name: "{{ template "eevee-operator.name" . }}"
-app.kubernetes.io/instance: "{{ template "eevee-operator.name" . }}"
-{{- end -}}
