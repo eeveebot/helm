@@ -34,12 +34,21 @@ helm search repo eevee
 
 ## Configure values.yaml
 
-See [charts/eevee/values.yaml](charts/eevee/values.yaml) for details
+See [charts/eevee/values.yaml](charts/eevee/values.yaml) for details on the core eevee chart
+
+See [charts/eevee-operator/values.yaml](charts/eevee-operator/values.yaml) for details on the eeevee-operator chart
+
+See [charts/eevee-bot/values.yaml](charts/eevee-bot/values.yaml) for details on the eeevee-bot chart
 
 ## Helm install
 
 ```bash
+# The core "eevee" chart brings in "eevee-bot" and "eevee-operator" as dependencies
 helm upgrade --install eevee eevee/eevee --values eevee-values.yaml
+
+# Alternatively, install the component subcharts on their own
+helm upgrade --install eevee-operator eevee/eevee-operator --values eevee-operator-values.yaml
+helm upgrade --install eevee-bot eevee/eevee-bot --values eevee-bot-values.yaml
 ```
 
 ## License
