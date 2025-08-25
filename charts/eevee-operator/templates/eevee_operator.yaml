@@ -5,7 +5,11 @@ kind: Namespace
 metadata:
   name: {{ .Values.operatorNamespace | default "eevee-system" }}
   labels:
-  {{- include "eevee-operator.labels" . | nindent 4 }}
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: eevee-operator
+    control-plane: eevee
+    {{- include "eevee-operator.labels" . | nindent 4 }}
+  name: eevee-system
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -241,6 +245,16 @@ metadata:
     app.kubernetes.io/name: eevee
   {{- include "eevee-operator.labels" . | nindent 4 }}
 rules:
+- resources:
+  - secrets
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
 - apiGroups:
   - apps
   resources:
@@ -267,6 +281,18 @@ rules:
   verbs:
   - get
   - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
   - watch
 - apiGroups:
   - eevee.bot

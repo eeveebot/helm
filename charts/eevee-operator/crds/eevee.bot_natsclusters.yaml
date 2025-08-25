@@ -2,13 +2,13 @@
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
+  name: natsclusters.eevee.bot
   labels:
     app.kubernetes.io/managed-by: Helm
   annotations:
     controller-gen.kubebuilder.io/version: v0.15.0
     meta.helm.sh/release-name: eevee
     meta.helm.sh/release-namespace: default
-  name: natsclusters.eevee.bot
 spec:
   group: eevee.bot
   names:
