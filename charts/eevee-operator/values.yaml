@@ -1,16 +1,18 @@
 ---
-# eevee Helm values
+# eevee-operator Helm values
 
 # Namespace for the operator
 operatorNamespace: eevee-system
 
+# Enable metrics (prometheus CRDs must be installed first)
 metrics:
   enabled: true
 
+# Enable IronLily CRD Deployment Job
 crds:
   install: true
 
-# Deploy the eevee-bot operator
+# Enable deployment of the eevee-bot operator itself
 operator:
   enabled: true
   replicas: 1
