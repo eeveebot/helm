@@ -3,6 +3,25 @@ entries:
   eevee:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2025-08-26T02:07:51.971523102Z"
+    dependencies:
+    - condition: eevee-operator.enabled
+      name: eevee-operator
+      repository: file://../eevee-operator
+      version: 0.0.84
+    - condition: eevee-bot.enabled
+      name: eevee-bot
+      repository: file://../eevee-bot
+      version: 0.0.84
+    description: A Helm chart for eevee.bot ecosystem deployment
+    digest: ffeb109dc5b3bbf25789dfd01473949d14a4f647ef38c646433393c1bf836d35
+    name: eevee
+    type: application
+    urls:
+    - https://github.com/eeveebot/helm/releases/download/eevee-0.0.84/eevee-0.0.84.tgz
+    version: 0.0.84
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2025-08-26T01:10:23.901647023Z"
     dependencies:
     - condition: eevee-operator.enabled
@@ -61,6 +80,16 @@ entries:
   eevee-bot:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2025-08-26T02:07:52.146376913Z"
+    description: A Helm chart for eevee.bot bot deployment
+    digest: 608de44c078b5a900d83a19dfc9a112f744a2811a19aa5fd357cb5f79ad8e478
+    name: eevee-bot
+    type: application
+    urls:
+    - https://github.com/eeveebot/helm/releases/download/eevee-bot-0.0.84/eevee-bot-0.0.84.tgz
+    version: 0.0.84
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2025-08-26T01:10:24.030656176Z"
     description: A Helm chart for eevee.bot bot deployment
     digest: 6ffbfa00cdf91eb1c5ea56e12cabe382ecac79add3e336b06dd81184b95e617c
@@ -92,6 +121,16 @@ entries:
   eevee-operator:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2025-08-26T02:07:52.300668853Z"
+    description: A Helm chart for eevee.bot operator deployment
+    digest: ffedf5b70ab875ab79c09a1923b1bc3077e2db13188a19c5abcff9ff9c31ea97
+    name: eevee-operator
+    type: application
+    urls:
+    - https://github.com/eeveebot/helm/releases/download/eevee-operator-0.0.84/eevee-operator-0.0.84.tgz
+    version: 0.0.84
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2025-08-26T01:10:24.14947167Z"
     description: A Helm chart for eevee.bot operator deployment
     digest: 5c0f7342fee32cf30c828d6d83b1fb1b98be7c620ed7b5936e023178ad9b8edf
@@ -120,4 +159,4 @@ entries:
     urls:
     - https://github.com/eeveebot/helm/releases/download/eevee-operator-0.0.81/eevee-operator-0.0.81.tgz
     version: 0.0.81
-generated: "2025-08-26T01:10:24.149515081Z"
+generated: "2025-08-26T02:07:52.30070439Z"
