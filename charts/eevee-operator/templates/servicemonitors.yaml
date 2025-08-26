@@ -16,7 +16,7 @@ spec:
     scheme: http
   selector:
     matchLabels:
-      control-plane: {{ include "eevee-operator.fullname" . }}
+      control-plane: {{- include "eevee-operator.fullname" }}
 
 {{ end }}
 {{ end }}
