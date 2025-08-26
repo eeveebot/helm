@@ -7,6 +7,8 @@
 eevee is a microservices architecture chatbot framework that lives in k8s \
 and consists of independent modules that communicate through a common message bus, NATS
 
+---
+
 ## Helpful Links
 
 | **Link**
@@ -21,9 +23,11 @@ and consists of independent modules that communicate through a common message bu
 | [**Toolbox**](https://github.com/eeveebot/toolbox)
 | [**CLI**](https://github.com/eeveebot/cli)
 
+---
+
 ## Getting Started
 
-Check out [quickstart/gettting-started](https://eevee.bot/docs/quickstart/getting-started/) for setup instructions.
+Check out [docs/helm](https://eevee.bot/docs/helm) for setup instructions.
 
 ## Add helm repo
 
@@ -50,6 +54,8 @@ helm upgrade --install eevee eevee/eevee --values eevee-values.yaml
 helm upgrade --install eevee-operator eevee/eevee-operator --values eevee-operator-values.yaml
 helm upgrade --install eevee-bot eevee/eevee-bot --values eevee-bot-values.yaml
 ```
+
+---
 
 ## License
 
