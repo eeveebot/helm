@@ -5,8 +5,8 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   labels:
-    control-plane: eevee
-    {{- include "eevee-operator.labels" . | nindent 4 }}
+    control-plane: {{ include "eevee-operator.fullname" . }}
+    {{- include "eevee-operator.labels" . | nindent 2 }}
   name: eevee-operator-metrics-monitor
   namespace: {{ .Values.operatorNamespace | default "eevee-system" }}
 spec:
@@ -16,7 +16,6 @@ spec:
     scheme: http
   selector:
     matchLabels:
-      control-plane: {{- include "eevee-operator.fullname" }}
-
+      control-plane: {{- include "eevee-operator.fullname" . }}
 {{ end }}
 {{ end }}
