@@ -1,11 +1,11 @@
 {{ if .Values.operator.enabled | default true }}
 {{ if .Values.metrics.enabled | default false }}
-
+---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   labels:
-    control-plane: {{ include "eevee-operator.fullname" . }}
+    control-plane: {{ .Values.operatorNamespace | default "eevee-system" }}
     {{- include "eevee-operator.labels" . | nindent 2 }}
   name: eevee-operator-metrics-monitor
   namespace: {{ .Values.operatorNamespace | default "eevee-system" }}
@@ -16,6 +16,6 @@ spec:
     scheme: http
   selector:
     matchLabels:
-      control-plane: {{- include "eevee-operator.fullname" . }}
+      control-plane: {{ .Values.operatorNamespace | default "eevee-system" }}
 {{ end }}
 {{ end }}

@@ -5,7 +5,7 @@ kind: Namespace
 metadata:
   labels:
     {{- include "eevee-operator.labels" . | nindent 4 }}
-    control-plane: {{ include "eevee-operator.fullname" . }}
+    control-plane: {{ .Values.operatorNamespace | default "eevee-system" }}
   name: {{ .Values.operatorNamespace | default "eevee-system" }}
 ---
 apiVersion: v1
@@ -13,7 +13,7 @@ kind: Service
 metadata:
   labels:
     {{- include "eevee-operator.labels" . | nindent 4 }}
-    control-plane: {{ include "eevee-operator.fullname" . }}
+    control-plane: {{ .Values.operatorNamespace | default "eevee-system" }}
   name: eevee-operator-metrics-service
   namespace: {{ .Values.operatorNamespace | default "eevee-system" }}
 spec:
@@ -30,20 +30,20 @@ kind: Deployment
 metadata:
   labels:
     {{- include "eevee-operator.labels" . | nindent 4 }}
-    control-plane: {{ include "eevee-operator.fullname" . }}
+    control-plane: {{ .Values.operatorNamespace | default "eevee-system" }}
   name: eevee-operator
   namespace: {{ .Values.operatorNamespace | default "eevee-system" }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      control-plane: {{ include "eevee-operator.fullname" . }}
+      control-plane: {{ .Values.operatorNamespace | default "eevee-system" }}
   template:
     metadata:
       annotations:
         kubectl.kubernetes.io/default-container: operator
       labels:
-        control-plane: {{ include "eevee-operator.fullname" . }}
+        control-plane: {{ .Values.operatorNamespace | default "eevee-system" }}
     spec:
       affinity:
         nodeAffinity:
