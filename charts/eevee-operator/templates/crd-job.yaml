@@ -1,6 +1,3 @@
-# Ganked most of this from https://github.com/giantswarm/eevee-operator-app/blob/a8315a8e89dc291f70f8c5fbc800598ae347835f/helm/prometheus-operator-app/templates/crd-install/crd-rbac.yaml
-# Consider their license to apply to this file in particular
-
 {{- if .Values.crds.install }}
 apiVersion: batch/v1
 kind: Job
