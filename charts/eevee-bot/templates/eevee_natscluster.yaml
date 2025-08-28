@@ -15,9 +15,6 @@ spec:
       replicas: {{ .Values.nats.replicas }}
     gateway:
       enabled: false
-    jetstream:
-      enabled: true
-      {{ .Values.nats.jetstream | toYaml | nindent 6 }}
     leafnodes:
       enabled: false
     merge:
