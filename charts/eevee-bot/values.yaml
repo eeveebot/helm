@@ -20,6 +20,7 @@ metrics:
 # Deploy NATS cluster (disable if you want to bring your own)
 nats:
   enabled: true
+  replicas: 1
   jetstream:
     fileStore:
         dir: /data
