@@ -40,7 +40,6 @@ spec:
       enabled: false
   container:
     env:
-      GOMEMLIMIT: 3.5GiB
       TOKEN:
         valueFrom:
           secretKeyRef:
