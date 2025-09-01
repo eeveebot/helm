@@ -2,24 +2,24 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ include "eevee-operator.crdInstall" . }}
+  name: {{ include "eevee-crds.crdInstall" . }}
   namespace: {{ .Release.Namespace | quote }}
   annotations:
     # create hook dependencies in the right order
     "helm.sh/hook-weight": "-1"
-    {{- include "eevee-operator.CRDInstallAnnotations" . | nindent 4 }}
+    {{- include "eevee-crds.CRDInstallAnnotations" . | nindent 4 }}
   labels:
-    app.kubernetes.io/component: {{ include "eevee-operator.crdInstall" . | quote }}
-    {{- include "eevee-operator.selectorLabels" . | nindent 4 }}
-    role: {{ include "eevee-operator.CRDInstallSelector" . | quote }}
+    app.kubernetes.io/component: {{ include "eevee-crds.crdInstall" . | quote }}
+    {{- include "eevee-crds.selectorLabels" . | nindent 4 }}
+    role: {{ include "eevee-crds.CRDInstallSelector" . | quote }}
 spec:
   template:
     metadata:
       labels:
-        app.kubernetes.io/component: {{ include "eevee-operator.crdInstall" . | quote }}
-        {{- include "eevee-operator.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: {{ include "eevee-crds.crdInstall" . | quote }}
+        {{- include "eevee-crds.selectorLabels" . | nindent 8 }}
     spec:
-      serviceAccountName: {{ include "eevee-operator.crdInstall" . }}
+      serviceAccountName: {{ include "eevee-crds.crdInstall" . }}
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
@@ -48,7 +48,7 @@ spec:
     {{- with $currentScope }}
       - name: {{ $path | base | trimSuffix ".yaml" | replace "_" "-" | replace "." "-"  }}
         configMap:
-          name: {{ include "eevee-operator.crdInstall" . }}-{{ $path | base | trimSuffix ".yaml" | replace "_" "-" | replace "." "-" }}
+          name: {{ include "eevee-crds.crdInstall" . }}-{{ $path | base | trimSuffix ".yaml" | replace "_" "-" | replace "." "-" }}
           items:
           - key: content
             path: {{ $path | base }}
@@ -61,31 +61,31 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: {{ include "eevee-operator.crdInstall" . }}
+  name: {{ include "eevee-crds.crdInstall" . }}
   namespace: {{ .Release.Namespace }}
   annotations:
     # create hook dependencies in the right order
     "helm.sh/hook-weight": "-4"
-    {{- include "eevee-operator.CRDInstallAnnotations" . | nindent 4 }}
+    {{- include "eevee-crds.CRDInstallAnnotations" . | nindent 4 }}
   labels:
-    app.kubernetes.io/component: {{ include "eevee-operator.crdInstall" . | quote }}
-    {{- include "eevee-operator.selectorLabels" . | nindent 4 }}
-    role: {{ include "eevee-operator.CRDInstallSelector" . | quote }}
+    app.kubernetes.io/component: {{ include "eevee-crds.crdInstall" . | quote }}
+    {{- include "eevee-crds.selectorLabels" . | nindent 4 }}
+    role: {{ include "eevee-crds.CRDInstallSelector" . | quote }}
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: {{ include "eevee-operator.crdInstall" . }}
+  name: {{ include "eevee-crds.crdInstall" . }}
   namespace: {{ .Release.Namespace | quote }}
   annotations:
     # create hook dependencies in the right order
     "helm.sh/hook-weight": "-3"
-    {{- include "eevee-operator.CRDInstallAnnotations" . | nindent 4 }}
+    {{- include "eevee-crds.CRDInstallAnnotations" . | nindent 4 }}
   labels:
-    app.kubernetes.io/component: {{ include "eevee-operator.crdInstall" . | quote }}
-    {{- include "eevee-operator.selectorLabels" . | nindent 4 }}
-    role: {{ include "eevee-operator.CRDInstallSelector" . | quote }}
+    app.kubernetes.io/component: {{ include "eevee-crds.crdInstall" . | quote }}
+    {{- include "eevee-crds.selectorLabels" . | nindent 4 }}
+    role: {{ include "eevee-crds.CRDInstallSelector" . | quote }}
 rules:
 - apiGroups:
   - ""
@@ -108,30 +108,30 @@ rules:
   resources:
   - podsecuritypolicies
   resourceNames:
-  - {{ include "eevee-operator.crdInstall" . }}
+  - {{ include "eevee-crds.crdInstall" . }}
   verbs:
   - use
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: {{ include "eevee-operator.crdInstall" . }}
+  name: {{ include "eevee-crds.crdInstall" . }}
   namespace: {{ .Release.Namespace | quote }}
   annotations:
     # create hook dependencies in the right order
     "helm.sh/hook-weight": "-2"
-    {{- include "eevee-operator.CRDInstallAnnotations" . | nindent 4 }}
+    {{- include "eevee-crds.CRDInstallAnnotations" . | nindent 4 }}
   labels:
-    app.kubernetes.io/component: {{ include "eevee-operator.crdInstall" . | quote }}
-    {{- include "eevee-operator.labels" . | nindent 4 }}
-    role: {{ include "eevee-operator.CRDInstallSelector" . | quote }}
+    app.kubernetes.io/component: {{ include "eevee-crds.crdInstall" . | quote }}
+    {{- include "eevee-crds.labels" . | nindent 4 }}
+    role: {{ include "eevee-crds.CRDInstallSelector" . | quote }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: {{ include "eevee-operator.crdInstall" . }}
+  name: {{ include "eevee-crds.crdInstall" . }}
 subjects:
   - kind: ServiceAccount
-    name: {{ include "eevee-operator.crdInstall" . }}
+    name: {{ include "eevee-crds.crdInstall" . }}
     namespace: {{ .Release.Namespace | quote }}
 
 ---
@@ -146,16 +146,16 @@ allowed length for a configmap if they are combined.
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "eevee-operator.crdInstall" . }}-{{ $path | base | trimSuffix ".yaml" | replace "_" "-" | replace "." "-" }}
+  name: {{ include "eevee-crds.crdInstall" . }}-{{ $path | base | trimSuffix ".yaml" | replace "_" "-" | replace "." "-" }}
   namespace: {{ .Release.Namespace | quote }}
   annotations:
     # create hook dependencies in the right order
     "helm.sh/hook-weight": "-5"
-    {{- include "eevee-operator.CRDInstallAnnotations" . | nindent 4 }}
+    {{- include "eevee-crds.CRDInstallAnnotations" . | nindent 4 }}
   labels:
-    app.kubernetes.io/component: {{ include "eevee-operator.crdInstall" . | quote }}
-    {{- include "eevee-operator.selectorLabels" . | nindent 4 }}
-    role: {{ include "eevee-operator.CRDInstallSelector" . | quote }}
+    app.kubernetes.io/component: {{ include "eevee-crds.crdInstall" . | quote }}
+    {{- include "eevee-crds.selectorLabels" . | nindent 4 }}
+    role: {{ include "eevee-crds.CRDInstallSelector" . | quote }}
 data:
   content: |
 {{ .Files.Get $path | indent 4 }}

@@ -19,6 +19,8 @@ eevee-operator:
   operator:
     enabled: true
     replicas: 1
+
+eevee-crds:
   crds:
     install: true
 
