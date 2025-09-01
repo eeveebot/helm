@@ -40,6 +40,8 @@ helm search repo eevee
 
 See [charts/eevee/values.yaml](charts/eevee/values.yaml) for details on the core eevee chart
 
+See [charts/eevee-crds/values.yaml](charts/eevee-crds/values.yaml) for details on the eeevee-crds chart
+
 See [charts/eevee-operator/values.yaml](charts/eevee-operator/values.yaml) for details on the eeevee-operator chart
 
 See [charts/eevee-bot/values.yaml](charts/eevee-bot/values.yaml) for details on the eeevee-bot chart
@@ -51,8 +53,10 @@ See [charts/eevee-bot/values.yaml](charts/eevee-bot/values.yaml) for details on 
 helm upgrade --install eevee eevee/eevee --values eevee-values.yaml
 
 # Alternatively, install the component subcharts on their own
+helm upgrade --install eevee-bot eevee/eevee-crds --values eevee-crds-values.yaml
 helm upgrade --install eevee-operator eevee/eevee-operator --values eevee-operator-values.yaml
 helm upgrade --install eevee-bot eevee/eevee-bot --values eevee-bot-values.yaml
+
 ```
 
 ---
