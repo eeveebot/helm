@@ -1,6 +1,6 @@
 ---
 # eevee-crds Helm values
 
-# Enable IronLily CRD Deployment Job
+# Enable eevee CRD Deployment Job
 crds:
   install: true

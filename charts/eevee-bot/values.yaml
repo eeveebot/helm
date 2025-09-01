@@ -14,6 +14,8 @@ botNamespace: eevee-bot
 # Name of this bot
 name: eevee-bot
 
+# Enable metrics
+# Prometheus CRDs must be preinstalled
 metrics:
   enabled: true
 
