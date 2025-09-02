@@ -1,23 +1,24 @@
 ---
 # eevee-bot Helm values
 
+# Name of this bot
+name: eevee-bot
+
+# Namespace for the bot
+namespace: eevee-bot
+
 # Use an existing secret for nats token
 # Must have a key "token" with the desired token
 natsAuthExistingSecret: false
 
-# Name of secret to use/create
-natsAuthSecret: nats-auth
+# Variables specified in .all apply to all eevee-bot components
+all:
+  # Name of secret to use/create
+  natsAuthSecret: nats-auth
 
-# Namespace for the bot
-botNamespace: eevee-bot
-
-# Name of this bot
-name: eevee-bot
-
-# Enable metrics
-# Prometheus CRDs must be preinstalled
-metrics:
-  enabled: true
+  # Enable metrics
+  # Prometheus CRDs must be preinstalled
+  metrics: true
 
 # Deploy NATS cluster (disable if you want to bring your own)
 nats:
@@ -28,7 +29,7 @@ nats:
 toolbox:
   enabled: true
   spec:
-     # Number of toolbox replicas to deploy
+    # Number of toolbox replicas to deploy
     size: 1
     # Override container image
     containerImage: ghcr.io/eeveebot/toolbox:latest

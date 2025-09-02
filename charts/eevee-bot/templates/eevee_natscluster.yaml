@@ -41,7 +41,7 @@ spec:
         valueFrom:
           secretKeyRef:
             key: token
-            name: {{ .Values.natsAuthSecret }}
+            name: {{ .Values.all.natsAuthSecret }}
     merge:
       resources:
         limits:
@@ -50,15 +50,15 @@ spec:
         requests:
           cpu: "2"
           memory: 4Gi
-  namespaceOverride: {{ .Values.botNamespace }}
+  namespaceOverride: {{ include "eevee-bot.botNamespace" $ }}
   natsBox:
     enabled: false
   podDisruptionBudget:
     enabled: true
   promExporter:
-    enabled: {{ .Values.metrics.enabled }}
+    enabled: {{ .Values.all.metrics }}
     podMonitor:
-      enabled: {{ .Values.metrics.enabled }}
+      enabled: {{ .Values.all.metrics }}
   reloader:
     enabled: true
   service:
