@@ -3,4 +3,4 @@
 
 # Enable eevee CRD Deployment Job
 crds:
-  install: true
+  installJob: true
