@@ -1,4 +1,4 @@
-{{ if not .Values.natsAuthExistingSecret }}
+{{ if not .Values.global.natsAuthExistingSecret }}
 ---
 apiVersion: v1
 kind: Secret

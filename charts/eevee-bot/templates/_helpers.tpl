@@ -2,14 +2,14 @@
 Expand the name of the chart.
 */}}
 {{- define "eevee-bot.name" -}}
-{{- default .Chart.Name .Values.nameOverride $ | trunc 63 | trimSuffix "-" }}
+{{- default .Chart.Name .Values.name $ | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Expand the namespace of the chart.
 */}}
 {{- define "eevee-bot.botNamespace" -}}
-{{- default .Release.Namespace .Values.namespace $ | trunc 63 | trimSuffix "-" }}
+{{- default .Release.Namespace .Values.global.namespace $ | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
@@ -21,7 +21,7 @@ If release name contains chart name it will be used as a full name.
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
-{{- $name := default .Chart.Name .Values.nameOverride }}
+{{- $name := default .Chart.Name .Values.name }}
 {{- if contains $name .Release.Name }}
 {{- .Release.Name | trunc 63 | trimSuffix "-" }}
 {{- else }}

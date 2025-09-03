@@ -2,12 +2,21 @@
 # eevee Helm values
 
 global:
+  # Namespace for the bot
+  namespace: eevee-bot
+
   # Use an existing secret for nats token
   # Must have a key "token" with the desired token
   natsAuthExistingSecret: false
 
-  # Name of secret to use/create
+  # Name of secret to use/create for NATS token
   natsAuthSecret: nats-auth
+
+  # Namespace NATS is deployed to
+  natsNamespace: eevee-bot
+
+  # Enable metrics
+  # Prometheus CRDs must be preinstalled
   metrics: true
 
 eevee-operator:
@@ -29,17 +38,24 @@ eevee-bot:
   # Name of this bot
   name: eevee-bot
 
-  # Namespace for the bot
-  namespace: eevee-bot
-
   # Use an existing secret for nats token
   # Must have a key "token" with the desired token
   natsAuthExistingSecret: false
 
   # Variables specified in .all apply to all eevee-bot components
   global:
-    # Name of secret to use/create
+    # Namespace for the bot
+    namespace: eevee-bot
+
+    # Use an existing secret for nats token
+    # Must have a key "token" with the desired token
+    natsAuthExistingSecret: false
+
+    # Name of secret to use/create for NATS token
     natsAuthSecret: nats-auth
+
+    # Namespace NATS is deployed to
+    natsNamespace: eevee-bot
 
     # Enable metrics
     # Prometheus CRDs must be preinstalled
