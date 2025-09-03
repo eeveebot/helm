@@ -9,6 +9,6 @@ metadata:
   labels:
   {{- include "eevee-bot.labels" $ | nindent 4 }}
 spec:
-  {{- merge .Values.all .spec | toYaml | nindent 2 }}
+  {{- merge (dict "all" .Values.all) .spec | toYaml | nindent 2 }}
 {{ end }}
 {{ end }}
