@@ -41,7 +41,7 @@ spec:
         valueFrom:
           secretKeyRef:
             key: token
-            name: {{ .Values.all.natsAuthSecret }}
+            name: {{ .Values.global.natsAuthSecret }}
     merge:
       resources:
         limits:
@@ -56,9 +56,9 @@ spec:
   podDisruptionBudget:
     enabled: true
   promExporter:
-    enabled: {{ .Values.all.metrics }}
+    enabled: {{ .Values.global.metrics }}
     podMonitor:
-      enabled: {{ .Values.all.metrics }}
+      enabled: {{ .Values.global.metrics }}
   reloader:
     enabled: true
   service:

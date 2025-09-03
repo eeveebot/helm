@@ -11,8 +11,8 @@ namespace: eevee-bot
 # Must have a key "token" with the desired token
 natsAuthExistingSecret: false
 
-# Variables specified in .all apply to all eevee-bot components
-all:
+# Variables specified in .global apply to all eevee-bot components
+global:
   # Name of secret to use/create
   natsAuthSecret: nats-auth
 

@@ -1,5 +1,7 @@
-{{ if gt (len .Values.connectors.irc ) 0 }}
+{{ if gt (len .Values.connectors.irc) 0 }}
+{{ $global := .Values.global }}
 {{ range .Values.connectors.irc }}
+{{ $spec := merge $global . }}
 ---
 apiVersion: eevee.bot/v1alpha1
 kind: ConnectorIrc
@@ -9,6 +11,6 @@ metadata:
   labels:
   {{- include "eevee-bot.labels" $ | nindent 4 }}
 spec:
-  {{- merge (dict "all" .Values.all) .spec | toYaml | nindent 2 }}
+  {{- $spec | toYaml | nindent 2 }}
 {{ end }}
 {{ end }}
