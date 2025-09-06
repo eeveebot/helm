@@ -53,7 +53,7 @@ See [charts/eevee-bot/values.yaml](charts/eevee-bot/values.yaml) for details on 
 helm upgrade --install eevee eevee/eevee --values eevee-values.yaml
 
 # Alternatively, install the component subcharts on their own
-helm upgrade --install eevee-bot eevee/eevee-crds --values eevee-crds-values.yaml
+helm upgrade --install eevee-crds eevee/eevee-crds --values eevee-crds-values.yaml
 helm upgrade --install eevee-operator eevee/eevee-operator --values eevee-operator-values.yaml
 helm upgrade --install eevee-bot eevee/eevee-bot --values eevee-bot-values.yaml
 ```
