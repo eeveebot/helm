@@ -1,12 +1,12 @@
 {{ if gt (len .Values.connectors.irc) 0 }}
 {{ $connectorIRCGlobal := .Values.global }}
 {{ range $index, $connector := .Values.connectors.irc }}
-{{ $connectorIRCSpec := merge $connectorIRCGlobal $connector }}
+{{ $connectorIRCSpec := merge $connectorIRCGlobal $connector.spec }}
 ---
 apiVersion: eevee.bot/v1alpha1
 kind: ConnectorIrc
 metadata:
-  name: {{ include "eevee-bot.fullname" $ }}-connector-irc
+  name: {{ include "eevee-bot.fullname" $ }}-{{ $connector.spec.name }}-connector-irc
   namespace: {{ include "eevee-bot.botNamespace" $ }}
   labels:
   {{- include "eevee-bot.labels" $ | nindent 4 }}
