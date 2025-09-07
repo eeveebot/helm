@@ -1,5 +1,5 @@
 {{ if .Values.toolbox.enabled }}
-{{ $spec := merge .Values.global .Values.toolbox.spec }}
+{{ $toolboxSpec := merge .Values.global .Values.toolbox.spec }}
 ---
 apiVersion: eevee.bot/v1alpha1
 kind: Toolbox
@@ -9,5 +9,5 @@ metadata:
   labels:
   {{- include "eevee-bot.labels" . | nindent 4 }}
 spec:
-  {{- $spec | toYaml | nindent 2 }}
+  {{- $toolboxSpec | toYaml | nindent 2 }}
 {{ end }}
