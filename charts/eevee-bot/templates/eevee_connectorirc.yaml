@@ -1,7 +1,7 @@
 {{ if gt (len .Values.connectors.irc) 0 }}
 {{ $connectorIRCGlobal := .Values.global }}
 {{ range $index, $connector := .Values.connectors.irc }}
-{{ $connectorIRCSpec := merge $connectorIRCGlobal $connector.spec }}
+{{ $connectorIRCSpec := merge $connectorIRCGlobal $connector }}
 ---
 apiVersion: eevee.bot/v1alpha1
 kind: ConnectorIrc

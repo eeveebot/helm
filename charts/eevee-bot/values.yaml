@@ -44,46 +44,45 @@ toolbox:
 connectors:
   # IRC Connector instances to create
   irc:
-  - spec:
-      name: eevee-localhost
-      # Number of connector-irc replicas to deploy
-      # NOTE: only 1 is supported at this time
-      size: 1
+  - name: eevee-localhost
+    # Number of connector-irc replicas to deploy
+    # NOTE: only 1 is supported at this time
+    size: 1
 
-      # Override container image
-      containerImage: ghcr.io/eeveebot/connector-irc:latest
+    # Override container image
+    containerImage: ghcr.io/eeveebot/connector-irc:latest
 
-      # Override pull policy
-      # Defaults to IfNotPresent
-      pullPolicy: Always
+    # Override pull policy
+    # Defaults to IfNotPresent
+    pullPolicy: Always
 
-      # Setup IRC Connections
-      ircConnections:
-      - name: localhost
-        irc:
-          host: localhost
-          port: 6667
-          ssl: true
-          autoReconnect: true
-          autoReconnectWait: 5000
-          autoReconnectMaxRetries: 10
-          autoRejoin: true
-          autoRejoinWait: 5000
-          autoRejoinMaxRetries: 5
-          pingInterval: 30
-          pingTimeout: 120
+    # Setup IRC Connections
+    ircConnections:
+    - name: localhost
+      irc:
+        host: localhost
+        port: 6667
+        ssl: true
+        autoReconnect: true
+        autoReconnectWait: 5000
+        autoReconnectMaxRetries: 10
+        autoRejoin: true
+        autoRejoinWait: 5000
+        autoRejoinMaxRetries: 5
+        pingInterval: 30
+        pingTimeout: 120
 
-        # Identifying information for the bot
-        ident:
-          nick: eevee
-          username: eevee
-          gecos: eevee.bot
-          version: "0.4.20"
-          quitMsg: "eevee 0.4.20"
+      # Identifying information for the bot
+      ident:
+        nick: eevee
+        username: eevee
+        gecos: eevee.bot
+        version: "0.4.20"
+        quitMsg: "eevee 0.4.20"
 
-        # Actions to take after connecting
-        postConnect:
-          join:
-            - sequence: 1
-              channel: '#eevee'
-              key: ''
+      # Actions to take after connecting
+      postConnect:
+        join:
+          - sequence: 1
+            channel: '#eevee'
+            key: ''
