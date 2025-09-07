@@ -3,6 +3,29 @@ entries:
   eevee:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2025-09-07T01:06:13.745350589Z"
+    dependencies:
+    - condition: eevee-operator.enabled
+      name: eevee-operator
+      repository: file://../eevee-operator
+      version: 0.0.126
+    - condition: eevee-bot.enabled
+      name: eevee-bot
+      repository: file://../eevee-bot
+      version: 0.0.126
+    - condition: eevee-crds.crds.install
+      name: eevee-crds
+      repository: file://../eevee-crds
+      version: 0.0.126
+    description: A Helm chart for eevee.bot ecosystem deployment
+    digest: de5bfa5d527c2a5c52f4897a0c419d9e0178c6dd4e3f8b71bda3e008c65c223a
+    name: eevee
+    type: application
+    urls:
+    - https://github.com/eeveebot/helm/releases/download/eevee-0.0.126/eevee-0.0.126.tgz
+    version: 0.0.126
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2025-09-07T00:57:46.095896282Z"
     dependencies:
     - condition: eevee-operator.enabled
@@ -349,6 +372,16 @@ entries:
   eevee-bot:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2025-09-07T01:06:13.870572318Z"
+    description: A Helm chart for eevee.bot bot deployment
+    digest: 68966ce05b188927b8db9ccf3c6d556c5bcc3cebde490d9e28d5eab7d039da7f
+    name: eevee-bot
+    type: application
+    urls:
+    - https://github.com/eeveebot/helm/releases/download/eevee-bot-0.0.126/eevee-bot-0.0.126.tgz
+    version: 0.0.126
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2025-09-07T00:57:46.256879447Z"
     description: A Helm chart for eevee.bot bot deployment
     digest: 825f1d2ebc9438dd2c4d3466ab8cbcc0a88065051a76d804d96c5291dd47547c
@@ -498,6 +531,16 @@ entries:
     - https://github.com/eeveebot/helm/releases/download/eevee-bot-0.0.105/eevee-bot-0.0.105.tgz
     version: 0.0.105
   eevee-crds:
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2025-09-07T01:06:13.992785217Z"
+    description: A Helm chart for eevee.bot crds deployment
+    digest: 22cd5e5bec2c715df2b44622f51243ed53f9a09efcf77fe10125599ca72e7c15
+    name: eevee-crds
+    type: application
+    urls:
+    - https://github.com/eeveebot/helm/releases/download/eevee-crds-0.0.126/eevee-crds-0.0.126.tgz
+    version: 0.0.126
   - apiVersion: v2
     appVersion: 0.0.1
     created: "2025-09-07T00:57:46.474076685Z"
@@ -651,6 +694,16 @@ entries:
   eevee-operator:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2025-09-07T01:06:14.155953063Z"
+    description: A Helm chart for eevee.bot operator deployment
+    digest: 4535931cef70d0e1131ead646d0163263c93440d08bff480b091852dfedb6a7b
+    name: eevee-operator
+    type: application
+    urls:
+    - https://github.com/eeveebot/helm/releases/download/eevee-operator-0.0.126/eevee-operator-0.0.126.tgz
+    version: 0.0.126
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2025-09-07T00:57:46.634695591Z"
     description: A Helm chart for eevee.bot operator deployment
     digest: 9fe65310065221085b942e2d6bbb92c26272c6564cc08b1adc4a0721d0f59812
@@ -799,4 +852,4 @@ entries:
     urls:
     - https://github.com/eeveebot/helm/releases/download/eevee-operator-0.0.105/eevee-operator-0.0.105.tgz
     version: 0.0.105
-generated: "2025-09-07T00:57:46.635001113Z"
+generated: "2025-09-07T01:06:14.156329632Z"
