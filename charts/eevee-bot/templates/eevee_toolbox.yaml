@@ -1,5 +1,6 @@
 {{ if .Values.toolbox.enabled }}
-{{ $toolboxSpec := merge .Values.global .Values.toolbox.spec }}
+{{ $toolboxIRCGlobal := .Values.global }}
+{{ $toolboxSpec := merge $toolboxIRCGlobal .Values.toolbox.spec }}
 ---
 apiVersion: eevee.bot/v1alpha1
 kind: Toolbox
