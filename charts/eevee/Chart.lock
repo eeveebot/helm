@@ -1,0 +1,12 @@
+dependencies:
+- name: eevee-operator
+  repository: file://../eevee-operator
+  version: 0.0.130
+- name: eevee-bot
+  repository: file://../eevee-bot
+  version: 0.0.130
+- name: eevee-crds
+  repository: file://../eevee-crds
+  version: 0.0.130
+digest: sha256:98e2558550ac8c87338b31b353fb953dd41b90fa424ed6c915cf811cf3409a19
+generated: "2025-09-06T22:32:06.141235-04:00"
