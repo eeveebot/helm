@@ -19,7 +19,7 @@ spec:
       enabled: false
     merge:
       authorization:
-        token: << $TOKEN >>
+        token: << {{ `$TOKEN` }} >>
     monitor:
       enabled: true
       port: 8222
