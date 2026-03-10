@@ -1,90 +1,77 @@
 apiVersion: v1
 entries:
   bot:
-  - apiVersion: v2
-    appVersion: 0.1.8
-    created: "2026-03-10T01:17:55.863346101Z"
-    description: A combined deployment of various CR entities that define an eevee
-      bot
-    digest: 87767496c62008b370862c17dc400f0e6be54abac8a234fa1706d5002bfed02c
-    name: bot
-    type: application
-    urls:
-    - https://github.com/eeveebot/helm/releases/download/bot-0.1.8/bot-0.1.8.tgz
-    version: 0.1.8
+    - apiVersion: v2
+      appVersion: 0.1.8
+      created: "2026-03-10T01:17:55.863346101Z"
+      description: A combined deployment of various CR entities that define an eevee bot
+      digest: 87767496c62008b370862c17dc400f0e6be54abac8a234fa1706d5002bfed02c
+      name: bot
+      type: application
+      urls:
+        - https://github.com/eeveebot/helm/releases/download/bot-0.1.8/bot-0.1.8.tgz
+      version: 0.1.8
   crds:
-  - apiVersion: v2
-    appVersion: 0.1.7
-    created: "2026-03-10T01:16:31.3737998Z"
-    description: The eevee CRDs
-    digest: 2c6a01011f9d0f9adb2e0e08c16f41791e433a99d7db2624b7fce5b48b7d0502
-    name: crds
-    type: application
-    urls:
-    - https://github.com/eeveebot/helm/releases/download/crds-0.1.7/crds-0.1.7.tgz
-    version: 0.1.7
-  - apiVersion: v2
-    appVersion: 0.1.6
-    created: "2026-03-10T01:12:21.296153745Z"
-    description: The eevee CRDs
-    digest: c5d5b09ca11c9b65d0759ce5c82e0fe7776d9820ee071fce7ea0d2967498f361
-    name: crds
-    type: application
-    urls:
-    - https://github.com/eeveebot/helm/releases/download/crds-0.1.6/crds-0.1.6.tgz
-    version: 0.1.6
+    - apiVersion: v2
+      appVersion: 0.1.7
+      created: "2026-03-10T01:16:31.3737998Z"
+      description: The eevee CRDs
+      digest: 2c6a01011f9d0f9adb2e0e08c16f41791e433a99d7db2624b7fce5b48b7d0502
+      name: crds
+      type: application
+      urls:
+        - https://github.com/eeveebot/helm/releases/download/crds-0.1.7/crds-0.1.7.tgz
+      version: 0.1.7
+    - apiVersion: v2
+      appVersion: 0.1.6
+      created: "2026-03-10T01:12:21.296153745Z"
+      description: The eevee CRDs
+      digest: c5d5b09ca11c9b65d0759ce5c82e0fe7776d9820ee071fce7ea0d2967498f361
+      name: crds
+      type: application
+      urls:
+        - https://github.com/eeveebot/helm/releases/download/crds-0.1.6/crds-0.1.6.tgz
+      version: 0.1.6
   eevee:
-  - apiVersion: v2
-    appVersion: 0.1.7
-    created: "2026-03-10T01:16:31.560319765Z"
-    description: An opinionated deployment of crds, operator, and bot
-    digest: bf725ecb88c39c869876a9f41ffbd3f73d09f5490b97fce74dca697d50b25bb6
-    name: eevee
-    type: application
-    urls:
-    - https://github.com/eeveebot/helm/releases/download/eevee-0.1.7/eevee-0.1.7.tgz
-    version: 0.1.7
-  - apiVersion: v2
-    appVersion: 0.1.6
-    created: "2026-03-10T01:12:21.508430084Z"
-    description: An opinionated deployment of crds, operator, and bot
-    digest: 3b3066e3d3002265aafb7071480d51b69d607d26cc926b0605f6d1f2e74580ed
-    name: eevee
-    type: application
-    urls:
-    - https://github.com/eeveebot/helm/releases/download/eevee-0.1.6/eevee-0.1.6.tgz
-    version: 0.1.6
-  eevee-bot:
-  - apiVersion: v2
-    appVersion: 0.1.7
-    created: "2026-03-10T01:16:31.737902261Z"
-    description: A combined deployment of various CR entities that define an eevee
-      bot
-    digest: 74e6cd47331e6966b95317709e4655af821d8e89ec90ffd3e3a2fe8372ee5ce3
-    name: eevee-bot
-    type: application
-    urls:
-    - https://github.com/eeveebot/helm/releases/download/eevee-bot-0.1.7/eevee-bot-0.1.7.tgz
-    version: 0.1.7
+    - apiVersion: v2
+      appVersion: 0.1.7
+      created: "2026-03-10T01:16:31.560319765Z"
+      description: An opinionated deployment of crds, operator, and bot
+      digest: bf725ecb88c39c869876a9f41ffbd3f73d09f5490b97fce74dca697d50b25bb6
+      name: eevee
+      type: application
+      urls:
+        - https://github.com/eeveebot/helm/releases/download/eevee-0.1.7/eevee-0.1.7.tgz
+      version: 0.1.7
+    - apiVersion: v2
+      appVersion: 0.1.6
+      created: "2026-03-10T01:12:21.508430084Z"
+      description: An opinionated deployment of crds, operator, and bot
+      digest: 3b3066e3d3002265aafb7071480d51b69d607d26cc926b0605f6d1f2e74580ed
+      name: eevee
+      type: application
+      urls:
+        - https://github.com/eeveebot/helm/releases/download/eevee-0.1.6/eevee-0.1.6.tgz
+      version: 0.1.6
   operator:
-  - apiVersion: v2
-    appVersion: 0.1.7
-    created: "2026-03-10T01:16:31.907017231Z"
-    description: The eevee Operator
-    digest: 9361c97520a6a23d894598c13998bf3c2257ebfa92e6f1620fb5a20748fc205c
-    name: operator
-    type: application
-    urls:
-    - https://github.com/eeveebot/helm/releases/download/operator-0.1.7/operator-0.1.7.tgz
-    version: 0.1.7
-  - apiVersion: v2
-    appVersion: 0.1.6
-    created: "2026-03-10T01:12:21.950542737Z"
-    description: The eevee Operator
-    digest: 8cac4f426c73201ba37e43643cd6451f23bdb8e0ca96d44fa4424cf4a8e23e5c
-    name: operator
-    type: application
-    urls:
-    - https://github.com/eeveebot/helm/releases/download/operator-0.1.6/operator-0.1.6.tgz
-    version: 0.1.6
+    - apiVersion: v2
+      appVersion: 0.1.7
+      created: "2026-03-10T01:16:31.907017231Z"
+      description: The eevee Operator
+      digest: 9361c97520a6a23d894598c13998bf3c2257ebfa92e6f1620fb5a20748fc205c
+      name: operator
+      type: application
+      urls:
+        - https://github.com/eeveebot/helm/releases/download/operator-0.1.7/operator-0.1.7.tgz
+      version: 0.1.7
+    - apiVersion: v2
+      appVersion: 0.1.6
+      created: "2026-03-10T01:12:21.950542737Z"
+      description: The eevee Operator
+      digest: 8cac4f426c73201ba37e43643cd6451f23bdb8e0ca96d44fa4424cf4a8e23e5c
+      name: operator
+      type: application
+      urls:
+        - https://github.com/eeveebot/helm/releases/download/operator-0.1.6/operator-0.1.6.tgz
+      version: 0.1.6
 generated: "2026-03-10T01:17:55.863360917Z"
