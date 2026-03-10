@@ -1,5 +1,17 @@
 apiVersion: v1
 entries:
+  bot:
+  - apiVersion: v2
+    appVersion: 0.1.8
+    created: "2026-03-10T01:17:55.863346101Z"
+    description: A combined deployment of various CR entities that define an eevee
+      bot
+    digest: 87767496c62008b370862c17dc400f0e6be54abac8a234fa1706d5002bfed02c
+    name: bot
+    type: application
+    urls:
+    - https://github.com/eeveebot/helm/releases/download/bot-0.1.8/bot-0.1.8.tgz
+    version: 0.1.8
   crds:
   - apiVersion: v2
     appVersion: 0.1.7
@@ -75,4 +87,4 @@ entries:
     urls:
     - https://github.com/eeveebot/helm/releases/download/operator-0.1.6/operator-0.1.6.tgz
     version: 0.1.6
-generated: "2026-03-10T01:16:31.907031494Z"
+generated: "2026-03-10T01:17:55.863360917Z"
