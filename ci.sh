@@ -5,6 +5,9 @@ HANDWRITTEN_CHARTS=(bot eevee)
 
 COMMIT="$(git rev-parse --short --verify main)"
 
+VERSIONS_SRC="${VERSIONS_SRC:-"$SCRIPT_DIR/versions.yaml"}" 
+CHART_DIR="${CHART_DIR:-"$SCRIPT_DIR/charts"}"
+
 # where this .sh file lives
 DIRNAME=$(dirname "$0")
 SCRIPT_DIR=$(cd "$DIRNAME" || exit 1; pwd)
@@ -52,7 +55,15 @@ function main() {
     fi
 
     cd "${SCRIPT_DIR}" || exit 1
-    bash set-version.sh "${CHART}"
+
+    # Update the chart versions/description
+    DESCRIPTION=$(yq eval ".${CHART}.description" $VERSIONS_SRC)
+    CHART_VERSION=$(yq eval ".${CHART}.chart" $VERSIONS_SRC)
+    APP_VERSION=$(yq eval ".${CHART}.application" $VERSIONS_SRC)
+    yq e -i ".description = \"${DESCRIPTION}\"" "${CHART_DIR}/${CHART}/Chart.yaml"
+    yq e -i ".version = \"${CHART_VERSION}\"" "${CHART_DIR}/${CHART}/Chart.yaml"
+    yq e -i ".appVersion = \"${APP_VERSION}\"" "${CHART_DIR}/${CHART}/Chart.yaml"
+
     git add -v "charts/${CHART}"
     git diff --quiet && git diff --staged --quiet || git commit -m "Build ${CHART} helmchart for commit ${COMMIT}"
   done
@@ -73,7 +84,15 @@ function main() {
     fi
 
     cd "${SCRIPT_DIR}" || exit 1
-    bash set-version.sh "${CHART}"
+
+    # Update the chart versions/description
+    DESCRIPTION=$(yq eval ".${CHART}.description" $VERSIONS_SRC)
+    CHART_VERSION=$(yq eval ".${CHART}.chart" $VERSIONS_SRC)
+    APP_VERSION=$(yq eval ".${CHART}.application" $VERSIONS_SRC)
+    yq e -i ".description = \"${DESCRIPTION}\"" "${CHART_DIR}/${CHART}/Chart.yaml"
+    yq e -i ".version = \"${CHART_VERSION}\"" "${CHART_DIR}/${CHART}/Chart.yaml"
+    yq e -i ".appVersion = \"${APP_VERSION}\"" "${CHART_DIR}/${CHART}/Chart.yaml"
+
     git add -v "charts/${CHART}/*"
     git diff --quiet && git diff --staged --quiet || git commit -m "Build ${CHART} helmchart for commit ${COMMIT}"
   done
