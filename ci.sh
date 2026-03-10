@@ -139,7 +139,7 @@ function update_readme_gh_pages_branch() {
   git switch gh-pages
   cp -v /tmp/README.md README.md
   git add --verbose README.md
-  git diff --quiet && git diff --staged --quiet || git commit -m "Update README.md for commit ${COMMIT}"
+  git diff --quiet && git diff --staged --quiet || (git commit -m "Update README.md for commit ${COMMIT}" && git push)
   git switch main
 }
 
