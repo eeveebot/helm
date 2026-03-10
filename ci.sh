@@ -94,7 +94,7 @@ function main() {
     yq e -i ".version = \"${CHART_VERSION}\"" "${CHART_DIR}/${CHART}/Chart.yaml"
     yq e -i ".appVersion = \"${APP_VERSION}\"" "${CHART_DIR}/${CHART}/Chart.yaml"
 
-    git add -v "charts/${CHART}/*"
+    git add -v "${CHART_DIR}/${CHART}/*"
     git diff --quiet && git diff --staged --quiet || git commit -m "Build ${CHART} helmchart for commit ${COMMIT}"
   done
 
