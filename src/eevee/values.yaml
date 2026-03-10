@@ -1,0 +1,134 @@
+---
+# eevee Helm values
+
+global:
+  # Namespace for the bot
+  namespace: eevee-bot
+
+  # Use an existing secret for nats token
+  # Must have a key "token" with the desired token
+  natsAuthExistingSecret: false
+
+  # Name of secret to use/create for NATS token
+  natsAuthSecret: nats-auth
+
+  # Namespace NATS is deployed to
+  natsNamespace: eevee-bot
+
+  # Enable metrics
+  # Prometheus CRDs must be preinstalled
+  metrics: true
+
+operator:
+  # Namespace for the operator
+  operatorNamespace: eevee-system
+
+  # Deploy the eevee-bot operator
+  operator:
+    enabled: true
+    replicas: 1
+
+crds:
+  # Enable the crd chart
+  enabled: true
+  # Configure crd install job
+  installJob:
+    # Enable install job
+    enabled: true
+    # Image to use when installing crds
+    image: ghcr.io/eeveebot/crds
+    # Tag to use when installing crds
+    imageTag: latest
+
+bot:
+  # eevee-bot Helm values
+
+  # Name of this bot
+  name: eevee-bot
+
+  # Use an existing secret for nats token
+  # Must have a key "token" with the desired token
+  natsAuthExistingSecret: false
+
+  # Variables specified in .all apply to all eevee-bot components
+  global:
+    # Namespace for the bot
+    namespace: eevee-bot
+
+    # Use an existing secret for nats token
+    # Must have a key "token" with the desired token
+    natsAuthExistingSecret: false
+
+    # Name of secret to use/create for NATS token
+    natsAuthSecret: nats-auth
+
+    # Namespace NATS is deployed to
+    natsNamespace: eevee-bot
+
+    # Enable metrics
+    # Prometheus CRDs must be preinstalled
+    metrics: true
+
+  # Deploy NATS cluster (disable if you want to bring your own)
+  nats:
+    enabled: true
+    replicas: 1
+
+  # Deploy toolbox
+  toolbox:
+    enabled: true
+    spec:
+      # Number of toolbox replicas to deploy
+      size: 1
+      # Override container image
+      containerImage: ghcr.io/eeveebot/toolbox:latest
+      # Override pull policy
+      # Defaults to IfNotPresent
+      pullPolicy: Always
+
+  # Connectors to enable
+  connectors:
+    # IRC Connector instances to create
+    irc:
+    - name: eevee-localhost
+      # Number of connector-irc replicas to deploy
+      # NOTE: only 1 is supported at this time
+      size: 1
+  
+      # Override container image
+      containerImage: ghcr.io/eeveebot/connector-irc:latest
+  
+      # Override pull policy
+      # Defaults to IfNotPresent
+      pullPolicy: Always
+  
+      # Setup IRC Connections
+      ircConnections:
+      - name: localhost
+        irc:
+          host: localhost
+          port: 6667
+          ssl: true
+          autoReconnect: true
+          autoReconnectWait: 5000
+          autoReconnectMaxRetries: 10
+          autoRejoin: true
+          autoRejoinWait: 5000
+          autoRejoinMaxRetries: 5
+          pingInterval: 30
+          pingTimeout: 120
+  
+        # Identifying information for the bot
+        ident:
+          nick: eevee
+          username: eevee
+          gecos: eevee.bot
+          version: "0.4.20"
+          quitMsg: "eevee 0.4.20"
+  
+        # Actions to take after connecting
+        postConnect:
+          join:
+            - sequence: 1
+              channel: '#eevee'
+              key: ''

@@ -1,0 +1,59 @@
+name: Build Charts
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - 'versions.yaml'
+      - 'README.md'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  packages: write
+
+concurrency:
+  group: eeveebot-helm
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  REGISTRY: ghcr.io
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          token: "${{ secrets.GH_PAT }}"
+          ref: main
+          clean: true
+          fetch-depth: 1
+          fetch-tags: true
+          set-safe-directory: true
+
+      - name: Setup nodejs
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: Generate HelmCharts
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          curl -sSL https://github.com/arttor/helmify/releases/download/v0.4.19/helmify_Linux_x86_64.tar.gz \
+            | sudo tar -xzv -C /usr/bin helmify
+          bash ci.sh

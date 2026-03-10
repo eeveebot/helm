@@ -1,6 +1,0 @@
----
-# eevee-crds Helm values
-
-# Enable eevee CRD Deployment Job
-crds:
-  installJob: true

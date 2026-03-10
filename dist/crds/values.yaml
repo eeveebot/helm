@@ -1,0 +1,32 @@
+eeveeCrdJob:
+  main:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      privileged: false
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+    env:
+      kubeInClusterConfig: "true"
+    image:
+      repository: ghcr.io/eeveebot/crds
+      tag: latest
+    imagePullPolicy: Always
+    resources:
+      limits:
+        cpu: 1500m
+        memory: 2Gi
+      requests:
+        cpu: "1"
+        memory: 512Mi
+  nodeSelector: {}
+  podSecurityContext:
+    fsGroupChangePolicy: Always
+    runAsNonRoot: true
+  tolerations: []
+  topologySpreadConstraints: []
+kubernetesClusterDomain: cluster.local
+serviceAccount:
+  annotations: {}
+  automount: true
+  create: true
+  name: ""

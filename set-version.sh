@@ -5,24 +5,18 @@ DIRNAME=$(dirname "$0")
 SCRIPT_DIR=$(cd "$DIRNAME" || exit 1; pwd)
 cd "$SCRIPT_DIR" || exit 1
 
-# Check if a version argument is provided
-if [ -z "$1" ]; then
-  echo "Usage: $0 <version>"
-  exit 1
-fi
+CHART_NAME=$1
+CHART_DIR="${CHART_DIR:-"$SCRIPT_DIR/charts"}"
+VERSIONS_SRC="${VERSIONS_SRC:-"$SCRIPT_DIR/versions.yaml"}"
 
-# Get the version from the first argument
-VERSION=$1
+# Read versions from versions.yaml
+DESCRIPTION=$(yq eval ".${CHART_NAME}.description" $VERSIONS_SRC)
+CHART_VERSION=$(yq eval ".${CHART_NAME}.chart" $VERSIONS_SRC)
+APP_VERSION=$(yq eval ".${CHART_NAME}.application" $VERSIONS_SRC)
 
-export VERSION
+# Update Chart.yaml with the new versions
+yq eval --inplace ".description = \"$DESCRIPTION\"" "$CHART_DIR/${CHART_NAME}/Chart.yaml"
+yq eval --inplace ".version = \"$CHART_VERSION\"" "$CHART_DIR/${CHART_NAME}/Chart.yaml"
+yq eval --inplace ".appVersion = \"$APP_VERSION\"" "$CHART_DIR/${CHART_NAME}/Chart.yaml"
 
-# Use find to locate all Chart.yaml files recursively
-find . -name "Chart.yaml" | while IFS= read -r file; do
-  echo "Updating $file to version $VERSION"
-
-  # Update the version field and dependencies in each document
-  yq e -i '(.. | select(tag == "!!map" and has("version"))).version = env(VERSION)' "$file"
-  yq e -i '(.. | select(tag == "!!map" and has("dependencies"))).dependencies[] |= select(has("version")).version = env(VERSION)' "$file"
-done
-
-echo "Updated version to $VERSION in all Chart.yaml files."
+echo "Updated Chart.yaml for ${CHART_NAME} with chart version: $CHART_VERSION and app version: $APP_VERSION"
