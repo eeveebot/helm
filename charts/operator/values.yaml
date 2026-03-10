@@ -1,5 +1,12 @@
-eeveeOperator:
-  main:
+eeveeOperatorService:
+  ports:
+  - port: 9000
+    targetPort: 9000
+  type: ClusterIP
+kubernetesClusterDomain: cluster.local
+operator:
+  nodeSelector: {}
+  operator:
     containerSecurityContext:
       allowPrivilegeEscalation: false
       privileged: false
@@ -16,7 +23,6 @@ eeveeOperator:
       requests:
         cpu: "1"
         memory: 512Mi
-  nodeSelector: {}
   podSecurityContext:
     fsGroupChangePolicy: Always
     runAsNonRoot: true
@@ -29,12 +35,6 @@ eeveeOperator:
     type: RollingUpdate
   tolerations: []
   topologySpreadConstraints: []
-kubernetesClusterDomain: cluster.local
-service:
-  ports:
-  - port: 9000
-    targetPort: 9000
-  type: ClusterIP
 serviceAccount:
   annotations: {}
   automount: true

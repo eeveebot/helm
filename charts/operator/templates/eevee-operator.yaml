@@ -1,8 +1,9 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: eevee-operator-role
+  name: operator-role
   labels:
+    eevee.io/operator: "true"
   {{- include "operator.labels" . | nindent 4 }}
 rules:
 - apiGroups:
@@ -276,13 +277,14 @@ automountServiceAccountToken: {{ .Values.serviceAccount.automount }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: eevee-operator-rolebinding
+  name: operator-role-binding
   labels:
+    eevee.io/operator: "true"
   {{- include "operator.labels" . | nindent 4 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: eevee-operator-role
+  name: operator-role
 subjects:
 - kind: ServiceAccount
   name: '{{ include "operator.serviceAccountName" . }}'
@@ -291,19 +293,19 @@ subjects:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: eevee-operator
+  name: operator
   labels:
     eevee.io/operator: "true"
   {{- include "operator.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.eeveeOperator.replicas }}
-  revisionHistoryLimit: {{ .Values.eeveeOperator.revisionHistoryLimit }}
+  replicas: {{ .Values.operator.replicas }}
+  revisionHistoryLimit: {{ .Values.operator.revisionHistoryLimit }}
   strategy:
     rollingUpdate:
-      maxSurge: {{ .Values.eeveeOperator.strategy.rollingUpdate.maxSurge | quote }}
-      maxUnavailable: {{ .Values.eeveeOperator.strategy.rollingUpdate.maxUnavailable
-        | quote }}
-    type: {{ .Values.eeveeOperator.strategy.type | quote }}
+      maxSurge: {{ .Values.operator.strategy.rollingUpdate.maxSurge | quote }}
+      maxUnavailable: {{ .Values.operator.strategy.rollingUpdate.maxUnavailable | quote
+        }}
+    type: {{ .Values.operator.strategy.type | quote }}
   selector:
     matchLabels:
       cdk8s.io/metadata.addr: eevee-operator-c8fa08f6
@@ -319,28 +321,27 @@ spec:
       - env:
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
-        image: {{ .Values.eeveeOperator.main.image.repository }}:{{ .Values.eeveeOperator.main.image.tag
+        image: {{ .Values.operator.operator.image.repository }}:{{ .Values.operator.operator.image.tag
           | default .Chart.AppVersion }}
-        imagePullPolicy: {{ .Values.eeveeOperator.main.imagePullPolicy }}
-        name: main
+        imagePullPolicy: {{ .Values.operator.operator.imagePullPolicy }}
+        name: operator
         ports:
         - containerPort: 9000
           name: http
           protocol: TCP
-        resources: {{- toYaml .Values.eeveeOperator.main.resources | nindent 10 }}
-        securityContext: {{- toYaml .Values.eeveeOperator.main.containerSecurityContext
+        resources: {{- toYaml .Values.operator.operator.resources | nindent 10 }}
+        securityContext: {{- toYaml .Values.operator.operator.containerSecurityContext
           | nindent 10 }}
       dnsPolicy: ClusterFirst
-      nodeSelector: {{- toYaml .Values.eeveeOperator.nodeSelector | nindent 8 }}
+      nodeSelector: {{- toYaml .Values.operator.nodeSelector | nindent 8 }}
       restartPolicy: Always
-      securityContext: {{- toYaml .Values.eeveeOperator.podSecurityContext | nindent 8
-        }}
+      securityContext: {{- toYaml .Values.operator.podSecurityContext | nindent 8 }}
       serviceAccountName: {{ include "operator.serviceAccountName" . }}
       setHostnameAsFQDN: false
       shareProcessNamespace: false
       terminationGracePeriodSeconds: 30
-      tolerations: {{- toYaml .Values.eeveeOperator.tolerations | nindent 8 }}
-      topologySpreadConstraints: {{- toYaml .Values.eeveeOperator.topologySpreadConstraints
+      tolerations: {{- toYaml .Values.operator.tolerations | nindent 8 }}
+      topologySpreadConstraints: {{- toYaml .Values.operator.topologySpreadConstraints
         | nindent 8 }}
 ---
 apiVersion: v1
@@ -350,9 +351,9 @@ metadata:
   labels:
   {{- include "operator.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.service.type }}
+  type: {{ .Values.eeveeOperatorService.type }}
   selector:
     cdk8s.io/metadata.addr: eevee-operator-c8fa08f6
     {{- include "operator.selectorLabels" . | nindent 4 }}
   ports:
-  {{- .Values.service.ports | toYaml | nindent 2 }}
+  {{- .Values.eeveeOperatorService.ports | toYaml | nindent 2 }}
