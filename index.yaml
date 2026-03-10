@@ -87,6 +87,16 @@ entries:
     version: 0.1.6
   eevee:
   - apiVersion: v2
+    appVersion: 0.1.11
+    created: "2026-03-10T01:36:12.275840636Z"
+    description: An opinionated deployment of crds, operator, and bot
+    digest: 6e9549b0f63ed64542d0a0e69a8dbd6dff185039cf5010b693b3b72ad5eb28af
+    name: eevee
+    type: application
+    urls:
+    - https://github.com/eeveebot/helm/releases/download/eevee-0.1.11/eevee-0.1.11.tgz
+    version: 0.1.11
+  - apiVersion: v2
     appVersion: 0.1.10
     created: "2026-03-10T01:35:00.758299566Z"
     description: An opinionated deployment of crds, operator, and bot
@@ -177,4 +187,4 @@ entries:
     urls:
     - https://github.com/eeveebot/helm/releases/download/operator-0.1.6/operator-0.1.6.tgz
     version: 0.1.6
-generated: "2026-03-10T01:35:00.758366922Z"
+generated: "2026-03-10T01:36:12.275886493Z"
