@@ -59,6 +59,10 @@ export class CrdJob extends cdk8s.Chart {
           envVariables: {
             KUBE_IN_CLUSTER_CONFIG: cdk8splus.EnvValue.fromValue('true'),
           },
+          securityContext: {
+            user: 0,
+            group: 0,
+          },
         },
       ],
       ttlAfterFinished: cdk8s.Duration.seconds(600),
