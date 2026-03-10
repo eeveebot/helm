@@ -107,6 +107,8 @@ function main() {
   done
   git add -v "charts/eevee/*"
   git diff --quiet && git diff --staged --quiet || git commit -m "Update deps of ${CHART} helmchart for commit ${COMMIT}"
+
+  finalize_git_ci
 }
 
 function finalize_git_ci() {
