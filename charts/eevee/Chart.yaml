@@ -30,5 +30,5 @@ dependencies:
     condition: bot.enabled
   - name: crds
     repository: helm.eevee.bot
-    version: '0.1.1'
+    version: '0.0.4'
     condition: crds.enabled
