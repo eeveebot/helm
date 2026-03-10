@@ -8,8 +8,8 @@ COMMIT="$(git rev-parse --short --verify main)"
 
 # where this .sh file lives
 DIRNAME=$(dirname "$0")
-SCRIPT_DIR=$(cd "$DIRNAME" || exit 1; pwd)
-cd "$SCRIPT_DIR" || exit 1
+SCRIPT_DIR=$(cd "${DIRNAME}" || exit 1; pwd)
+cd "${SCRIPT_DIR}" || exit 1
 
 VERSIONS_SRC="${VERSIONS_SRC:-"$SCRIPT_DIR/versions.yaml"}" 
 CHART_DIR="${CHART_DIR:-"$SCRIPT_DIR/charts"}"
@@ -38,7 +38,7 @@ function main() {
     PRE_HELMIFY_HOOK="pre_helmify_hook_${CHART}"
     if declare -f "$PRE_HELMIFY_HOOK" > /dev/null; then
       echo "Calling pre-helmify hook function: $PRE_HELMIFY_HOOK"
-      "$PRE_HELMIFY_HOOK"
+      (cd "${SCRIPT_DIR}" && "$PRE_HELMIFY_HOOK")
     else
       echo "No pre-helmify hook function found for chart: $CHART"
     fi
@@ -50,7 +50,7 @@ function main() {
     PRE_COMMIT_HOOK="pre_commit_hook_${CHART}"
     if declare -f "$PRE_COMMIT_HOOK" > /dev/null; then
       echo "Calling pre-commit hook function: $PRE_COMMIT_HOOK"
-      "$PRE_COMMIT_HOOK"
+      (cd "${SCRIPT_DIR}" && "$PRE_COMMIT_HOOK")
     else
       echo "No pre-commit hook function found for chart: $CHART"
     fi
@@ -79,7 +79,7 @@ function main() {
     PRE_COMMIT_HOOK="pre_commit_hook_${CHART}"
     if declare -f "$PRE_COMMIT_HOOK" > /dev/null; then
       echo "Calling pre-commit hook function: $PRE_COMMIT_HOOK"
-      "$PRE_COMMIT_HOOK"
+      (cd "${SCRIPT_DIR}" && "$PRE_COMMIT_HOOK")
     else
       echo "No pre-commit hook function found for chart: $CHART"
     fi
@@ -162,9 +162,8 @@ function setup_npm_ci() {
 }
 
 function pre_helmify_hook_operator() {
-  echo "noop"
-  # yq e -i '(.spec.selector.matchLabels, .spec.template.metadata.labels, .spec.selector) |= with_entries(select(.key == "cdk8s.io/metadata.addr") | .key = "eevee.bot/operator")' dist/manifests/operator/eevee-operator.yaml
-  # yq e -i '(.. | select(tag == "!!map" and has("eevee.bot/operator"))) |= (.["eevee.bot/operator"] = "true")' dist/manifests/operator/eevee-operator.yaml
+  yq e -i '(.spec.selector.matchLabels, .spec.template.metadata.labels, .spec.selector) |= with_entries(select(.key == "cdk8s.io/metadata.addr") | .key = "eevee.bot/operator")' dist/manifests/operator/eevee-operator.yaml
+  yq e -i '(.. | select(tag == "!!map" and has("eevee.bot/operator"))) |= (.["eevee.bot/operator"] = "true")' dist/manifests/operator/eevee-operator.yaml
 }
 
 main

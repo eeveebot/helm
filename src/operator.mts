@@ -30,7 +30,7 @@ export class Operator extends cdk8s.Chart {
           name: 'operator-role',
           namespace: namespace,
           labels: {
-            'eevee.io/operator': 'true',
+            'eevee.bot/operator': 'true',
           },
         },
       }
@@ -71,7 +71,7 @@ export class Operator extends cdk8s.Chart {
           name: 'operator-service-account',
           namespace: namespace,
           labels: {
-            'eevee.io/operator': 'true',
+            'eevee.bot/operator': 'true',
           },
         },
       }
@@ -85,7 +85,7 @@ export class Operator extends cdk8s.Chart {
           name: 'operator-role-binding',
           namespace: namespace,
           labels: {
-            'eevee.io/operator': 'true',
+            'eevee.bot/operator': 'true',
           },
         },
         role: operatorRole,
@@ -99,7 +99,7 @@ export class Operator extends cdk8s.Chart {
         name: 'operator',
         namespace: namespace,
         labels: {
-          'eevee.io/operator': 'true',
+          'eevee.bot/operator': 'true',
         },
       },
       automountServiceAccountToken: true,
@@ -122,13 +122,6 @@ export class Operator extends cdk8s.Chart {
     });
 
     operatorDeployment.exposeViaService({
-      metadata: {
-        name: 'operator',
-        namespace: namespace,
-        labels: {
-          'eevee.io/operator': 'true',
-        },
-      },
       ports: [
         {
           port: httpApiPort,
