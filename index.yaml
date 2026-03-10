@@ -36,6 +36,16 @@ entries:
     version: 0.1.8
   crds:
   - apiVersion: v2
+    appVersion: 0.1.13
+    created: "2026-03-10T19:03:21.852491074Z"
+    description: The eevee CRDs
+    digest: 9bf7e6f40173a5d57232087f631c3786e144eafaaad1e1f7f157f1c42ec9cbaf
+    name: crds
+    type: application
+    urls:
+    - https://github.com/eeveebot/helm/releases/download/crds-0.1.13/crds-0.1.13.tgz
+    version: 0.1.13
+  - apiVersion: v2
     appVersion: 0.1.12
     created: "2026-03-10T03:15:36.939821726Z"
     description: The eevee CRDs
@@ -240,4 +250,4 @@ entries:
     urls:
     - https://github.com/eeveebot/helm/releases/download/operator-0.1.6/operator-0.1.6.tgz
     version: 0.1.6
-generated: "2026-03-10T03:15:37.088429676Z"
+generated: "2026-03-10T19:03:22.017379172Z"
