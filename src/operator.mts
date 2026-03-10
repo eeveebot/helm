@@ -24,7 +24,17 @@ export class Operator extends cdk8s.Chart {
   ) {
     super(scope, id, props);
 
-    const operatorRole = new cdk8splus.Role(this, 'operator-role');
+    const operatorRole = new cdk8splus.Role(this, 'operator-role',
+      {
+        metadata: {
+          name: 'operator-role',
+          namespace: namespace,
+          labels: {
+            'eevee.io/operator': 'true',
+          },
+        },
+      }
+    );
 
     operatorRole.allowReadWrite(
       cdk8splus.ApiResource.CONFIG_MAPS,
@@ -55,7 +65,16 @@ export class Operator extends cdk8s.Chart {
 
     const serviceAccount = new cdk8splus.ServiceAccount(
       this,
-      'operator-service-account'
+      'operator-service-account',
+      {
+        metadata: {
+          name: 'operator-service-account',
+          namespace: namespace,
+          labels: {
+            'eevee.io/operator': 'true',
+          },
+        },
+      }
     );
 
     const roleBinding = new cdk8splus.RoleBinding(
@@ -63,8 +82,11 @@ export class Operator extends cdk8s.Chart {
       'operator-role-binding',
       {
         metadata: {
-          name: 'eevee-operator-rolebinding',
+          name: 'operator-role-binding',
           namespace: namespace,
+          labels: {
+            'eevee.io/operator': 'true',
+          },
         },
         role: operatorRole,
       }
@@ -74,6 +96,8 @@ export class Operator extends cdk8s.Chart {
 
     const operatorDeployment = new cdk8splus.Deployment(this, 'operator', {
       metadata: {
+        name: 'operator',
+        namespace: namespace,
         labels: {
           'eevee.io/operator': 'true',
         },
@@ -83,6 +107,7 @@ export class Operator extends cdk8s.Chart {
       select: true,
       containers: [
         {
+          name: 'operator',
           image: image,
           ports: [
             {
@@ -97,6 +122,13 @@ export class Operator extends cdk8s.Chart {
     });
 
     operatorDeployment.exposeViaService({
+      metadata: {
+        name: 'operator',
+        namespace: namespace,
+        labels: {
+          'eevee.io/operator': 'true',
+        },
+      },
       ports: [
         {
           port: httpApiPort,
