@@ -5,13 +5,14 @@ HANDWRITTEN_CHARTS=(bot eevee)
 
 COMMIT="$(git rev-parse --short --verify main)"
 
-VERSIONS_SRC="${VERSIONS_SRC:-"$SCRIPT_DIR/versions.yaml"}" 
-CHART_DIR="${CHART_DIR:-"$SCRIPT_DIR/charts"}"
 
 # where this .sh file lives
 DIRNAME=$(dirname "$0")
 SCRIPT_DIR=$(cd "$DIRNAME" || exit 1; pwd)
 cd "$SCRIPT_DIR" || exit 1
+
+VERSIONS_SRC="${VERSIONS_SRC:-"$SCRIPT_DIR/versions.yaml"}" 
+CHART_DIR="${CHART_DIR:-"$SCRIPT_DIR/charts"}"
 
 function main() {
   cd "$SCRIPT_DIR" || exit 1
@@ -64,7 +65,7 @@ function main() {
     yq e -i ".version = \"${CHART_VERSION}\"" "${CHART_DIR}/${CHART}/Chart.yaml"
     yq e -i ".appVersion = \"${APP_VERSION}\"" "${CHART_DIR}/${CHART}/Chart.yaml"
 
-    git add -v "charts/${CHART}"
+    git add -v "${CHART_DIR}/${CHART}"
     git diff --quiet && git diff --staged --quiet || git commit -m "Build ${CHART} helmchart for commit ${COMMIT}"
   done
 
@@ -103,9 +104,9 @@ function main() {
     CHART_VERSION=$(yq e ".${CHART}.chart" versions.yaml)
     export CHART
     export CHART_VERSION
-    yq e -i '(.dependencies[] | select(.name == env(CHART)) | .version) = env(CHART_VERSION)' "${SCRIPT_DIR}/charts/eevee/Chart.yaml"
+    yq e -i '(.dependencies[] | select(.name == env(CHART)) | .version) = env(CHART_VERSION)' "${CHART_DIR}/eevee/Chart.yaml"
   done
-  git add -v "charts/eevee/*"
+  git add -v "${CHART_DIR}/eevee/*"
   git diff --quiet && git diff --staged --quiet || git commit -m "Update deps of ${CHART} helmchart for commit ${COMMIT}"
 
   finalize_git_ci
