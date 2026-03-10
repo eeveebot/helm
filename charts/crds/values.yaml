@@ -4,7 +4,9 @@ eeveeCrdJob:
       allowPrivilegeEscalation: false
       privileged: false
       readOnlyRootFilesystem: true
+      runAsGroup: 0
       runAsNonRoot: true
+      runAsUser: 0
     env:
       kubeInClusterConfig: "true"
     image:
