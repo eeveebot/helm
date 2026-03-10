@@ -114,7 +114,15 @@ function main() {
 
 function finalize_git_ci() {
   cd "$SCRIPT_DIR" || exit 1
-  echo "Git push"
+  echo "Updating gh-pages branch"
+  cp -R "${CHART_DIR}" /tmp/charts
+  git switch gh-pages
+  cp -R /tmp/charts/* "${CHART_DIR}"/
+  git add "${CHART_DIR}"/*
+  git diff --quiet && git diff --staged --quiet || git commit -m "Update helmcharts on gh-pages branch for commit ${COMMIT}"
+  git push
+
+  echo "Git push main"
   git switch main
   git push
 }
