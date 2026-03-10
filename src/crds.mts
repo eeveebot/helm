@@ -24,12 +24,18 @@ export class CrdJob extends cdk8s.Chart {
 
     const crdJobRole = new cdk8splus.Role(this, 'crd-job-role');
 
+    const crdJobClusterRole = new cdk8splus.ClusterRole(this, 'crd-job-cluster-role');
+
     crdJobRole.allowReadWrite(
-      cdk8splus.ApiResource.CUSTOM_RESOURCE_DEFINITIONS,
       new eevee.ChatConnectionIrc.ApiResource,
       new eevee.IpcConfig.ApiResource,
       new eevee.Toolbox.ApiResource,
     );
+
+    crdJobClusterRole.allowReadWrite(
+      cdk8splus.ApiResource.CUSTOM_RESOURCE_DEFINITIONS,
+    );
+
     const serviceAccount = new cdk8splus.ServiceAccount(
       this,
       'crd-job-service-account'
@@ -47,7 +53,19 @@ export class CrdJob extends cdk8s.Chart {
       }
     );
 
+    const clusterRoleBinding = new cdk8splus.ClusterRoleBinding(
+      this,
+      'crd-job-cluster-role-binding',
+      {
+        metadata: {
+          name: 'crd-job-cluster-role-binding',
+        },
+        role: crdJobClusterRole,
+      }
+    );
+
     roleBinding.addSubjects(serviceAccount);
+    clusterRoleBinding.addSubjects(serviceAccount);
 
     const crdJob = new cdk8splus.Job(this, 'crd-job', {
       metadata: {
