@@ -3,7 +3,7 @@ kind: Role
 metadata:
   name: operator-role
   labels:
-    eevee.io/operator: "true"
+    eevee.bot/operator: "true"
   {{- include "operator.labels" . | nindent 4 }}
 rules:
 - apiGroups:
@@ -279,7 +279,7 @@ kind: RoleBinding
 metadata:
   name: operator-role-binding
   labels:
-    eevee.io/operator: "true"
+    eevee.bot/operator: "true"
   {{- include "operator.labels" . | nindent 4 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -295,7 +295,7 @@ kind: Deployment
 metadata:
   name: operator
   labels:
-    eevee.io/operator: "true"
+    eevee.bot/operator: "true"
   {{- include "operator.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.operator.replicas }}
@@ -307,13 +307,12 @@ spec:
         }}
     type: {{ .Values.operator.strategy.type | quote }}
   selector:
-    matchLabels:
-      cdk8s.io/metadata.addr: eevee-operator-c8fa08f6
+    matchLabels: null
     {{- include "operator.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        cdk8s.io/metadata.addr: eevee-operator-c8fa08f6
+        eevee.bot/operator: "true"
       {{- include "operator.selectorLabels" . | nindent 8 }}
     spec:
       automountServiceAccountToken: true
@@ -353,7 +352,7 @@ metadata:
 spec:
   type: {{ .Values.eeveeOperatorService.type }}
   selector:
-    cdk8s.io/metadata.addr: eevee-operator-c8fa08f6
+    eevee.bot/operator: "true"
     {{- include "operator.selectorLabels" . | nindent 4 }}
   ports:
   {{- .Values.eeveeOperatorService.ports | toYaml | nindent 2 }}
