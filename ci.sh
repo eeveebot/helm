@@ -44,8 +44,8 @@ function main() {
     fi
 
     helmify -vv --original-name -f "manifests/${CHART}" "${CHART}"
-    mkdir -pv "${SCRIPT_DIR}/charts/${CHART}"
-    cp -R "${CHART}"/* "${SCRIPT_DIR}/charts/${CHART}"
+    mkdir -pv "${CHART_DIR}/${CHART}"
+    cp -R "${CHART}"/* "${CHART_DIR}/${CHART}"
 
     PRE_COMMIT_HOOK="pre_commit_hook_${CHART}"
     if declare -f "$PRE_COMMIT_HOOK" > /dev/null; then
@@ -73,8 +73,8 @@ function main() {
     echo "Processing chart: $CHART"
 
     cd src || exit 1
-    mkdir -pv "${SCRIPT_DIR}/charts/${CHART}"
-    cp -R "${CHART}"/* "${SCRIPT_DIR}/charts/${CHART}"
+    mkdir -pv "${CHART_DIR}/${CHART}"
+    cp -R "${CHART}"/* "${CHART_DIR}/${CHART}"
 
     PRE_COMMIT_HOOK="pre_commit_hook_${CHART}"
     if declare -f "$PRE_COMMIT_HOOK" > /dev/null; then
