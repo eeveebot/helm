@@ -117,6 +117,7 @@ function finalize_git_ci() {
   echo "Updating gh-pages branch"
   cp -R "${CHART_DIR}" /tmp/charts
   git switch gh-pages
+  mkdir -pv "${CHART_DIR}"
   cp -R /tmp/charts/* "${CHART_DIR}"/
   git add "${CHART_DIR}"/*
   git diff --quiet && git diff --staged --quiet || git commit -m "Update helmcharts on gh-pages branch for commit ${COMMIT}"
@@ -155,7 +156,7 @@ function setup_npm_ci() {
   cd "$SCRIPT_DIR" || exit 1
   # npm install
   echo "Setup npm"
-  echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" | tee -a "${HOME}/.npmrc"
+  echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> "${HOME}/.npmrc"
   git switch main
   npm ci
 }
