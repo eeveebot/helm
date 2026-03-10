@@ -10,8 +10,8 @@ DIRNAME=$(dirname "$0")
 SCRIPT_DIR=$(cd "$DIRNAME" || exit 1; pwd)
 cd "$SCRIPT_DIR" || exit 1
 
-
 function main() {
+  cd "$SCRIPT_DIR" || exit 1
   setup_git_ci
   update_readme_gh_pages_branch
   setup_npm_ci
@@ -79,7 +79,7 @@ function main() {
   done
 
   # Update deps in eevee chart
-  for CHART in "${GENERATED_CHARTS[@]} ${HANDWRITTEN_CHARTS[@]}"; do
+  for CHART in "${GENERATED_CHARTS[@]}" "${HANDWRITTEN_CHARTS[@]}"; do
     echo "Updating version in eevee chart for ${CHART}"
     CHART_VERSION=$(yq e ".${CHART}.chart" versions.yaml)
     export CHART
@@ -90,7 +90,15 @@ function main() {
   git diff --quiet && git diff --staged --quiet || git commit -m "Update deps of ${CHART} helmchart for commit ${COMMIT}"
 }
 
+function finalize_git_ci() {
+  cd "$SCRIPT_DIR" || exit 1
+  echo "Git push"
+  git switch main
+  git push
+}
+
 function setup_git_ci() {
+  cd "$SCRIPT_DIR" || exit 1
   # git setup
   echo "Setup git"
   git config --global --add safe.directory "$(pwd)"
@@ -101,6 +109,7 @@ function setup_git_ci() {
 }
 
 function update_readme_gh_pages_branch() {
+  cd "$SCRIPT_DIR" || exit 1
   # update readme
   echo "Update readme"
   git switch main
@@ -113,6 +122,7 @@ function update_readme_gh_pages_branch() {
 }
 
 function setup_npm_ci() {
+  cd "$SCRIPT_DIR" || exit 1
   # npm install
   echo "Setup npm"
   echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" | tee -a "${HOME}/.npmrc"
