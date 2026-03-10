@@ -2,6 +2,8 @@ import { Construct } from 'constructs';
 import * as cdk8splus from 'cdk8s-plus-33';
 import * as cdk8s from 'cdk8s';
 
+import { eevee } from '@eeveebot/crds';
+
 const outdir: string = '../dist/manifests/crds';
 const suffix: string = '-crds.yaml';
 
@@ -23,7 +25,10 @@ export class CrdJob extends cdk8s.Chart {
     const crdJobRole = new cdk8splus.Role(this, 'crd-job-role');
 
     crdJobRole.allowReadWrite(
-      cdk8splus.ApiResource.CUSTOM_RESOURCE_DEFINITIONS
+      cdk8splus.ApiResource.CUSTOM_RESOURCE_DEFINITIONS,
+      new eevee.ChatConnectionIrc.ApiResource,
+      new eevee.IpcConfig.ApiResource,
+      new eevee.Toolbox.ApiResource,
     );
     const serviceAccount = new cdk8splus.ServiceAccount(
       this,
@@ -35,7 +40,7 @@ export class CrdJob extends cdk8s.Chart {
       'crd-job-role-binding',
       {
         metadata: {
-          name: 'eevee-crd-job-rolebinding',
+          name: 'crd-job-role-binding',
           namespace: namespace,
         },
         role: crdJobRole,
