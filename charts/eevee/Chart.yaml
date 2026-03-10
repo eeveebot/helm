@@ -22,13 +22,13 @@ appVersion: "0.0.1"
 dependencies:
   - name: operator
     repository: helm.eevee.bot
-    version: '0.1.1'
+    version: '0.1.3'
     condition: operator.enabled
   - name: bot
     repository: helm.eevee.bot
-    version: '0.1.1'
+    version: '0.1.3'
     condition: bot.enabled
   - name: crds
     repository: helm.eevee.bot
-    version: '0.1.1'
+    version: '0.1.3'
     condition: crds.enabled
