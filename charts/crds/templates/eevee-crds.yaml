@@ -18,6 +18,45 @@ rules:
   - patch
   - delete
   - deletecollection
+- apiGroups:
+  - eevee.bot
+  resources:
+  - ChatConnectionIrc
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - eevee.bot
+  resources:
+  - ipcConfig
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - eevee.bot
+  resources:
+  - Toolbox
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
 ---
 {{ if .Values.serviceAccount.create }}
 apiVersion: v1
@@ -36,7 +75,7 @@ automountServiceAccountToken: {{ .Values.serviceAccount.automount }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: eevee-crd-job-rolebinding
+  name: crd-job-role-binding
   labels:
   {{- include "crds.labels" . | nindent 4 }}
 roleRef:
