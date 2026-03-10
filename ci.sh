@@ -101,7 +101,7 @@ function main() {
   # Update deps in eevee chart
   for CHART in "${GENERATED_CHARTS[@]}" "${HANDWRITTEN_CHARTS[@]}"; do
     echo "Updating version in eevee chart for ${CHART}"
-    CHART_VERSION=$(yq e ".${CHART}.chart" versions.yaml)
+    CHART_VERSION=$(yq e ".version" "${CHART_DIR}/${CHART}/Chart.yaml")
     export CHART
     export CHART_VERSION
     yq e -i '(.dependencies[] | select(.name == env(CHART)) | .version) = env(CHART_VERSION)' "${CHART_DIR}/eevee/Chart.yaml"
