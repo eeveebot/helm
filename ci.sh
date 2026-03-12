@@ -1,7 +1,8 @@
 #!bash
 
 GENERATED_CHARTS=(crds operator)
-HANDWRITTEN_CHARTS=(bot eevee)
+HANDWRITTEN_CHARTS=(bot)
+META_CHARTS=(eevee)
 
 COMMIT="$(git rev-parse --short --verify main)"
 
@@ -16,8 +17,9 @@ DIRNAME=$(dirname "$0")
 SCRIPT_DIR=$(cd "${DIRNAME}" || exit 1; pwd)
 cd "${SCRIPT_DIR}" || exit 1
 
-VERSIONS_SRC="${VERSIONS_SRC:-"$SCRIPT_DIR/versions.yaml"}"
-CHART_DIR="${CHART_DIR:-"$SCRIPT_DIR/charts"}"
+VERSIONS_SRC="${VERSIONS_SRC:-"${SCRIPT_DIR}/versions.yaml"}"
+CHART_DIR="${CHART_DIR:-"${SCRIPT_DIR}/charts"}"
+CHART_SRC_DIR="${CHART_SRC_DIR:-"${SCRIPT_DIR}/src"}"
 
 function main() {
   cd "$SCRIPT_DIR" || exit 1
@@ -90,19 +92,18 @@ function main() {
   for CHART in "${HANDWRITTEN_CHARTS[@]}"; do
     echo "Processing chart: $CHART"
 
-    cd src || exit 1
     mkdir -pv "${CHART_DIR}/${CHART}"
-    cp -R "${CHART}"/* "${CHART_DIR}/${CHART}"
+    cp -R "${CHART_SRC_DIR}/${CHART}"/* "${CHART_DIR}/${CHART}"
+
+    cd "${SCRIPT_DIR}" || exit 1
 
     PRE_COMMIT_HOOK="pre_commit_hook_${CHART}"
     if declare -f "$PRE_COMMIT_HOOK" > /dev/null; then
       echo "Calling pre-commit hook function: $PRE_COMMIT_HOOK"
-      (cd "${SCRIPT_DIR}" && "$PRE_COMMIT_HOOK")
+      "$PRE_COMMIT_HOOK"
     else
       echo "No pre-commit hook function found for chart: $CHART"
     fi
-
-    cd "${SCRIPT_DIR}" || exit 1
 
     # Update the chart versions/description
     DESCRIPTION=$(yq eval ".${CHART}.description" $VERSIONS_SRC)
@@ -123,36 +124,51 @@ function main() {
   # Update deps in eevee chart
   for CHART in "${GENERATED_CHARTS[@]}" "${HANDWRITTEN_CHARTS[@]}"; do
     echo "Updating version in eevee chart for ${CHART}"
+    cd "${SCRIPT_DIR}" || exit 1
     CHART_VERSION=$(yq e ".version" "${CHART_DIR}/${CHART}/Chart.yaml")
     export CHART
     export CHART_VERSION
-    yq e -i '(.dependencies[] | select(.name == env(CHART)) | .version) = env(CHART_VERSION)' "${CHART_DIR}/eevee/Chart.yaml"
+    yq e -i '(.dependencies[] | select(.name == env(CHART)) | .version) = env(CHART_VERSION)' "${CHART_SRC_DIR}/eevee/Chart.yaml"
   done
 
   if [[ "$IS_GITHUB_CI" == true ]]; then
-    echo "Bumping eevee chart version"
-    CHART_VERSION=$(yq e '.eevee.chart' $VERSIONS_SRC)
-    APP_VERSION=$(yq e '.eevee.application' $VERSIONS_SRC)
+    for CHART in "${META_CHARTS[@]}"; do
+      echo "Processing meta-chart: $CHART"
+      cd "${SCRIPT_DIR}" || exit 1
 
-    # Increment patch version
-    NEW_CHART_VERSION=$(echo "$CHART_VERSION" | awk -F. '{print $1"."$2"."$3+1}')
-    if [ $? -ne 0 ] || [ -z "$NEW_CHART_VERSION" ]; then
-      echo "Error: Failed to increment chart version"
-      exit 1
-    fi
-    NEW_APP_VERSION="$NEW_CHART_VERSION"
+      echo "Bumping ${CHART} version"
+      # Get current version from Chart.yaml
+      CHART_VERSION=$(yq e '.version' "${CHART_DIR}/${CHART}/Chart.yaml")
+      APP_VERSION=$(yq e '.appVersion' "${CHART_DIR}/${CHART}/Chart.yaml")
 
-    # Update versions.yaml
-    yq e -i '.eevee.chart = "'"$NEW_CHART_VERSION"'"' $VERSIONS_SRC
-    yq e -i '.eevee.application = "'"$NEW_APP_VERSION"'"' $VERSIONS_SRC
+      # Increment patch version
+      NEW_CHART_VERSION=$(echo "$CHART_VERSION" | awk -F. '{print $1"."$2"."$3+1}')
+      if [ $? -ne 0 ] || [ -z "$NEW_CHART_VERSION" ]; then
+        echo "Error: Failed to increment chart version"
+        exit 1
+      fi
+      NEW_APP_VERSION="$NEW_CHART_VERSION"
 
-    # Update eevee chart Chart.yaml
-    yq e -i '.version = "'"$NEW_CHART_VERSION"'"' "${CHART_DIR}/eevee/Chart.yaml"
-    yq e -i '.appVersion = "'"$NEW_APP_VERSION"'"' "${CHART_DIR}/eevee/Chart.yaml"
+      # Copy chart sources
+      mkdir -pv "${CHART_DIR}/${CHART}"
+      cp -R "${CHART_SRC_DIR}/${CHART}"/* "${CHART_DIR}/${CHART}"
 
-    echo "Adding eevee chart to git staged and committing"
-    git add "${CHART_DIR}/eevee/*"
-    git diff --quiet && git diff --staged --quiet || git commit -m "Update deps of eevee helmchart for commit ${COMMIT}"
+      # Update version in Chart.yaml
+      yq e -i '.version = "'"$NEW_CHART_VERSION"'"' "${CHART_DIR}/${CHART}/Chart.yaml"
+      yq e -i '.appVersion = "'"$NEW_APP_VERSION"'"' "${CHART_DIR}/${CHART}/Chart.yaml"
+
+      PRE_COMMIT_HOOK="pre_commit_hook_${CHART}"
+      if declare -f "$PRE_COMMIT_HOOK" > /dev/null; then
+        echo "Calling pre-commit hook function: $PRE_COMMIT_HOOK"
+        (cd "${SCRIPT_DIR}" && "$PRE_COMMIT_HOOK")
+      else
+        echo "No pre-commit hook function found for chart: $CHART"
+      fi
+
+      echo "Adding ${CHART} chart to git staged and committing"
+      git add "${CHART_DIR}/${CHART}/*"
+      git diff --quiet && git diff --staged --quiet || git commit -m "Update deps of ${CHART} helmchart for commit ${COMMIT}"
+    done
   else
     echo "Skipping git operations in local environment"
   fi
