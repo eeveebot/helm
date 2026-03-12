@@ -20,6 +20,10 @@ version: '0.0.0'
 # It is recommended to use it with quotes.
 appVersion: '0.0.0'
 dependencies:
+  - name: crds
+    repository: file://../crds
+    version: '0.0.0'
+    condition: crds.enabled
   - name: operator
     repository: file://../operator
     version: '0.0.0'
@@ -28,7 +32,3 @@ dependencies:
     repository: file://../bot
     version: '0.0.0'
     condition: bot.enabled
-  - name: crds
-    repository: file://../crds
-    version: '0.0.0'
-    condition: crds.enabled
