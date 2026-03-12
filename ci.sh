@@ -33,7 +33,6 @@ function main() {
   fi
 
   echo "Cleanup"
-  rm -rf charts/*
   rm -rf dist/*
 
   # generated charts
