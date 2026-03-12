@@ -1,7 +1,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: operator-role
+  name: eevee-operator-role
   labels:
     eevee.bot/operator: "true"
   {{- include "operator.labels" . | nindent 4 }}
@@ -365,7 +365,7 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: operator-cluster-role
+  name: eevee-operator-cluster-role
   labels:
     eevee.bot/operator: "true"
   {{- include "operator.labels" . | nindent 4 }}
@@ -752,7 +752,7 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: operator-role
+  name: eevee-operator-role
 subjects:
 - kind: ServiceAccount
   name: '{{ include "operator.serviceAccountName" . }}'
@@ -768,7 +768,7 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: operator-cluster-role
+  name: eevee-operator-cluster-role
 subjects:
 - kind: ServiceAccount
   name: '{{ include "operator.serviceAccountName" . }}'
@@ -803,6 +803,8 @@ spec:
       automountServiceAccountToken: true
       containers:
       - env:
+        - name: KUBE_IN_CLUSTER_CONFIG
+          value: {{ quote .Values.operator.operator.env.kubeInClusterConfig }}
         - name: WATCH_OTHER_NAMESPACES
           value: {{ quote .Values.operator.operator.env.watchOtherNamespaces }}
         - name: KUBERNETES_CLUSTER_DOMAIN
