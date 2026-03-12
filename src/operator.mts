@@ -40,7 +40,6 @@ export class Operator extends cdk8s.Chart {
       cdk8splus.ApiResource.CONFIG_MAPS,
       cdk8splus.ApiResource.CRON_JOBS,
       cdk8splus.ApiResource.CUSTOM_RESOURCE_DEFINITIONS,
-      cdk8splus.ApiResource.DAEMON_SETS,
       cdk8splus.ApiResource.DEPLOYMENTS,
       cdk8splus.ApiResource.JOBS,
       cdk8splus.ApiResource.LEASES,
