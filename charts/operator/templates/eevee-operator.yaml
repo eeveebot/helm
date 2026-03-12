@@ -369,7 +369,364 @@ metadata:
   labels:
     eevee.bot/operator: "true"
   {{- include "operator.labels" . | nindent 4 }}
-rules: []
+rules:
+- apiGroups:
+  - ""
+  resourceNames: []
+  resources:
+  - configmaps
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - batch
+  resourceNames: []
+  resources:
+  - cronjobs
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - apiextensions.k8s.io
+  resourceNames: []
+  resources:
+  - customresourcedefinitions
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - apps
+  resourceNames: []
+  resources:
+  - deployments
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - apps
+  resourceNames: []
+  resources:
+  - daemonsets
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - batch
+  resourceNames: []
+  resources:
+  - jobs
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - coordination.k8s.io
+  resourceNames: []
+  resources:
+  - leases
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - ""
+  resourceNames: []
+  resources:
+  - persistentvolumeclaims
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - ""
+  resourceNames: []
+  resources:
+  - pods
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - apps
+  resourceNames: []
+  resources:
+  - replicasets
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - ""
+  resourceNames: []
+  resources:
+  - secrets
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - ""
+  resourceNames: []
+  resources:
+  - services
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - apps
+  resourceNames: []
+  resources:
+  - statefulsets
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - networking.k8s.io
+  resourceNames: []
+  resources:
+  - ingresses
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - eevee.bot
+  resourceNames: []
+  resources:
+  - chatconnectionirc
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - eevee.bot
+  resourceNames: []
+  resources:
+  - ipcconfig
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - eevee.bot
+  resourceNames: []
+  resources:
+  - toolbox
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - ""
+  resourceNames: []
+  resources:
+  - configmaps
+  verbs:
+  - watch
+- apiGroups:
+  - batch
+  resourceNames: []
+  resources:
+  - cronjobs
+  verbs:
+  - watch
+- apiGroups:
+  - apiextensions.k8s.io
+  resourceNames: []
+  resources:
+  - customresourcedefinitions
+  verbs:
+  - watch
+- apiGroups:
+  - apps
+  resourceNames: []
+  resources:
+  - deployments
+  verbs:
+  - watch
+- apiGroups:
+  - apps
+  resourceNames: []
+  resources:
+  - daemonsets
+  verbs:
+  - watch
+- apiGroups:
+  - batch
+  resourceNames: []
+  resources:
+  - jobs
+  verbs:
+  - watch
+- apiGroups:
+  - coordination.k8s.io
+  resourceNames: []
+  resources:
+  - leases
+  verbs:
+  - watch
+- apiGroups:
+  - ""
+  resourceNames: []
+  resources:
+  - persistentvolumeclaims
+  verbs:
+  - watch
+- apiGroups:
+  - ""
+  resourceNames: []
+  resources:
+  - pods
+  verbs:
+  - watch
+- apiGroups:
+  - apps
+  resourceNames: []
+  resources:
+  - replicasets
+  verbs:
+  - watch
+- apiGroups:
+  - ""
+  resourceNames: []
+  resources:
+  - secrets
+  verbs:
+  - watch
+- apiGroups:
+  - ""
+  resourceNames: []
+  resources:
+  - services
+  verbs:
+  - watch
+- apiGroups:
+  - apps
+  resourceNames: []
+  resources:
+  - statefulsets
+  verbs:
+  - watch
+- apiGroups:
+  - networking.k8s.io
+  resourceNames: []
+  resources:
+  - ingresses
+  verbs:
+  - watch
+- apiGroups:
+  - eevee.bot
+  resourceNames: []
+  resources:
+  - chatconnectionirc
+  verbs:
+  - watch
+- apiGroups:
+  - eevee.bot
+  resourceNames: []
+  resources:
+  - ipcconfig
+  verbs:
+  - watch
+- apiGroups:
+  - eevee.bot
+  resourceNames: []
+  resources:
+  - toolbox
+  verbs:
+  - watch
 ---
 {{ if .Values.serviceAccount.create }}
 apiVersion: v1
@@ -396,6 +753,22 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: operator-role
+subjects:
+- kind: ServiceAccount
+  name: '{{ include "operator.serviceAccountName" . }}'
+  namespace: '{{ .Release.Namespace }}'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: operator-role-binding
+  labels:
+    eevee.bot/operator: "true"
+  {{- include "operator.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: operator-cluster-role
 subjects:
 - kind: ServiceAccount
   name: '{{ include "operator.serviceAccountName" . }}'
