@@ -12,6 +12,8 @@ operator:
       privileged: false
       readOnlyRootFilesystem: true
       runAsNonRoot: true
+    env:
+      watchOtherNamespaces: "false"
     image:
       repository: ghcr.io/eeveebot/operator
       tag: latest
