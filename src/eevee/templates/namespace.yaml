@@ -4,4 +4,4 @@ kind: Namespace
 metadata:
   name: {{ include "eevee-bot.botNamespace" $ }}
   labels:
-  {{- include "eevee-bot.labels" . | nindent 4 }}
+    {{- include "eevee-bot.labels" . | nindent 4 }}

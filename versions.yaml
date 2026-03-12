@@ -2,8 +2,8 @@
 
 eevee:
   description: An opinionated deployment of crds, operator, and bot
-  chart: 0.1.13
-  application: 0.1.13
+  chart: 0.1.14
+  application: 0.1.14
 
 operator:
   description: The eevee Operator
@@ -17,5 +17,5 @@ crds:
 
 bot:
   description: A combined deployment of various CR entities that define an eevee bot
-  chart: 0.1.12
-  application: 0.1.12
+  chart: 0.1.14
+  application: 0.1.14

@@ -4,61 +4,84 @@
 # Name of this bot
 name: eevee-bot
 
-# Variables specified in .global apply to all eevee-bot components
-global:
-  # Namespace for the bot
-  namespace: eevee-bot
+# IPC Configuration
+ipcConfig:
+  # Name of the IPC config resource
+  name: eevee-ipc-config
 
-  # Use an existing secret for nats token
-  # Must have a key "token" with the desired token
-  natsAuthExistingSecret: false
+  # NATS configuration
+  nats:
+    # Managed NATS deployment configuration
+    managed:
+      # Should the eevee-operator deploy a NATS server for us?
+      enabled: true
 
-  # Name of secret to use/create for NATS token
-  natsAuthSecret: nats-auth
+      # NATS container image to use
+      image: docker.io/nats:latest
 
-  # Namespace NATS is deployed to
-  natsNamespace: eevee-bot
+    # NATS token authentication configuration
+    token:
+      # Should the eevee-operator generate a token for NATS auth?
+      generate: true
 
-  # Enable metrics
-  # Prometheus CRDs must be preinstalled
-  metrics: true
+      # Secret reference for existing token (only used if generate is false)
+      # secretKeyRef:
+      #   name: nats-auth-secret
+      #   key: token
 
-# Deploy NATS cluster (disable if you want to bring your own)
-nats:
-  enabled: true
-  replicas: 1
-
-# Deploy toolbox
+# Toolbox configuration
 toolbox:
+  # Enable toolbox deployment
   enabled: true
+
+  # Toolbox spec
   spec:
-    # Number of toolbox replicas to deploy
-    size: 1
-    # Override container image
-    containerImage: ghcr.io/eeveebot/toolbox:latest
-    # Override pull policy
-    # Defaults to IfNotPresent
-    pullPolicy: Always
-
-# Connectors to enable
-connectors:
-  # IRC Connector instances to create
-  irc:
-  - name: eevee-localhost
-    # Number of connector-irc replicas to deploy
-    # NOTE: only 1 is supported at this time
+    # Number of toolbox instances to deploy
     size: 1
 
-    # Override container image
-    containerImage: ghcr.io/eeveebot/connector-irc:latest
+    # Container image to use
+    image: ghcr.io/eeveebot/toolbox:latest
 
-    # Override pull policy
-    # Defaults to IfNotPresent
+    # Image pull policy
     pullPolicy: Always
 
-    # Setup IRC Connections
-    ircConnections:
-    - name: localhost
+    # Enable metrics
+    metrics: true
+
+    # Metrics port
+    metricsPort: 8080
+
+    # IPC configuration name
+    ipcConfig: eevee-ipc-config
+
+# IRC Connections
+chatConnectionIrc:
+  # Enable IRC connections
+  enabled: true
+
+  # Chat connection IRC spec
+  spec:
+    # IPC configuration name
+    ipcConfig: eevee-ipc-config
+
+    # Container image to use
+    image: ghcr.io/eeveebot/connector-irc:latest
+
+    # Enable metrics
+    metrics: true
+
+    # Metrics port
+    metricsPort: 8080
+
+    # List of IRC connections
+    connections:
+    - # Display name for this network
+      name: localhost
+
+      # Enable this connection
+      enabled: true
+
+      # IRC connection configuration
       irc:
         host: localhost
         port: 6667
@@ -72,7 +95,7 @@ connectors:
         pingInterval: 30
         pingTimeout: 120
 
-      # Identifying information for the bot
+      # IRC Ident information
       ident:
         nick: eevee
         username: eevee
@@ -82,7 +105,7 @@ connectors:
 
       # Actions to take after connecting
       postConnect:
+      - # Join channels after connecting
+        action: join
         join:
-          - sequence: 1
-            channel: '#eevee'
-            key: ''
+        - channel: '#eevee'
