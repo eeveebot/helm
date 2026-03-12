@@ -91,6 +91,16 @@ entries:
     version: 0.1.8
   crds:
   - apiVersion: v2
+    appVersion: 0.1.26
+    created: "2026-03-12T22:34:50.890932808Z"
+    description: The eevee CRDs
+    digest: 7b04dd6122648c0d1cb23efb717ac4b069079bb72b1e95d5f4e773063d169013
+    name: crds
+    type: application
+    urls:
+    - https://github.com/eeveebot/helm/releases/download/crds-0.1.26/crds-0.1.26.tgz
+    version: 0.1.26
+  - apiVersion: v2
     appVersion: 0.1.25
     created: "2026-03-12T22:29:27.93797837Z"
     description: The eevee CRDs
@@ -241,6 +251,25 @@ entries:
     - https://github.com/eeveebot/helm/releases/download/crds-0.1.6/crds-0.1.6.tgz
     version: 0.1.6
   eevee:
+  - apiVersion: v2
+    appVersion: 0.1.32
+    created: "2026-03-12T22:34:51.027284076Z"
+    dependencies:
+    - condition: operator.enabled
+      name: operator
+      repository: file://../operator
+      version: 0.1.20
+    - condition: bot.enabled
+      name: bot
+      repository: file://../bot
+      version: 0.1.20
+    description: A Helm chart for eevee.bot ecosystem deployment
+    digest: 2e8162349423ac5e9dde984a31b5c7de9d72e3c7fbc55d6f9d747d8fa268ccf5
+    name: eevee
+    type: application
+    urls:
+    - https://github.com/eeveebot/helm/releases/download/eevee-0.1.32/eevee-0.1.32.tgz
+    version: 0.1.32
   - apiVersion: v2
     appVersion: 0.1.31
     created: "2026-03-12T22:29:28.159745152Z"
@@ -815,4 +844,4 @@ entries:
     urls:
     - https://github.com/eeveebot/helm/releases/download/operator-0.1.6/operator-0.1.6.tgz
     version: 0.1.6
-generated: "2026-03-12T22:29:28.160078024Z"
+generated: "2026-03-12T22:34:51.027863799Z"
