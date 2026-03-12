@@ -745,7 +745,7 @@ automountServiceAccountToken: {{ .Values.serviceAccount.automount }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: operator-role-binding
+  name: eevee-operator-role-binding
   labels:
     eevee.bot/operator: "true"
   {{- include "operator.labels" . | nindent 4 }}
@@ -761,7 +761,7 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: operator-role-binding
+  name: eevee-operator-cluster-role-binding
   labels:
     eevee.bot/operator: "true"
   {{- include "operator.labels" . | nindent 4 }}
