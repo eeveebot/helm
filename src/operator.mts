@@ -116,6 +116,9 @@ export class Operator extends cdk8s.Chart {
               number: httpApiPort,
             },
           ],
+          envVariables: {
+            WATCH_OTHER_NAMESPACES: cdk8splus.EnvValue.fromValue('false'),
+          },
         },
       ],
       replicas: 1,

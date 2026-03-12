@@ -5,6 +5,11 @@ HANDWRITTEN_CHARTS=(bot eevee)
 
 COMMIT="$(git rev-parse --short --verify main)"
 
+# Check if we're running in GitHub CI/CD environment
+IS_GITHUB_CI=false
+if [[ -n "$GITHUB_ACTIONS" ]]; then
+  IS_GITHUB_CI=true
+fi
 
 # where this .sh file lives
 DIRNAME=$(dirname "$0")
@@ -16,9 +21,14 @@ CHART_DIR="${CHART_DIR:-"$SCRIPT_DIR/charts"}"
 
 function main() {
   cd "$SCRIPT_DIR" || exit 1
-  setup_git_ci
-  update_readme_gh_pages_branch
-  setup_npm_ci
+  
+  if [[ "$IS_GITHUB_CI" == true ]]; then
+    setup_git_ci
+    update_readme_gh_pages_branch
+    setup_npm_ci
+  else
+    echo "Running in local environment - skipping CI setup functions"
+  fi
 
   echo "Cleanup"
   rm -rf charts/*
@@ -26,7 +36,11 @@ function main() {
 
   # generated charts
   echo "Run typescript build"
-  npm ci
+  if [[ "$IS_GITHUB_CI" == true ]]; then
+    npm ci
+  else
+    echo "Skipping npm ci in local environment"
+  fi
   npx tsc
 
   for CHART in "${GENERATED_CHARTS[@]}"; do
@@ -65,8 +79,12 @@ function main() {
     yq e -i ".version = \"${CHART_VERSION}\"" "${CHART_DIR}/${CHART}/Chart.yaml"
     yq e -i ".appVersion = \"${APP_VERSION}\"" "${CHART_DIR}/${CHART}/Chart.yaml"
 
-    git add -v "${CHART_DIR}/${CHART}"
-    git diff --quiet && git diff --staged --quiet || git commit -m "Build ${CHART} helmchart for commit ${COMMIT}"
+    if [[ "$IS_GITHUB_CI" == true ]]; then
+      git add -v "${CHART_DIR}/${CHART}"
+      git diff --quiet && git diff --staged --quiet || git commit -m "Build ${CHART} helmchart for commit ${COMMIT}"
+    else
+      echo "Skipping git operations in local environment"
+    fi
   done
 
   for CHART in "${HANDWRITTEN_CHARTS[@]}"; do
@@ -94,8 +112,12 @@ function main() {
     yq e -i ".version = \"${CHART_VERSION}\"" "${CHART_DIR}/${CHART}/Chart.yaml"
     yq e -i ".appVersion = \"${APP_VERSION}\"" "${CHART_DIR}/${CHART}/Chart.yaml"
 
-    git add -v "${CHART_DIR}/${CHART}/*"
-    git diff --quiet && git diff --staged --quiet || git commit -m "Build ${CHART} helmchart for commit ${COMMIT}"
+    if [[ "$IS_GITHUB_CI" == true ]]; then
+      git add -v "${CHART_DIR}/${CHART}/*"
+      git diff --quiet && git diff --staged --quiet || git commit -m "Build ${CHART} helmchart for commit ${COMMIT}"
+    else
+      echo "Skipping git operations in local environment"
+    fi
   done
 
   # Update deps in eevee chart
@@ -106,13 +128,27 @@ function main() {
     export CHART_VERSION
     yq e -i '(.dependencies[] | select(.name == env(CHART)) | .version) = env(CHART_VERSION)' "${CHART_DIR}/eevee/Chart.yaml"
   done
-  git add -v "${CHART_DIR}/eevee/*"
-  git diff --quiet && git diff --staged --quiet || git commit -m "Update deps of ${CHART} helmchart for commit ${COMMIT}"
+  
+  if [[ "$IS_GITHUB_CI" == true ]]; then
+    git add -v "${CHART_DIR}/eevee/*"
+    git diff --quiet && git diff --staged --quiet || git commit -m "Update deps of ${CHART} helmchart for commit ${COMMIT}"
+  else
+    echo "Skipping git operations in local environment"
+  fi
 
-  finalize_git_ci
+  if [[ "$IS_GITHUB_CI" == true ]]; then
+    finalize_git_ci
+  else
+    echo "Skipping finalize_git_ci in local environment"
+  fi
 }
 
 function finalize_git_ci() {
+  if [[ "$IS_GITHUB_CI" != true ]]; then
+    echo "Skipping finalize_git_ci in local environment"
+    return
+  fi
+  
   cd "$SCRIPT_DIR" || exit 1
   echo "Updating gh-pages branch"
   cp -R "${CHART_DIR}" /tmp/charts
@@ -129,6 +165,11 @@ function finalize_git_ci() {
 }
 
 function setup_git_ci() {
+  if [[ "$IS_GITHUB_CI" != true ]]; then
+    echo "Skipping setup_git_ci in local environment"
+    return
+  fi
+  
   cd "$SCRIPT_DIR" || exit 1
   # git setup
   echo "Setup git"
@@ -140,6 +181,11 @@ function setup_git_ci() {
 }
 
 function update_readme_gh_pages_branch() {
+  if [[ "$IS_GITHUB_CI" != true ]]; then
+    echo "Skipping update_readme_gh_pages_branch in local environment"
+    return
+  fi
+  
   cd "$SCRIPT_DIR" || exit 1
   # update readme
   echo "Update readme"
@@ -153,6 +199,11 @@ function update_readme_gh_pages_branch() {
 }
 
 function setup_npm_ci() {
+  if [[ "$IS_GITHUB_CI" != true ]]; then
+    echo "Skipping setup_npm_ci in local environment"
+    return
+  fi
+  
   cd "$SCRIPT_DIR" || exit 1
   # npm install
   echo "Setup npm"
