@@ -120,53 +120,58 @@ function main() {
     fi
   done
 
-  # Update deps in eevee chart
-  for CHART in "${GENERATED_CHARTS[@]}" "${HANDWRITTEN_CHARTS[@]}"; do
-    echo "Updating version in eevee chart for ${CHART}"
-    cd "${SCRIPT_DIR}" || exit 1
-    CHART_VERSION=$(yq e ".version" "${CHART_DIR}/${CHART}/Chart.yaml")
-    export CHART
-    export CHART_VERSION
-    yq e -i '(.dependencies[] | select(.name == env(CHART)) | .version) = env(CHART_VERSION)' "${CHART_SRC_DIR}/eevee/Chart.yaml"
-  done
-
   if [[ "$IS_GITHUB_CI" == true ]]; then
-    for CHART in "${META_CHARTS[@]}"; do
+    for METACHART in "${META_CHARTS[@]}"; do
       echo "Processing meta-chart: $CHART"
       cd "${SCRIPT_DIR}" || exit 1
 
-      echo "Bumping ${CHART} version"
       # Get current version from Chart.yaml
-      CHART_VERSION=$(yq e '.version' "${CHART_DIR}/${CHART}/Chart.yaml")
-      APP_VERSION=$(yq e '.appVersion' "${CHART_DIR}/${CHART}/Chart.yaml")
+      METACHART_CHART_VERSION=$(yq e '.version' "${CHART_DIR}/${METACHART}/Chart.yaml")
+      METACHART_APP_VERSION=$(yq e '.appVersion' "${CHART_DIR}/${METACHART}/Chart.yaml")
 
+      # Copy chart sources
+      mkdir -pv "${CHART_DIR}/${METACHART}"
+      cp -R "${CHART_SRC_DIR}/${METACHART}"/* "${CHART_DIR}/${METACHART}"
+
+      # Update deps in meta chart
+      for CHART in "${GENERATED_CHARTS[@]}" "${HANDWRITTEN_CHARTS[@]}"; do
+        echo "Updating version in ${METACHART} chart for ${CHART}"
+        cd "${SCRIPT_DIR}" || exit 1
+        CHART_VERSION=$(yq e ".version" "${CHART_DIR}/${CHART}/Chart.yaml")
+        export CHART
+        export CHART_VERSION
+        yq e -i '(.dependencies[] | select(.name == env(CHART)) | .version) = env(CHART_VERSION)' "${CHART_DIR}/${METACHART}/Chart.yaml"
+      done
+
+      echo "Bumping ${METACHART} version"
       # Increment patch version
-      NEW_CHART_VERSION=$(echo "$CHART_VERSION" | awk -F. '{print $1"."$2"."$3+1}')
-      if [ $? -ne 0 ] || [ -z "$NEW_CHART_VERSION" ]; then
+      METACHART_NEW_CHART_VERSION=$(echo "$METACHART_CHART_VERSION" | awk -F. '{print $1"."$2"."$3+1}')
+      if [ $? -ne 0 ] || [ -z "$METACHART_NEW_CHART_VERSION" ]; then
         echo "Error: Failed to increment chart version"
         exit 1
       fi
-      NEW_APP_VERSION="$NEW_CHART_VERSION"
-
-      # Copy chart sources
-      mkdir -pv "${CHART_DIR}/${CHART}"
-      cp -R "${CHART_SRC_DIR}/${CHART}"/* "${CHART_DIR}/${CHART}"
+      METACHART_NEW_APP_VERSION=$(echo "$METACHART_APP_VERSION" | awk -F. '{print $1"."$2"."$3+1}')
+      if [ $? -ne 0 ] || [ -z "$METACHART_NEW_APP_VERSION" ]; then
+        echo "Error: Failed to increment app version"
+        exit 1
+      fi
 
       # Update version in Chart.yaml
-      yq e -i '.version = "'"$NEW_CHART_VERSION"'"' "${CHART_DIR}/${CHART}/Chart.yaml"
-      yq e -i '.appVersion = "'"$NEW_APP_VERSION"'"' "${CHART_DIR}/${CHART}/Chart.yaml"
+      yq e -i '.version = "'"$METACHART_NEW_CHART_VERSION"'"' "${CHART_DIR}/${METACHART}/Chart.yaml"
+      yq e -i '.appVersion = "'"$METACHART_NEW_APP_VERSION"'"' "${CHART_DIR}/${METACHART}/Chart.yaml"
 
-      PRE_COMMIT_HOOK="pre_commit_hook_${CHART}"
+      PRE_COMMIT_HOOK="pre_commit_hook_${METACHART}"
       if declare -f "$PRE_COMMIT_HOOK" > /dev/null; then
         echo "Calling pre-commit hook function: $PRE_COMMIT_HOOK"
         (cd "${SCRIPT_DIR}" && "$PRE_COMMIT_HOOK")
       else
-        echo "No pre-commit hook function found for chart: $CHART"
+        echo "No pre-commit hook function found for chart: $METACHART"
       fi
 
-      echo "Adding ${CHART} chart to git staged and committing"
-      git add "${CHART_DIR}/${CHART}/*"
-      git diff --quiet && git diff --staged --quiet || git commit -m "Update deps of ${CHART} helmchart for commit ${COMMIT}"
+      echo "Adding ${METACHART} chart to git staged and committing"
+      git add "${CHART_DIR}/${METACHART}/*"
+      git restore "src/${METACHART}/Chart.yaml" || true
+      git diff --quiet && git diff --staged --quiet || git commit -m "Bump version of ${METACHART} helmchart for commit ${COMMIT}"
     done
   else
     echo "Skipping git operations in local environment"
