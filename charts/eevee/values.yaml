@@ -19,13 +19,14 @@ bot:
 
   ipcConfig:
     name: eevee-ipc-config
-    nats:
-      managed:
-        enabled: true
-        image: docker.io/nats:latest
-      token:
-        generate: true
-  
+    spec:
+      nats:
+        managed:
+          enabled: true
+          image: docker.io/nats:latest
+        token:
+          generate: true
+
   toolbox:
     enabled: true
     spec:
@@ -35,7 +36,7 @@ bot:
       metrics: true
       metricsPort: 8080
       ipcConfig: eevee-ipc-config
-  
+
   chatConnectionIrc:
     enabled: true
     spec:
