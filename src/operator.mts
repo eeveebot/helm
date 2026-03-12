@@ -87,6 +87,46 @@ export class Operator extends cdk8s.Chart {
       new eevee.Toolbox.ApiResource,
     );
 
+    operatorClusterRole.allowReadWrite(
+      cdk8splus.ApiResource.CONFIG_MAPS,
+      cdk8splus.ApiResource.CRON_JOBS,
+      cdk8splus.ApiResource.CUSTOM_RESOURCE_DEFINITIONS,
+      cdk8splus.ApiResource.DEPLOYMENTS,
+      cdk8splus.ApiResource.DAEMON_SETS,
+      cdk8splus.ApiResource.JOBS,
+      cdk8splus.ApiResource.LEASES,
+      cdk8splus.ApiResource.PERSISTENT_VOLUME_CLAIMS,
+      cdk8splus.ApiResource.PODS,
+      cdk8splus.ApiResource.REPLICA_SETS,
+      cdk8splus.ApiResource.SECRETS,
+      cdk8splus.ApiResource.SERVICES,
+      cdk8splus.ApiResource.STATEFUL_SETS,
+      cdk8splus.ApiResource.INGRESSES,
+      new eevee.ChatConnectionIrc.ApiResource,
+      new eevee.IpcConfig.ApiResource,
+      new eevee.Toolbox.ApiResource,
+    );
+
+    operatorClusterRole.allowWatch(
+      cdk8splus.ApiResource.CONFIG_MAPS,
+      cdk8splus.ApiResource.CRON_JOBS,
+      cdk8splus.ApiResource.CUSTOM_RESOURCE_DEFINITIONS,
+      cdk8splus.ApiResource.DEPLOYMENTS,
+      cdk8splus.ApiResource.DAEMON_SETS,
+      cdk8splus.ApiResource.JOBS,
+      cdk8splus.ApiResource.LEASES,
+      cdk8splus.ApiResource.PERSISTENT_VOLUME_CLAIMS,
+      cdk8splus.ApiResource.PODS,
+      cdk8splus.ApiResource.REPLICA_SETS,
+      cdk8splus.ApiResource.SECRETS,
+      cdk8splus.ApiResource.SERVICES,
+      cdk8splus.ApiResource.STATEFUL_SETS,
+      cdk8splus.ApiResource.INGRESSES,
+      new eevee.ChatConnectionIrc.ApiResource,
+      new eevee.IpcConfig.ApiResource,
+      new eevee.Toolbox.ApiResource,
+    );
+
     operatorRole.allowRead(
       cdk8splus.ApiResource.INGRESS_CLASSES,
       cdk8splus.ApiResource.NAMESPACES,
@@ -124,6 +164,23 @@ export class Operator extends cdk8s.Chart {
     );
 
     roleBinding.addSubjects(serviceAccount);
+
+    const clusterRoleBinding = new cdk8splus.ClusterRoleBinding(
+      this,
+      'operator-cluster-role-binding'
+      {
+        metadata: {
+          name: 'operator-role-binding',
+          namespace: namespace,
+          labels: {
+            'eevee.bot/operator': 'true',
+          },
+        },
+        role: operatorClusterRole,
+      }
+    )
+
+    clusterRoleBinding.addSubjects(serviceAccount);
 
     const operatorDeployment = new cdk8splus.Deployment(this, 'operator', {
       metadata: {
