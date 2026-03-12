@@ -228,6 +228,108 @@ rules:
   - delete
   - deletecollection
 - apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - watch
+- apiGroups:
+  - batch
+  resources:
+  - cronjobs
+  verbs:
+  - watch
+- apiGroups:
+  - apiextensions.k8s.io
+  resources:
+  - customresourcedefinitions
+  verbs:
+  - watch
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  verbs:
+  - watch
+- apiGroups:
+  - apps
+  resources:
+  - daemonsets
+  verbs:
+  - watch
+- apiGroups:
+  - batch
+  resources:
+  - jobs
+  verbs:
+  - watch
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - persistentvolumeclaims
+  verbs:
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  verbs:
+  - watch
+- apiGroups:
+  - apps
+  resources:
+  - replicasets
+  verbs:
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - services
+  verbs:
+  - watch
+- apiGroups:
+  - apps
+  resources:
+  - statefulsets
+  verbs:
+  - watch
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - ingresses
+  verbs:
+  - watch
+- apiGroups:
+  - eevee.bot
+  resources:
+  - chatconnectionirc
+  verbs:
+  - watch
+- apiGroups:
+  - eevee.bot
+  resources:
+  - ipcconfig
+  verbs:
+  - watch
+- apiGroups:
+  - eevee.bot
+  resources:
+  - toolbox
+  verbs:
+  - watch
+- apiGroups:
   - networking.k8s.io
   resources:
   - ingressclasses
@@ -259,6 +361,15 @@ rules:
   - get
   - list
   - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: operator-cluster-role
+  labels:
+    eevee.bot/operator: "true"
+  {{- include "operator.labels" . | nindent 4 }}
+rules: []
 ---
 {{ if .Values.serviceAccount.create }}
 apiVersion: v1
