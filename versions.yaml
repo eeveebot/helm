@@ -2,8 +2,8 @@
 
 operator:
   description: The eevee Operator
-  chart: 0.1.24
-  application: 0.1.24
+  chart: 0.1.26
+  application: 0.1.26
 
 crds:
   description: The eevee CRDs

@@ -136,10 +136,10 @@ export class Operator extends cdk8s.Chart {
 
     const serviceAccount = new cdk8splus.ServiceAccount(
       this,
-      'operator-service-account',
+      'eevee-operator-service-account',
       {
         metadata: {
-          name: 'operator-service-account',
+          name: 'eevee-operator-service-account',
           namespace: namespace,
           labels: {
             'eevee.bot/operator': 'true',
@@ -150,10 +150,10 @@ export class Operator extends cdk8s.Chart {
 
     const roleBinding = new cdk8splus.RoleBinding(
       this,
-      'operator-role-binding',
+      'eevee-operator-role-binding',
       {
         metadata: {
-          name: 'operator-role-binding',
+          name: 'eevee-operator-role-binding',
           namespace: namespace,
           labels: {
             'eevee.bot/operator': 'true',
@@ -167,10 +167,10 @@ export class Operator extends cdk8s.Chart {
 
     const clusterRoleBinding = new cdk8splus.ClusterRoleBinding(
       this,
-      'operator-cluster-role-binding'
+      'eevee-operator-cluster-role-binding',
       {
         metadata: {
-          name: 'operator-role-binding',
+          name: 'eevee-operator-cluster-role-binding',
           namespace: namespace,
           labels: {
             'eevee.bot/operator': 'true',
