@@ -26,7 +26,7 @@ dependencies:
     condition: operator.enabled
   - name: bot
     repository: file://../bot
-    version: '0.1.14'
+    version: '0.1.15'
     condition: bot.enabled
   - name: crds
     repository: file://../crds

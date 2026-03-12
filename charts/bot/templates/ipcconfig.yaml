@@ -7,5 +7,4 @@ metadata:
   labels:
     {{- include "eevee-bot.labels" . | nindent 4 }}
 spec:
-  nats:
-    {{- toYaml .Values.ipcConfig.nats | nindent 4 }}
+  {{- toYaml .Values.ipcConfig.spec | nindent 2 }}
