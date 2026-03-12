@@ -318,6 +318,8 @@ spec:
       automountServiceAccountToken: true
       containers:
       - env:
+        - name: WATCH_OTHER_NAMESPACES
+          value: {{ quote .Values.operator.operator.env.watchOtherNamespaces }}
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
         image: {{ .Values.operator.operator.image.repository }}:{{ .Values.operator.operator.image.tag
