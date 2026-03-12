@@ -118,6 +118,9 @@ metadata:
   labels:
     eevee.bot/crds: "true"
   {{- include "crds.labels" . | nindent 4 }}
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade
+    helm.sh/hook-delete-policy: hook-succeeded,before-hook-creation
 spec:
   template:
     metadata:
