@@ -24,10 +24,10 @@ export class Operator extends cdk8s.Chart {
   ) {
     super(scope, id, props);
 
-    const operatorRole = new cdk8splus.Role(this, 'operator-role',
+    const operatorRole = new cdk8splus.Role(this, 'eevee-operator-role',
       {
         metadata: {
-          name: 'operator-role',
+          name: 'eevee-operator-role',
           namespace: namespace,
           labels: {
             'eevee.bot/operator': 'true',
@@ -36,10 +36,10 @@ export class Operator extends cdk8s.Chart {
       }
     );
 
-    const operatorClusterRole = new cdk8splus.ClusterRole(this, 'operator-cluster-role',
+    const operatorClusterRole = new cdk8splus.ClusterRole(this, 'eevee-operator-cluster-role',
       {
         metadata: {
-          name: 'operator-cluster-role',
+          name: 'eevee-operator-cluster-role',
           labels: {
             'eevee.bot/operator': 'true',
           },
@@ -205,6 +205,7 @@ export class Operator extends cdk8s.Chart {
             },
           ],
           envVariables: {
+            KUBE_IN_CLUSTER_CONFIG: cdk8splus.EnvValue.fromValue('true'),
             WATCH_OTHER_NAMESPACES: cdk8splus.EnvValue.fromValue('false'),
           },
           securityContext: {
