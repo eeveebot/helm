@@ -41,6 +41,7 @@ export class Operator extends cdk8s.Chart {
       cdk8splus.ApiResource.CRON_JOBS,
       cdk8splus.ApiResource.CUSTOM_RESOURCE_DEFINITIONS,
       cdk8splus.ApiResource.DEPLOYMENTS,
+      cdk8splus.ApiResource.DAEMON_SETS,
       cdk8splus.ApiResource.JOBS,
       cdk8splus.ApiResource.LEASES,
       cdk8splus.ApiResource.PERSISTENT_VOLUME_CLAIMS,
@@ -103,7 +104,7 @@ export class Operator extends cdk8s.Chart {
       },
       automountServiceAccountToken: true,
       serviceAccount: serviceAccount,
-      select: true,
+      select: false,
       containers: [
         {
           name: 'operator',

@@ -8,11 +8,11 @@
   },
   "scripts": {},
   "dependencies": {
-    "@eeveebot/crds": "^0.5.16",
+    "@eeveebot/crds": "^0.5.35",
     "@typescript-eslint/eslint-plugin": "^8.57.0",
-    "cdk8s": "^2.70.37",
-    "cdk8s-plus-33": "^2.4.14",
-    "constructs": "^10.4.5",
+    "cdk8s": "^2.70.51",
+    "cdk8s-plus-33": "^2.4.37",
+    "constructs": "^10.5.1",
     "typescript": "^5.9.3"
   }
 }
