@@ -36,7 +36,38 @@ export class Operator extends cdk8s.Chart {
       }
     );
 
+    const operatorClusterRole = new cdk8splus.ClusterRole(this, 'operator-cluster-role',
+      {
+        metadata: {
+          name: 'operator-cluster-role',
+          labels: {
+            'eevee.bot/operator': 'true',
+          },
+        },
+      }
+    )
+
     operatorRole.allowReadWrite(
+      cdk8splus.ApiResource.CONFIG_MAPS,
+      cdk8splus.ApiResource.CRON_JOBS,
+      cdk8splus.ApiResource.CUSTOM_RESOURCE_DEFINITIONS,
+      cdk8splus.ApiResource.DEPLOYMENTS,
+      cdk8splus.ApiResource.DAEMON_SETS,
+      cdk8splus.ApiResource.JOBS,
+      cdk8splus.ApiResource.LEASES,
+      cdk8splus.ApiResource.PERSISTENT_VOLUME_CLAIMS,
+      cdk8splus.ApiResource.PODS,
+      cdk8splus.ApiResource.REPLICA_SETS,
+      cdk8splus.ApiResource.SECRETS,
+      cdk8splus.ApiResource.SERVICES,
+      cdk8splus.ApiResource.STATEFUL_SETS,
+      cdk8splus.ApiResource.INGRESSES,
+      new eevee.ChatConnectionIrc.ApiResource,
+      new eevee.IpcConfig.ApiResource,
+      new eevee.Toolbox.ApiResource,
+    );
+
+    operatorRole.allowWatch(
       cdk8splus.ApiResource.CONFIG_MAPS,
       cdk8splus.ApiResource.CRON_JOBS,
       cdk8splus.ApiResource.CUSTOM_RESOURCE_DEFINITIONS,
