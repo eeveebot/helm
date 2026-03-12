@@ -119,6 +119,10 @@ export class Operator extends cdk8s.Chart {
           envVariables: {
             WATCH_OTHER_NAMESPACES: cdk8splus.EnvValue.fromValue('false'),
           },
+          securityContext: {
+            user: 1000,
+            group: 1000,
+          },
         },
       ],
       replicas: 1,
