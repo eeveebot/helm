@@ -15,6 +15,7 @@ operator:
       runAsNonRoot: true
       runAsUser: 1000
     env:
+      kubeInClusterConfig: "true"
       watchOtherNamespaces: "false"
     image:
       repository: ghcr.io/eeveebot/operator
