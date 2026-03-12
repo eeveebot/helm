@@ -73,7 +73,7 @@ export class CrdJob extends cdk8s.Chart {
           'eevee.bot/crds': 'true',
         },
         annotations: {
-          'helm.sh/hook': 'crd-install,pre-install,pre-upgrade',
+          'helm.sh/hook': 'pre-install,pre-upgrade',
           'helm.sh/hook-delete-policy': 'hook-succeeded,before-hook-creation',
         },
       },
