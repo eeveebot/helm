@@ -59,6 +59,19 @@ rules:
   - delete
   - deletecollection
 - apiGroups:
+  - apps
+  resources:
+  - daemonsets
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
   - batch
   resources:
   - jobs
@@ -178,7 +191,7 @@ rules:
 - apiGroups:
   - eevee.bot
   resources:
-  - ChatConnectionIrc
+  - chatconnectionirc
   verbs:
   - get
   - list
@@ -191,7 +204,7 @@ rules:
 - apiGroups:
   - eevee.bot
   resources:
-  - ipcConfig
+  - ipcconfig
   verbs:
   - get
   - list
@@ -204,7 +217,7 @@ rules:
 - apiGroups:
   - eevee.bot
   resources:
-  - Toolbox
+  - toolbox
   verbs:
   - get
   - list
@@ -294,7 +307,8 @@ spec:
         }}
     type: {{ .Values.operator.strategy.type | quote }}
   selector:
-    matchLabels: null
+    matchLabels:
+      eevee.bot/operator: "true"
     {{- include "operator.selectorLabels" . | nindent 6 }}
   template:
     metadata:
