@@ -1,18 +1,17 @@
 ---
 # eevee Helm values
 
-global:
-  # Namespace for the bot
-  namespace: eevee-bot
-
+# Values for operator chart
 operator:
   # Enable the operator chart
   enabled: true
 
+# Values for crds chart
 crds:
   # Enable the crd install job chart
   enabled: true
 
+# Values for bot chart
 bot:
   # Enable the bot chart
   enabled: true
