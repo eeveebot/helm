@@ -22,13 +22,13 @@ appVersion: "0.1.20"
 dependencies:
   - name: operator
     repository: file://../operator
-    version: '0.0.0'
+    version: '0.1.14'
     condition: operator.enabled
   - name: bot
     repository: file://../bot
-    version: '0.0.0'
+    version: '0.1.15'
     condition: bot.enabled
   - name: crds
     repository: file://../crds
-    version: '0.0.0'
+    version: '0.1.16'
     condition: crds.enabled
