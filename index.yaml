@@ -255,6 +255,16 @@ entries:
     version: 0.1.6
   operator:
   - apiVersion: v2
+    appVersion: 0.1.12
+    created: "2026-03-12T05:04:03.29300013Z"
+    description: The eevee Operator
+    digest: 0410e46016c9031ff8f5d03dad021ba441d1b6244a09b6a1323fbc75e65e5921
+    name: operator
+    type: application
+    urls:
+    - https://github.com/eeveebot/helm/releases/download/operator-0.1.12/operator-0.1.12.tgz
+    version: 0.1.12
+  - apiVersion: v2
     appVersion: 0.1.11
     created: "2026-03-10T03:11:35.087835663Z"
     description: The eevee Operator
@@ -314,4 +324,4 @@ entries:
     urls:
     - https://github.com/eeveebot/helm/releases/download/operator-0.1.6/operator-0.1.6.tgz
     version: 0.1.6
-generated: "2026-03-12T03:59:05.639906875Z"
+generated: "2026-03-12T05:04:03.293074389Z"
