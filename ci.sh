@@ -16,12 +16,12 @@ DIRNAME=$(dirname "$0")
 SCRIPT_DIR=$(cd "${DIRNAME}" || exit 1; pwd)
 cd "${SCRIPT_DIR}" || exit 1
 
-VERSIONS_SRC="${VERSIONS_SRC:-"$SCRIPT_DIR/versions.yaml"}" 
+VERSIONS_SRC="${VERSIONS_SRC:-"$SCRIPT_DIR/versions.yaml"}"
 CHART_DIR="${CHART_DIR:-"$SCRIPT_DIR/charts"}"
 
 function main() {
   cd "$SCRIPT_DIR" || exit 1
-  
+
   if [[ "$IS_GITHUB_CI" == true ]]; then
     setup_git_ci
     update_readme_gh_pages_branch
@@ -128,10 +128,31 @@ function main() {
     export CHART_VERSION
     yq e -i '(.dependencies[] | select(.name == env(CHART)) | .version) = env(CHART_VERSION)' "${CHART_DIR}/eevee/Chart.yaml"
   done
-  
+
   if [[ "$IS_GITHUB_CI" == true ]]; then
-    git add -v "${CHART_DIR}/eevee/*"
-    git diff --quiet && git diff --staged --quiet || git commit -m "Update deps of ${CHART} helmchart for commit ${COMMIT}"
+    echo "Bumping eevee chart version"
+    CHART_VERSION=$(yq e '.eevee.chart' $VERSIONS_SRC)
+    APP_VERSION=$(yq e '.eevee.application' $VERSIONS_SRC)
+
+    # Increment patch version
+    NEW_CHART_VERSION=$(echo "$CHART_VERSION" | awk -F. '{print $1"."$2"."$3+1}')
+    if [ $? -ne 0 ] || [ -z "$NEW_CHART_VERSION" ]; then
+      echo "Error: Failed to increment chart version"
+      exit 1
+    fi
+    NEW_APP_VERSION="$NEW_CHART_VERSION"
+
+    # Update versions.yaml
+    yq e -i '.eevee.chart = "'"$NEW_CHART_VERSION"'"' $VERSIONS_SRC
+    yq e -i '.eevee.application = "'"$NEW_APP_VERSION"'"' $VERSIONS_SRC
+
+    # Update eevee chart Chart.yaml
+    yq e -i '.version = "'"$NEW_CHART_VERSION"'"' "${CHART_DIR}/eevee/Chart.yaml"
+    yq e -i '.appVersion = "'"$NEW_APP_VERSION"'"' "${CHART_DIR}/eevee/Chart.yaml"
+
+    echo "Adding eevee chart to git staged and committing"
+    git add "${CHART_DIR}/eevee/*"
+    git diff --quiet && git diff --staged --quiet || git commit -m "Update deps of eevee helmchart for commit ${COMMIT}"
   else
     echo "Skipping git operations in local environment"
   fi
@@ -148,7 +169,7 @@ function finalize_git_ci() {
     echo "Skipping finalize_git_ci in local environment"
     return
   fi
-  
+
   cd "$SCRIPT_DIR" || exit 1
   echo "Updating gh-pages branch"
   cp -R "${CHART_DIR}" /tmp/charts
@@ -169,7 +190,7 @@ function setup_git_ci() {
     echo "Skipping setup_git_ci in local environment"
     return
   fi
-  
+
   cd "$SCRIPT_DIR" || exit 1
   # git setup
   echo "Setup git"
@@ -185,7 +206,7 @@ function update_readme_gh_pages_branch() {
     echo "Skipping update_readme_gh_pages_branch in local environment"
     return
   fi
-  
+
   cd "$SCRIPT_DIR" || exit 1
   # update readme
   echo "Update readme"
@@ -203,7 +224,7 @@ function setup_npm_ci() {
     echo "Skipping setup_npm_ci in local environment"
     return
   fi
-  
+
   cd "$SCRIPT_DIR" || exit 1
   # npm install
   echo "Setup npm"
