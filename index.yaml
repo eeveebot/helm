@@ -159,6 +159,29 @@ entries:
     version: 0.1.6
   eevee:
   - apiVersion: v2
+    appVersion: 0.1.16
+    created: "2026-03-12T05:12:43.588034462Z"
+    dependencies:
+    - condition: operator.enabled
+      name: operator
+      repository: file://../operator
+      version: 0.1.12
+    - condition: bot.enabled
+      name: bot
+      repository: file://../bot
+      version: 0.1.15
+    - condition: crds.enabled
+      name: crds
+      repository: file://../crds
+      version: 0.1.16
+    description: An opinionated deployment of crds, operator, and bot
+    digest: 5fc236ac9c693421d0ec86a594c14fb2ab44f1362eeebaeacfb8cae79f8090fc
+    name: eevee
+    type: application
+    urls:
+    - https://github.com/eeveebot/helm/releases/download/eevee-0.1.16/eevee-0.1.16.tgz
+    version: 0.1.16
+  - apiVersion: v2
     appVersion: 0.1.15
     created: "2026-03-12T05:06:23.70809293Z"
     dependencies:
@@ -358,4 +381,4 @@ entries:
     urls:
     - https://github.com/eeveebot/helm/releases/download/operator-0.1.6/operator-0.1.6.tgz
     version: 0.1.6
-generated: "2026-03-12T05:10:59.319318089Z"
+generated: "2026-03-12T05:12:43.588138847Z"
