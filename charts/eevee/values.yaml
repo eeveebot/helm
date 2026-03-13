@@ -145,7 +145,14 @@ bot:
           action: join
           join:
           - channel: '#eevee'
-  
+
+        # Send broadcast events for all received messages
+        broadcastMessages: true
+        # Settings related to command modules
+        commands:
+          # Common prefix regex to add to registered command regexes
+          commonPrefixRegex: "^-"
+
   # Bot Modules
   botModules:
   - name: echo
