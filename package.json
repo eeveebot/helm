@@ -12,7 +12,7 @@
     "update-libraries": "npm install --save @eeveebot/crds@latest"
   },
   "dependencies": {
-    "@eeveebot/crds": "^0.5.38",
+    "@eeveebot/crds": "^0.5.40",
     "@typescript-eslint/eslint-plugin": "^8.57.0",
     "cdk8s": "^2.70.51",
     "cdk8s-plus-33": "^2.4.37",
