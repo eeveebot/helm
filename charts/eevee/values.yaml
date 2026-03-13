@@ -25,7 +25,7 @@ bot:
     enabled: true
     spec:
       size: 1
-      image: ghcr.io/eeveebot/toolbox:latest
+      image: ghcr.io/eeveebot/cli:latest
       pullPolicy: Always
       metrics: true
       metricsPort: 8080
