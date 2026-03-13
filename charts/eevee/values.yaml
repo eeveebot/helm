@@ -20,6 +20,10 @@ bot:
           image: docker.io/nats:latest
         token:
           generate: true
+          # Secret reference
+          secretKeyRef:
+            name: nats-auth-secret
+            key: token
 
   toolbox:
     enabled: true
