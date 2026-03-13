@@ -16,6 +16,7 @@ operator:
       runAsUser: 1000
     env:
       kubeInClusterConfig: "true"
+      logLevel: debug
       watchOtherNamespaces: "false"
     image:
       repository: ghcr.io/eeveebot/operator

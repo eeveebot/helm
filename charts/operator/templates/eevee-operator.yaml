@@ -807,6 +807,8 @@ spec:
           value: {{ quote .Values.operator.operator.env.kubeInClusterConfig }}
         - name: WATCH_OTHER_NAMESPACES
           value: {{ quote .Values.operator.operator.env.watchOtherNamespaces }}
+        - name: LOG_LEVEL
+          value: {{ quote .Values.operator.operator.env.logLevel }}
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
         image: {{ .Values.operator.operator.image.repository }}:{{ .Values.operator.operator.image.tag
