@@ -24,11 +24,10 @@ ipcConfig:
       token:
         # Should the eevee-operator generate a token for NATS auth?
         generate: true
-
-        # Secret reference for existing token (only used if generate is false)
-        # secretKeyRef:
-        #   name: nats-auth-secret
-        #   key: token
+        # Secret reference
+        secretKeyRef:
+          name: nats-auth-secret
+          key: token
 
 # Toolbox configuration
 toolbox:
