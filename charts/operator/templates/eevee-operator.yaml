@@ -191,7 +191,7 @@ rules:
 - apiGroups:
   - eevee.bot
   resources:
-  - chatconnectionirc
+  - chatconnectionircs
   verbs:
   - get
   - list
@@ -204,7 +204,7 @@ rules:
 - apiGroups:
   - eevee.bot
   resources:
-  - ipcconfig
+  - ipcconfigs
   verbs:
   - get
   - list
@@ -217,7 +217,7 @@ rules:
 - apiGroups:
   - eevee.bot
   resources:
-  - toolbox
+  - toolboxs
   verbs:
   - get
   - list
@@ -314,19 +314,19 @@ rules:
 - apiGroups:
   - eevee.bot
   resources:
-  - chatconnectionirc
+  - chatconnectionircs
   verbs:
   - watch
 - apiGroups:
   - eevee.bot
   resources:
-  - ipcconfig
+  - ipcconfigs
   verbs:
   - watch
 - apiGroups:
   - eevee.bot
   resources:
-  - toolbox
+  - toolboxs
   verbs:
   - watch
 - apiGroups:
@@ -570,7 +570,7 @@ rules:
   - eevee.bot
   resourceNames: []
   resources:
-  - chatconnectionirc
+  - chatconnectionircs
   verbs:
   - get
   - list
@@ -584,7 +584,7 @@ rules:
   - eevee.bot
   resourceNames: []
   resources:
-  - ipcconfig
+  - ipcconfigs
   verbs:
   - get
   - list
@@ -598,7 +598,7 @@ rules:
   - eevee.bot
   resourceNames: []
   resources:
-  - toolbox
+  - toolboxs
   verbs:
   - get
   - list
@@ -710,21 +710,21 @@ rules:
   - eevee.bot
   resourceNames: []
   resources:
-  - chatconnectionirc
+  - chatconnectionircs
   verbs:
   - watch
 - apiGroups:
   - eevee.bot
   resourceNames: []
   resources:
-  - ipcconfig
+  - ipcconfigs
   verbs:
   - watch
 - apiGroups:
   - eevee.bot
   resourceNames: []
   resources:
-  - toolbox
+  - toolboxs
   verbs:
   - watch
 ---
