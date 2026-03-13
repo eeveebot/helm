@@ -206,6 +206,7 @@ export class Operator extends cdk8s.Chart {
           envVariables: {
             KUBE_IN_CLUSTER_CONFIG: cdk8splus.EnvValue.fromValue('true'),
             WATCH_OTHER_NAMESPACES: cdk8splus.EnvValue.fromValue('false'),
+            LOG_LEVEL: cdk8splus.EnvValue.fromValue('debug'),
           },
           securityContext: {
             user: 1000,
