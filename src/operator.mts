@@ -171,7 +171,6 @@ export class Operator extends cdk8s.Chart {
       {
         metadata: {
           name: 'eevee-operator-cluster-role-binding',
-          namespace: namespace,
           labels: {
             'eevee.bot/operator': 'true',
           },
