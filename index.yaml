@@ -2,6 +2,17 @@ apiVersion: v1
 entries:
   bot:
   - apiVersion: v2
+    appVersion: 0.1.47
+    created: "2026-03-13T23:49:53.144934987Z"
+    description: A combined deployment of various CR entities that define an eevee
+      bot
+    digest: 0565eefa12c4e164b17da746ef3010250f4104da58a5d5cb77ce970c9f32346c
+    name: bot
+    type: application
+    urls:
+    - https://github.com/eeveebot/helm/releases/download/bot-0.1.47/bot-0.1.47.tgz
+    version: 0.1.47
+  - apiVersion: v2
     appVersion: 0.1.46
     created: "2026-03-13T23:40:28.952570674Z"
     description: A combined deployment of various CR entities that define an eevee
@@ -571,6 +582,25 @@ entries:
     - https://github.com/eeveebot/helm/releases/download/crds-0.1.6/crds-0.1.6.tgz
     version: 0.1.6
   eevee:
+  - apiVersion: v2
+    appVersion: 0.1.64
+    created: "2026-03-13T23:49:53.321056283Z"
+    dependencies:
+    - condition: operator.enabled
+      name: operator
+      repository: file://../operator
+      version: 0.1.38
+    - condition: bot.enabled
+      name: bot
+      repository: file://../bot
+      version: 0.1.47
+    description: A Helm chart for eevee.bot ecosystem deployment
+    digest: 930651435430f61d183c53379ccdb26d45eca3c842b9f9ec7934c8700941d034
+    name: eevee
+    type: application
+    urls:
+    - https://github.com/eeveebot/helm/releases/download/eevee-0.1.64/eevee-0.1.64.tgz
+    version: 0.1.64
   - apiVersion: v2
     appVersion: 0.1.63
     created: "2026-03-13T23:40:29.390609591Z"
@@ -1913,4 +1943,4 @@ entries:
     urls:
     - https://github.com/eeveebot/helm/releases/download/operator-0.1.6/operator-0.1.6.tgz
     version: 0.1.6
-generated: "2026-03-13T23:40:29.583701588Z"
+generated: "2026-03-13T23:49:53.321645807Z"
