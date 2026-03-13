@@ -12,7 +12,7 @@ bot:
   enabled: true
 
   ipcConfig:
-    name: eevee-ipc-config
+    name: eevee-bot
     spec:
       nats:
         managed:
@@ -33,12 +33,12 @@ bot:
       pullPolicy: Always
       metrics: true
       metricsPort: 8080
-      ipcConfig: eevee-ipc-config
+      ipcConfig: eevee-bot
 
   chatConnectionIrc:
     enabled: true
     spec:
-      ipcConfig: eevee-ipc-config
+      ipcConfig: eevee-bot
       image: ghcr.io/eeveebot/connector-irc:latest
       metrics: true
       metricsPort: 8080
