@@ -191,19 +191,6 @@ rules:
 - apiGroups:
   - eevee.bot
   resources:
-  - chatconnectionircs
-  verbs:
-  - get
-  - list
-  - watch
-  - create
-  - update
-  - patch
-  - delete
-  - deletecollection
-- apiGroups:
-  - eevee.bot
-  resources:
   - ipcconfigs
   verbs:
   - get
@@ -217,33 +204,7 @@ rules:
 - apiGroups:
   - eevee.bot
   resources:
-  - toolboxes
-  verbs:
-  - get
-  - list
-  - watch
-  - create
-  - update
-  - patch
-  - delete
-  - deletecollection
-- apiGroups:
-  - eevee.bot
-  resources:
   - botmodules
-  verbs:
-  - get
-  - list
-  - watch
-  - create
-  - update
-  - patch
-  - delete
-  - deletecollection
-- apiGroups:
-  - eevee.bot
-  resources:
-  - routers
   verbs:
   - get
   - list
@@ -340,31 +301,13 @@ rules:
 - apiGroups:
   - eevee.bot
   resources:
-  - chatconnectionircs
-  verbs:
-  - watch
-- apiGroups:
-  - eevee.bot
-  resources:
   - ipcconfigs
   verbs:
   - watch
 - apiGroups:
   - eevee.bot
   resources:
-  - toolboxes
-  verbs:
-  - watch
-- apiGroups:
-  - eevee.bot
-  resources:
   - botmodules
-  verbs:
-  - watch
-- apiGroups:
-  - eevee.bot
-  resources:
-  - routers
   verbs:
   - watch
 - apiGroups:
@@ -608,20 +551,6 @@ rules:
   - eevee.bot
   resourceNames: []
   resources:
-  - chatconnectionircs
-  verbs:
-  - get
-  - list
-  - watch
-  - create
-  - update
-  - patch
-  - delete
-  - deletecollection
-- apiGroups:
-  - eevee.bot
-  resourceNames: []
-  resources:
   - ipcconfigs
   verbs:
   - get
@@ -636,35 +565,7 @@ rules:
   - eevee.bot
   resourceNames: []
   resources:
-  - toolboxes
-  verbs:
-  - get
-  - list
-  - watch
-  - create
-  - update
-  - patch
-  - delete
-  - deletecollection
-- apiGroups:
-  - eevee.bot
-  resourceNames: []
-  resources:
   - botmodules
-  verbs:
-  - get
-  - list
-  - watch
-  - create
-  - update
-  - patch
-  - delete
-  - deletecollection
-- apiGroups:
-  - eevee.bot
-  resourceNames: []
-  resources:
-  - routers
   verbs:
   - get
   - list
@@ -776,13 +677,6 @@ rules:
   - eevee.bot
   resourceNames: []
   resources:
-  - chatconnectionircs
-  verbs:
-  - watch
-- apiGroups:
-  - eevee.bot
-  resourceNames: []
-  resources:
   - ipcconfigs
   verbs:
   - watch
@@ -790,21 +684,7 @@ rules:
   - eevee.bot
   resourceNames: []
   resources:
-  - toolboxes
-  verbs:
-  - watch
-- apiGroups:
-  - eevee.bot
-  resourceNames: []
-  resources:
   - botmodules
-  verbs:
-  - watch
-- apiGroups:
-  - eevee.bot
-  resourceNames: []
-  resources:
-  - routers
   verbs:
   - watch
 ---
