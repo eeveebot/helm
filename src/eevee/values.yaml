@@ -22,7 +22,8 @@ bot:
           generate: true
           # Secret reference
           secretKeyRef:
-            name: nats-auth-secret
+            secret:
+              name: nats-auth-secret
             key: token
 
   toolbox:
