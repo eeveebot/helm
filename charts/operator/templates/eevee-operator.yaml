@@ -217,7 +217,7 @@ rules:
 - apiGroups:
   - eevee.bot
   resources:
-  - toolboxs
+  - toolboxes
   verbs:
   - get
   - list
@@ -326,7 +326,7 @@ rules:
 - apiGroups:
   - eevee.bot
   resources:
-  - toolboxs
+  - toolboxes
   verbs:
   - watch
 - apiGroups:
@@ -598,7 +598,7 @@ rules:
   - eevee.bot
   resourceNames: []
   resources:
-  - toolboxs
+  - toolboxes
   verbs:
   - get
   - list
@@ -724,7 +724,7 @@ rules:
   - eevee.bot
   resourceNames: []
   resources:
-  - toolboxs
+  - toolboxes
   verbs:
   - watch
 ---
