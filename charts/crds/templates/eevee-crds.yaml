@@ -8,7 +8,7 @@ rules:
 - apiGroups:
   - eevee.bot
   resources:
-  - chatconnectionircs
+  - botmodules
   verbs:
   - get
   - list
@@ -22,19 +22,6 @@ rules:
   - eevee.bot
   resources:
   - ipcconfigs
-  verbs:
-  - get
-  - list
-  - watch
-  - create
-  - update
-  - patch
-  - delete
-  - deletecollection
-- apiGroups:
-  - eevee.bot
-  resources:
-  - toolboxes
   verbs:
   - get
   - list
