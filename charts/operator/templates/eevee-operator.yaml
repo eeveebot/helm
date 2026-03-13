@@ -228,6 +228,32 @@ rules:
   - delete
   - deletecollection
 - apiGroups:
+  - eevee.bot
+  resources:
+  - botmodules
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - eevee.bot
+  resources:
+  - routers
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
   - ""
   resources:
   - configmaps
@@ -327,6 +353,18 @@ rules:
   - eevee.bot
   resources:
   - toolboxes
+  verbs:
+  - watch
+- apiGroups:
+  - eevee.bot
+  resources:
+  - botmodules
+  verbs:
+  - watch
+- apiGroups:
+  - eevee.bot
+  resources:
+  - routers
   verbs:
   - watch
 - apiGroups:
@@ -609,6 +647,34 @@ rules:
   - delete
   - deletecollection
 - apiGroups:
+  - eevee.bot
+  resourceNames: []
+  resources:
+  - botmodules
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - eevee.bot
+  resourceNames: []
+  resources:
+  - routers
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
   - ""
   resourceNames: []
   resources:
@@ -725,6 +791,20 @@ rules:
   resourceNames: []
   resources:
   - toolboxes
+  verbs:
+  - watch
+- apiGroups:
+  - eevee.bot
+  resourceNames: []
+  resources:
+  - botmodules
+  verbs:
+  - watch
+- apiGroups:
+  - eevee.bot
+  resourceNames: []
+  resources:
+  - routers
   verbs:
   - watch
 ---
