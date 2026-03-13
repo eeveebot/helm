@@ -8,44 +8,116 @@ operator:
 
 # Values for bot chart
 bot:
-  # Enable the bot chart
-  enabled: true
-
+  # Name of this bot
+  name: eevee-bot
+  
+  # IPC Configuration
   ipcConfig:
+    # Name of the IPC config resource
     name: eevee-bot
+  
     spec:
+      # NATS configuration
       nats:
+        # Managed NATS deployment configuration
         managed:
+          # Should the eevee-operator deploy a NATS server for us?
           enabled: true
+  
+          # NATS container image to use
           image: docker.io/nats:latest
+  
+        # NATS token authentication configuration
         token:
+          # Should the eevee-operator generate a token for NATS auth?
           generate: true
           # Secret reference
           secretKeyRef:
             secret:
               name: nats-auth-secret
             key: token
-
-  toolbox:
+  
+  # Router configuration
+  router:
+    # Enable router deployment
     enabled: true
+  
+    # Router spec
     spec:
+      # Number of toolbox instances to deploy
       size: 1
-      image: ghcr.io/eeveebot/cli:latest
+  
+      # Container image to use
+      image: ghcr.io/eeveebot/router:latest
+  
+      # Image pull policy
       pullPolicy: Always
+  
+      # Enable metrics
       metrics: true
+  
+      # Metrics port
       metricsPort: 8080
+  
+      # IPC configuration name
       ipcConfig: eevee-bot
-
-  chatConnectionIrc:
+  
+      # Router configuration
+      moduleConfig: {}
+  
+  # Toolbox configuration
+  toolbox:
+    # Enable toolbox deployment
     enabled: true
+  
+    # Toolbox spec
     spec:
-      ipcConfig: eevee-bot
-      image: ghcr.io/eeveebot/connector-irc:latest
+      # Number of toolbox instances to deploy
+      size: 1
+  
+      # Container image to use
+      image: ghcr.io/eeveebot/toolbox:latest
+  
+      # Image pull policy
+      pullPolicy: Always
+  
+      # Enable metrics
       metrics: true
+  
+      # Metrics port
       metricsPort: 8080
+  
+      # IPC configuration name
+      ipcConfig: eevee-bot
+  
+  # IRC Connections
+  chatConnectionIrc:
+    # Enable IRC connections
+    enabled: true
+  
+    # Chat connection IRC spec
+    spec:
+      # IPC configuration name
+      ipcConfig: eevee-bot
+  
+      # Container image to use
+      image: ghcr.io/eeveebot/connector-irc:latest
+  
+      # Enable metrics
+      metrics: true
+  
+      # Metrics port
+      metricsPort: 8080
+  
+      # List of IRC connections
       connections:
+      # Display name for this network
       - name: localhost
+  
+        # Enable this connection
         enabled: true
+  
+        # IRC connection configuration
         irc:
           host: localhost
           port: 6667
@@ -58,13 +130,43 @@ bot:
           autoRejoinMaxRetries: 5
           pingInterval: 30
           pingTimeout: 120
+  
+        # IRC Ident information
         ident:
           nick: eevee
           username: eevee
           gecos: eevee.bot
           version: "0.4.20"
           quitMsg: "eevee 0.4.20"
+  
+        # Actions to take after connecting
         postConnect:
-        - action: join
+        - # Join channels after connecting
+          action: join
           join:
           - channel: '#eevee'
+  
+  # Bot Modules
+  botModules:
+  - name: echo
+    spec:
+      # Number of module instances to deploy
+      size: 1
+  
+      # Container image to use
+      image: ghcr.io/eeveebot/echo:latest
+  
+      # Image pull policy
+      pullPolicy: Always
+  
+      # Enable metrics
+      metrics: false
+  
+      # Metrics port
+      metricsPort: 8080
+  
+      # IPC configuration name
+      ipcConfig: eevee-bot
+  
+      # Module name
+      moduleName: echo
