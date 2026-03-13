@@ -69,7 +69,7 @@ toolbox:
     size: 1
 
     # Container image to use
-    image: ghcr.io/eeveebot/toolbox:latest
+    image: ghcr.io/eeveebot/cli:latest
 
     # Image pull policy
     pullPolicy: Always
