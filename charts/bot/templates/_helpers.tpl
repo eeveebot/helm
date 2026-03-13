@@ -9,7 +9,11 @@ Expand the name of the chart.
 Expand the namespace of the chart.
 */}}
 {{- define "eevee-bot.botNamespace" -}}
-{{- default .Release.Namespace .Values.global.namespace $ | trunc 63 | trimSuffix "-" }}
+{{- if .Values.global }}
+{{- default .Release.Namespace .Values.global.namespace | trunc 63 | trimSuffix "-" }}
+{{- else }}
+{{- .Release.Namespace | trunc 63 | trimSuffix "-" }}
+{{- end }}
 {{- end }}
 
 {{/*
