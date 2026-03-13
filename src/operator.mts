@@ -65,6 +65,8 @@ export class Operator extends cdk8s.Chart {
       new eevee.ChatConnectionIrc.ApiResource,
       new eevee.IpcConfig.ApiResource,
       new eevee.Toolbox.ApiResource,
+      new eevee.BotModule.ApiResource,
+      new eevee.Router.ApiResource,
     );
 
     operatorRole.allowWatch(
@@ -85,6 +87,8 @@ export class Operator extends cdk8s.Chart {
       new eevee.ChatConnectionIrc.ApiResource,
       new eevee.IpcConfig.ApiResource,
       new eevee.Toolbox.ApiResource,
+      new eevee.BotModule.ApiResource,
+      new eevee.Router.ApiResource,
     );
 
     operatorClusterRole.allowReadWrite(
@@ -105,6 +109,8 @@ export class Operator extends cdk8s.Chart {
       new eevee.ChatConnectionIrc.ApiResource,
       new eevee.IpcConfig.ApiResource,
       new eevee.Toolbox.ApiResource,
+      new eevee.BotModule.ApiResource,
+      new eevee.Router.ApiResource,
     );
 
     operatorClusterRole.allowWatch(
@@ -125,6 +131,8 @@ export class Operator extends cdk8s.Chart {
       new eevee.ChatConnectionIrc.ApiResource,
       new eevee.IpcConfig.ApiResource,
       new eevee.Toolbox.ApiResource,
+      new eevee.BotModule.ApiResource,
+      new eevee.Router.ApiResource,
     );
 
     operatorRole.allowRead(
