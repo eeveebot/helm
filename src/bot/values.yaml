@@ -7,7 +7,7 @@ name: eevee-bot
 # IPC Configuration
 ipcConfig:
   # Name of the IPC config resource
-  name: eevee-ipc-config
+  name: eevee-bot
 
   spec:
     # NATS configuration
@@ -52,7 +52,7 @@ toolbox:
     metricsPort: 8080
 
     # IPC configuration name
-    ipcConfig: eevee-ipc-config
+    ipcConfig: eevee-bot
 
 # IRC Connections
 chatConnectionIrc:
@@ -62,7 +62,7 @@ chatConnectionIrc:
   # Chat connection IRC spec
   spec:
     # IPC configuration name
-    ipcConfig: eevee-ipc-config
+    ipcConfig: eevee-bot
 
     # Container image to use
     image: ghcr.io/eeveebot/connector-irc:latest
