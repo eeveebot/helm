@@ -2,15 +2,15 @@
 
 operator:
   description: The eevee Operator
-  chart: 0.1.37
-  application: 0.1.37
-
-crds:
-  description: The eevee CRDs
   chart: 0.1.38
   application: 0.1.38
 
+crds:
+  description: The eevee CRDs
+  chart: 0.1.39
+  application: 0.1.39
+
 bot:
   description: A combined deployment of various CR entities that define an eevee bot
-  chart: 0.1.45
-  application: 0.1.45
+  chart: 0.1.46
+  application: 0.1.46
