@@ -190,7 +190,7 @@ bot:
             authentication:
               # Currently supporting IRC hostmask identification
               irc:
-                hostmask: "root@localhost"
+                hostmask: "nick!username@example.com"
 
   - name: echo
     spec:
