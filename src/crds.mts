@@ -27,9 +27,8 @@ export class CrdJob extends cdk8s.Chart {
     const crdJobClusterRole = new cdk8splus.ClusterRole(this, 'crd-job-cluster-role');
 
     crdJobRole.allowReadWrite(
-      new eevee.ChatConnectionIrc.ApiResource,
+      new eevee.BotModule.ApiResource,
       new eevee.IpcConfig.ApiResource,
-      new eevee.Toolbox.ApiResource,
     );
 
     crdJobClusterRole.allowReadWrite(
