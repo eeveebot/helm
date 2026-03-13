@@ -149,6 +149,43 @@ chatConnectionIrc:
 
 # Bot Modules
 botModules:
+- name: admin
+  spec:
+    # Number of module instances to deploy
+    size: 1
+
+    # Container image to use
+    image: ghcr.io/eeveebot/admin:latest
+
+    # Image pull policy
+    pullPolicy: Always
+
+    # Enable metrics
+    metrics: false
+
+    # Metrics port
+    metricsPort: 8080
+
+    # IPC configuration name
+    ipcConfig: eevee-bot
+
+    # Module name
+    moduleName: admin
+
+    moduleConfig:
+      admins:
+        - displayName: "root"
+          # Unique identifier for this admin
+          uuid: "8f4ddc7a-cd4c-4884-a981-944507ca3eba"
+          # Platforms this admin is accepted on (regex patterns)
+          acceptedPlatforms:
+            - ".*"
+          # Authentication methods for this admin
+          authentication:
+            # Currently supporting IRC hostmask identification
+            irc:
+              hostmask: "root@localhost"
+
 - name: echo
   spec:
     # Number of module instances to deploy
