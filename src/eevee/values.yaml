@@ -7,35 +7,35 @@ operator:
   enabled: true
 
 # Values for bot chart
-bot:
-  # Name of this bot
-  name: eevee-bot
-  
-  # IPC Configuration
-  ipcConfig:
-    # Name of the IPC config resource
-    name: eevee-bot
-  
-    spec:
-      # NATS configuration
-      nats:
-        # Managed NATS deployment configuration
-        managed:
-          # Should the eevee-operator deploy a NATS server for us?
-          enabled: true
-  
-          # NATS container image to use
-          image: docker.io/nats:latest
-  
-        # NATS token authentication configuration
-        token:
-          # Should the eevee-operator generate a token for NATS auth?
-          generate: true
-          # Secret reference
-          secretKeyRef:
-            secret:
-              name: nats-auth-secret
-            key: token
-
-  # Bot Modules
-  botModules: []
+# bot:
+#   # Name of this bot
+#   name: eevee-bot
+#   
+#   # IPC Configuration
+#   ipcConfig:
+#     # Name of the IPC config resource
+#     name: eevee-bot
+#   
+#     spec:
+#       # NATS configuration
+#       nats:
+#         # Managed NATS deployment configuration
+#         managed:
+#           # Should the eevee-operator deploy a NATS server for us?
+#           enabled: true
+#   
+#           # NATS container image to use
+#           image: docker.io/nats:latest
+#   
+#         # NATS token authentication configuration
+#         token:
+#           # Should the eevee-operator generate a token for NATS auth?
+#           generate: true
+#           # Secret reference
+#           secretKeyRef:
+#             secret:
+#               name: nats-auth-secret
+#             key: token
+# 
+#   # Bot Modules
+#   botModules: []
