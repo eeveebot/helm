@@ -1,6 +1,6 @@
 {
   "name": "@eeveebot/helm",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "the eeveebot helm charts",
   "keywords": [],
   "engines": {
