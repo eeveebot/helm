@@ -9,11 +9,7 @@ Expand the name of the chart.
 Expand the namespace of the chart.
 */}}
 {{- define "eevee-bot.botNamespace" -}}
-{{- if .Values.global }}
-{{- default .Release.Namespace | trunc 63 | trimSuffix "-" }}
-{{- else }}
 {{- .Release.Namespace | trunc 63 | trimSuffix "-" }}
-{{- end }}
 {{- end }}
 
 {{/*
@@ -70,11 +66,4 @@ Create the name of the service account to use
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
-{{- end }}
-
-{{/*
-Generate a random alphanumeric token.
-*/}}
-{{- define "eevee-bot.natsToken" -}}
-{{- randAlphaNum 32 }}
 {{- end }}
