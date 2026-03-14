@@ -203,21 +203,23 @@ function finalize_git_ci() {
   echo "Git push main"
   git switch main
     
-  # Apply git tag with -build suffix stripped
-  local current_tag
-  current_tag=$(git describe --tags --exact-match 2>/dev/null) || true
-  if [[ -n "$current_tag" ]]; then
+  # Find the newest semver tag with -build suffix
+  local newest_tag
+  # Get all tags, filter for semver format (vX.Y.Z-build or X.Y.Z-build), sort by version, get the latest
+  newest_tag=$(git tag -l | grep -E '^v?[0-9]+\.[0-9]+\.[0-9]+-build' | sort -V | tail -n 1)
+  
+  if [[ -n "$newest_tag" ]]; then
     # Strip -build suffix if present
     local stripped_tag
-    stripped_tag="${current_tag%-build}"
-    if [[ "$stripped_tag" != "$current_tag" ]]; then
-      echo "Applying tag $stripped_tag (stripped from $current_tag)"
+    stripped_tag="${newest_tag%-build}"
+    if [[ "$stripped_tag" != "$newest_tag" ]]; then
+      echo "Applying tag $stripped_tag (stripped from $newest_tag)"
       git tag "$stripped_tag"
     else
-      echo "Current tag $current_tag does not have -build suffix, no tag to apply"
+      echo "Newest tag $newest_tag does not have -build suffix, no tag to apply"
     fi
   else
-    echo "No current tag found, skipping tag application"
+    echo "No semver tag found, skipping tag application"
   fi
 
   # Push tags along with main branch
