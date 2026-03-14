@@ -177,9 +177,9 @@ export class Operator extends cdk8s.Chart {
 
     clusterRoleBinding.addSubjects(serviceAccount);
 
-    const operatorDeployment = new cdk8splus.Deployment(this, 'operator', {
+    const operatorDeployment = new cdk8splus.Deployment(this, 'eevee-operator', {
       metadata: {
-        name: 'operator',
+        name: 'eevee-operator',
         namespace: namespace,
         labels: {
           'eevee.bot/operator': 'true',
