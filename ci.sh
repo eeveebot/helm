@@ -256,7 +256,7 @@ function setup_npm_ci() {
 function pre_helmify_hook_operator() {
   yq e -i '(.spec.selector.matchLabels, .spec.template.metadata.labels, .spec.selector) |= with_entries(select(.key == "cdk8s.io/metadata.addr") | .key = "eevee.bot/operator")' dist/manifests/operator/eevee-operator.yaml
   yq e -i '(.. | select(tag == "!!map" and has("eevee.bot/operator"))) |= (.["eevee.bot/operator"] = "true")' dist/manifests/operator/eevee-operator.yaml
-  yq e -i '(select(.kind == "Deployment" and .metadata.name == "operator") | .spec.selector) |= {"matchLabels": {"eevee.bot/operator": "true"}}' dist/manifests/operator/eevee-operator.yaml
+  yq e -i '(select(.kind == "Deployment" and .metadata.name == "eevee-operator") | .spec.selector) |= {"matchLabels": {"eevee.bot/operator": "true"}}' dist/manifests/operator/eevee-operator.yaml
 }
 
 main
