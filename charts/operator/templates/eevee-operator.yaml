@@ -787,6 +787,10 @@ spec:
             secretKeyRef:
               key: token
               name: eevee-operator-api-token
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
         image: {{ .Values.operator.operator.image.repository }}:{{ .Values.operator.operator.image.tag
