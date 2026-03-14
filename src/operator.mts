@@ -223,6 +223,7 @@ export class Operator extends cdk8s.Chart {
             LOG_LEVEL: cdk8splus.EnvValue.fromValue('debug'),
             HTTP_API_PORT: cdk8splus.EnvValue.fromValue(httpApiPort.toString()),
             EEVEE_OPERATOR_API_TOKEN: apiTokenSecret.envValue('token'),
+            NAMESPACE: cdk8splus.EnvValue.fromFieldRef(cdk8splus.EnvFieldPaths.POD_NAMESPACE),
           },
           securityContext: {
             user: 1000,
