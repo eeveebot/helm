@@ -751,7 +751,8 @@ spec:
         }}
     type: {{ .Values.operator.strategy.type | quote }}
   selector:
-    matchLabels: null
+    matchLabels:
+      eevee.bot/operator: "true"
     {{- include "operator.selectorLabels" . | nindent 6 }}
   template:
     metadata:
