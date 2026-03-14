@@ -1,3 +1,14 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: eevee-operator-api-token
+  labels:
+    eevee.bot/operator: "true"
+  {{- include "operator.labels" . | nindent 4 }}
+stringData:
+  token: {{ required "operatorApiToken.token is required" .Values.operatorApiToken.token
+    | quote }}
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -771,6 +782,11 @@ spec:
           value: {{ quote .Values.operator.operator.env.logLevel }}
         - name: HTTP_API_PORT
           value: {{ quote .Values.operator.operator.env.httpApiPort }}
+        - name: EEVEE_OPERATOR_API_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: token
+              name: eevee-operator-api-token
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
         image: {{ .Values.operator.operator.image.repository }}:{{ .Values.operator.operator.image.tag
