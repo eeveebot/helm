@@ -917,6 +917,25 @@ entries:
     version: 0.1.6
   eevee:
   - apiVersion: v2
+    appVersion: 0.1.118
+    created: "2026-03-14T18:45:40.064775948Z"
+    dependencies:
+    - condition: operator.enabled
+      name: operator
+      repository: file://../operator
+      version: 2.2.16
+    - condition: bot.enabled
+      name: bot
+      repository: file://../bot
+      version: 1.0.4
+    description: A Helm chart for eevee.bot ecosystem deployment
+    digest: 97360b83d8f525d8c90cc5ee0cdd0c5d3052c99102ab203f83f5f2e397d47a0b
+    name: eevee
+    type: application
+    urls:
+    - https://github.com/eeveebot/helm/releases/download/eevee-0.1.118/eevee-0.1.118.tgz
+    version: 0.1.118
+  - apiVersion: v2
     appVersion: 0.1.117
     created: "2026-03-14T18:42:49.128459013Z"
     dependencies:
@@ -2900,6 +2919,16 @@ entries:
     version: 0.1.6
   operator:
   - apiVersion: v2
+    appVersion: 2.2.16
+    created: "2026-03-14T18:45:40.316884553Z"
+    description: The eevee Operator
+    digest: 6740c2b7a62f381378dd1bec2f55d143f699d04a76eb1ff34dc4d679c0b385af
+    name: operator
+    type: application
+    urls:
+    - https://github.com/eeveebot/helm/releases/download/operator-2.2.16/operator-2.2.16.tgz
+    version: 2.2.16
+  - apiVersion: v2
     appVersion: 2.2.14
     created: "2026-03-14T18:42:49.279747477Z"
     description: The eevee Operator
@@ -3449,4 +3478,4 @@ entries:
     urls:
     - https://github.com/eeveebot/helm/releases/download/operator-0.1.6/operator-0.1.6.tgz
     version: 0.1.6
-generated: "2026-03-14T18:42:49.280401111Z"
+generated: "2026-03-14T18:45:40.317846462Z"
