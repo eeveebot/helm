@@ -202,7 +202,26 @@ function finalize_git_ci() {
 
   echo "Git push main"
   git switch main
-  git push
+    
+  # Apply git tag with -build suffix stripped
+  local current_tag
+  current_tag=$(git describe --tags --exact-match 2>/dev/null) || true
+  if [[ -n "$current_tag" ]]; then
+    # Strip -build suffix if present
+    local stripped_tag
+    stripped_tag="${current_tag%-build}"
+    if [[ "$stripped_tag" != "$current_tag" ]]; then
+      echo "Applying tag $stripped_tag (stripped from $current_tag)"
+      git tag "$stripped_tag"
+    else
+      echo "Current tag $current_tag does not have -build suffix, no tag to apply"
+    fi
+  else
+    echo "No current tag found, skipping tag application"
+  fi
+
+  # Push tags along with main branch
+  git push && git push --tags
 }
 
 function setup_git_ci() {
