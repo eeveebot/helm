@@ -5,3 +5,5 @@
 operator:
   # Enable the operator chart
   enabled: true
+  operatorApiToken:
+    token: ''
