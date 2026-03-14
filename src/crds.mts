@@ -9,7 +9,7 @@ const suffix: string = '-crds.yaml';
 
 const namespace: string = 'eevee-system';
 
-const image: string = 'ghcr.io/eeveebot/crds:1.2.0';
+const image: string = 'ghcr.io/eeveebot/crds:1.3.0';
 
 export class CrdJob extends cdk8s.Chart {
   constructor(
