@@ -454,6 +454,16 @@ entries:
     version: 0.1.8
   crds:
   - apiVersion: v2
+    appVersion: 1.2.0
+    created: "2026-03-14T11:52:25.74730705Z"
+    description: The eevee CRDs
+    digest: 39a960fc6735c5ce93dc38c865194309a799dfad7891914dec6bd945b1ae58b3
+    name: crds
+    type: application
+    urls:
+    - https://github.com/eeveebot/helm/releases/download/crds-1.2.0/crds-1.2.0.tgz
+    version: 1.2.0
+  - apiVersion: v2
     appVersion: 0.1.46
     created: "2026-03-14T05:47:43.530912978Z"
     description: The eevee CRDs
@@ -784,6 +794,25 @@ entries:
     - https://github.com/eeveebot/helm/releases/download/crds-0.1.6/crds-0.1.6.tgz
     version: 0.1.6
   eevee:
+  - apiVersion: v2
+    appVersion: 0.1.85
+    created: "2026-03-14T11:52:25.921233368Z"
+    dependencies:
+    - condition: operator.enabled
+      name: operator
+      repository: file://../operator
+      version: 1.1.0
+    - condition: bot.enabled
+      name: bot
+      repository: file://../bot
+      version: 0.1.59
+    description: A Helm chart for eevee.bot ecosystem deployment
+    digest: 1f0688367383c9fe336fa7fbd92ed18d4a3ebbb08ca5ea95262b05c20e62105b
+    name: eevee
+    type: application
+    urls:
+    - https://github.com/eeveebot/helm/releases/download/eevee-0.1.85/eevee-0.1.85.tgz
+    version: 0.1.85
   - apiVersion: v2
     appVersion: 0.1.84
     created: "2026-03-14T11:35:29.070359738Z"
@@ -2236,6 +2265,16 @@ entries:
     version: 0.1.6
   operator:
   - apiVersion: v2
+    appVersion: 1.1.0
+    created: "2026-03-14T11:52:26.081704245Z"
+    description: The eevee Operator
+    digest: dbacdcbd7873609fbbeae42c4d1c9a90268a3cfcec9f5c405b95e901d26342db
+    name: operator
+    type: application
+    urls:
+    - https://github.com/eeveebot/helm/releases/download/operator-1.1.0/operator-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v2
     appVersion: 1.0.1
     created: "2026-03-14T11:35:29.24450729Z"
     description: The eevee Operator
@@ -2665,4 +2704,4 @@ entries:
     urls:
     - https://github.com/eeveebot/helm/releases/download/operator-0.1.6/operator-0.1.6.tgz
     version: 0.1.6
-generated: "2026-03-14T11:35:29.245237308Z"
+generated: "2026-03-14T11:52:26.082522201Z"
