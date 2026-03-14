@@ -12,5 +12,5 @@ crds:
 
 bot:
   description: A combined deployment of various CR entities that define an eevee bot
-  chart: 0.1.53
-  application: 0.1.53
+  chart: 0.1.54
+  application: 0.1.54
