@@ -18,5 +18,10 @@
     "cdk8s-plus-33": "^2.4.37",
     "constructs": "^10.5.1",
     "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.5",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.0.3"
   }
 }

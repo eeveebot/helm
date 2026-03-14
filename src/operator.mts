@@ -1,6 +1,7 @@
 import { Construct } from 'constructs';
 import * as cdk8splus from 'cdk8s-plus-33';
 import * as cdk8s from 'cdk8s';
+import * as crypto from 'crypto';
 
 import { eevee } from '@eeveebot/crds';
 
@@ -23,6 +24,23 @@ export class Operator extends cdk8s.Chart {
     }
   ) {
     super(scope, id, props);
+
+    // Generate a random API token
+    const apiToken = 'token';
+
+    // Create a secret to store the API token
+    const apiTokenSecret = new cdk8splus.Secret(this, 'eevee-operator-api-token', {
+      metadata: {
+        name: 'eevee-operator-api-token',
+        namespace: namespace,
+        labels: {
+          'eevee.bot/operator': 'true',
+        },
+      },
+      stringData: {
+        'token': apiToken,
+      },
+    });
 
     const operatorRole = new cdk8splus.Role(this, 'eevee-operator-role',
       {
@@ -204,6 +222,7 @@ export class Operator extends cdk8s.Chart {
             WATCH_OTHER_NAMESPACES: cdk8splus.EnvValue.fromValue('false'),
             LOG_LEVEL: cdk8splus.EnvValue.fromValue('debug'),
             HTTP_API_PORT: cdk8splus.EnvValue.fromValue(httpApiPort.toString()),
+            EEVEE_OPERATOR_API_TOKEN: apiTokenSecret.envValue('token'),
           },
           securityContext: {
             user: 1000,
