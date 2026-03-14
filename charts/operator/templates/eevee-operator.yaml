@@ -769,6 +769,8 @@ spec:
           value: {{ quote .Values.operator.operator.env.watchOtherNamespaces }}
         - name: LOG_LEVEL
           value: {{ quote .Values.operator.operator.env.logLevel }}
+        - name: HTTP_API_PORT
+          value: {{ quote .Values.operator.operator.env.httpApiPort }}
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
         image: {{ .Values.operator.operator.image.repository }}:{{ .Values.operator.operator.image.tag
