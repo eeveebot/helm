@@ -10,7 +10,7 @@ const suffix: string = '-operator.yaml';
 
 const namespace: string = 'eevee-system';
 
-const image: string = 'ghcr.io/eeveebot/operator:latest';
+const image: string = 'ghcr.io/eeveebot/operator:1.0.1';
 
 const httpApiPort: number = 9000;
 
