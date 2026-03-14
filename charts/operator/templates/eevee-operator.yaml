@@ -737,7 +737,7 @@ subjects:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: operator
+  name: eevee-operator
   labels:
     eevee.bot/operator: "true"
   {{- include "operator.labels" . | nindent 4 }}
@@ -751,8 +751,7 @@ spec:
         }}
     type: {{ .Values.operator.strategy.type | quote }}
   selector:
-    matchLabels:
-      eevee.bot/operator: "true"
+    matchLabels: null
     {{- include "operator.selectorLabels" . | nindent 6 }}
   template:
     metadata:
@@ -797,7 +796,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: eevee-operator-service
+  name: eevee-eevee-operator-service
   labels:
   {{- include "operator.labels" . | nindent 4 }}
 spec:
