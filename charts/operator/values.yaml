@@ -21,7 +21,7 @@ operator:
       watchOtherNamespaces: "false"
     image:
       repository: ghcr.io/eeveebot/operator
-      tag: 2.2.8
+      tag: 2.2.9
     imagePullPolicy: Always
     resources:
       limits:
