@@ -465,6 +465,16 @@ entries:
     version: 0.1.8
   crds:
   - apiVersion: v2
+    appVersion: 2.4.2
+    created: "2026-03-14T14:15:30.413745206Z"
+    description: The eevee CRDs
+    digest: 5f3e86ddfd96b60ce50e134b769fd0f5fded93784f7c8494dbd03de8951cdd5d
+    name: crds
+    type: application
+    urls:
+    - https://github.com/eeveebot/helm/releases/download/crds-2.4.2/crds-2.4.2.tgz
+    version: 2.4.2
+  - apiVersion: v2
     appVersion: 2.4.1
     created: "2026-03-14T14:10:21.443893811Z"
     description: The eevee CRDs
@@ -895,6 +905,25 @@ entries:
     - https://github.com/eeveebot/helm/releases/download/crds-0.1.6/crds-0.1.6.tgz
     version: 0.1.6
   eevee:
+  - apiVersion: v2
+    appVersion: 0.1.107
+    created: "2026-03-14T14:15:30.520507415Z"
+    dependencies:
+    - condition: operator.enabled
+      name: operator
+      repository: file://../operator
+      version: 2.2.7
+    - condition: bot.enabled
+      name: bot
+      repository: file://../bot
+      version: 1.0.3
+    description: A Helm chart for eevee.bot ecosystem deployment
+    digest: cd0ee33af9132ca46a4f5581db7fa0396e1bb9808900da062d995dc962cc439c
+    name: eevee
+    type: application
+    urls:
+    - https://github.com/eeveebot/helm/releases/download/eevee-0.1.107/eevee-0.1.107.tgz
+    version: 0.1.107
   - apiVersion: v2
     appVersion: 0.1.106
     created: "2026-03-14T14:10:21.594142724Z"
@@ -2699,6 +2728,16 @@ entries:
     - https://github.com/eeveebot/helm/releases/download/operator-2.2.8/operator-2.2.8.tgz
     version: 2.2.8
   - apiVersion: v2
+    appVersion: 2.2.7
+    created: "2026-03-14T14:15:30.633353755Z"
+    description: The eevee Operator
+    digest: c5c2f999181036d74bc42ae5cbca2889f9ff03b186a37cd153eec50518e82ae5
+    name: operator
+    type: application
+    urls:
+    - https://github.com/eeveebot/helm/releases/download/operator-2.2.7/operator-2.2.7.tgz
+    version: 2.2.7
+  - apiVersion: v2
     appVersion: 2.2.6
     created: "2026-03-14T14:10:21.727387269Z"
     description: The eevee Operator
@@ -3178,4 +3217,4 @@ entries:
     urls:
     - https://github.com/eeveebot/helm/releases/download/operator-0.1.6/operator-0.1.6.tgz
     version: 0.1.6
-generated: "2026-03-14T14:10:21.72842714Z"
+generated: "2026-03-14T14:15:30.634197607Z"
