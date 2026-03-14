@@ -3,9 +3,7 @@ name: Build Charts
 on:
   push:
     tags:
-      - '*'
-    branches:
-      - main
+      - '*-build'
     paths:
       - 'src/**'
       - 'versions.yaml'

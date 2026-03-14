@@ -4,8 +4,7 @@ on:
   push:
     tags:
       - '*'
-    branches:
-      - main
+      - '!*-build'
     paths:
       - 'charts/**'
   workflow_dispatch:
