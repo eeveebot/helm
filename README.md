@@ -60,7 +60,7 @@ See [charts/bot/values.yaml](charts/bot/values.yaml) for details on the bot char
 ## Helm install
 
 ```bash
-# The core "eevee" chart brings in "eevee-crds", "eevee-operator", and "eevee-bot" as dependencies
+# The core "eevee" chart brings in "crds", "eevee-operator", and "eevee-bot" as dependencies
 helm upgrade --install eevee eevee/eevee --values eevee-values.yaml
 
 # Alternatively, install the component subcharts on their own
