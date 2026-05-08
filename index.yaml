@@ -476,6 +476,16 @@ entries:
     version: 0.1.8
   crds:
   - apiVersion: v2
+    appVersion: 2.5.1
+    created: "2026-05-08T00:36:42.827662811Z"
+    description: The eevee CRDs
+    digest: 5c490be817544e4dcc61994ba65702fe3d80a67a5e8caf023f07e09bda39592d
+    name: crds
+    type: application
+    urls:
+    - https://github.com/eeveebot/helm/releases/download/crds-2.5.1/crds-2.5.1.tgz
+    version: 2.5.1
+  - apiVersion: v2
     appVersion: 2.4.3
     created: "2026-03-14T20:03:57.193590628Z"
     description: The eevee CRDs
@@ -926,6 +936,25 @@ entries:
     - https://github.com/eeveebot/helm/releases/download/crds-0.1.6/crds-0.1.6.tgz
     version: 0.1.6
   eevee:
+  - apiVersion: v2
+    appVersion: 0.1.123
+    created: "2026-05-08T00:36:43.018002158Z"
+    dependencies:
+    - condition: operator.enabled
+      name: operator
+      repository: file://../operator
+      version: 2.2.21
+    - condition: bot.enabled
+      name: bot
+      repository: file://../bot
+      version: 1.0.4
+    description: A Helm chart for eevee.bot ecosystem deployment
+    digest: b859da9a7a1f769df1d9b33da3deae16c5727a038eb6dd60b626d47af9e9df5a
+    name: eevee
+    type: application
+    urls:
+    - https://github.com/eeveebot/helm/releases/download/eevee-0.1.123/eevee-0.1.123.tgz
+    version: 0.1.123
   - apiVersion: v2
     appVersion: 0.1.122
     created: "2026-03-15T19:20:41.157540779Z"
@@ -3005,6 +3034,16 @@ entries:
     version: 0.1.6
   operator:
   - apiVersion: v2
+    appVersion: 2.2.21
+    created: "2026-05-08T00:36:43.192423778Z"
+    description: The eevee Operator
+    digest: a8b156cceeeeeeb9863844dc580f7c264bbbb30be94e89f11bfc5c21bbf1a358
+    name: operator
+    type: application
+    urls:
+    - https://github.com/eeveebot/helm/releases/download/operator-2.2.21/operator-2.2.21.tgz
+    version: 2.2.21
+  - apiVersion: v2
     appVersion: 2.2.18
     created: "2026-03-14T20:03:57.46702133Z"
     description: The eevee Operator
@@ -3584,4 +3623,4 @@ entries:
     urls:
     - https://github.com/eeveebot/helm/releases/download/operator-0.1.6/operator-0.1.6.tgz
     version: 0.1.6
-generated: "2026-03-15T19:20:41.158074987Z"
+generated: "2026-05-08T00:36:43.193667608Z"
