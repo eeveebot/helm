@@ -13,6 +13,7 @@ eevee is a microservices architecture chatbot framework that lives in k8s and co
 | [**Homepage**](https://eevee.bot/) | --- |
 | [**Documentation**](https://eevee.bot/docs) | --- |
 | [**Helm Repo**](https://helm.eevee.bot) | --- |
+| [**Issues**](https://github.com/eeveebot/eevee/issues) | [![Issues](https://img.shields.io/github/issues/eeveebot/eevee)](https://github.com/eeveebot/eevee/issues) |
 | [**.GitHub**](https://github.com/eeveebot/.github) | --- |
 | [**Admin**](https://github.com/eeveebot/admin) | [![Build](https://github.com/eeveebot/admin/actions/workflows/build-image.yml/badge.svg)](https://github.com/eeveebot/admin/actions/workflows/build-image.yml) |
 | [**Calculator**](https://github.com/eeveebot/calculator) | [![Build](https://github.com/eeveebot/calculator/actions/workflows/build-image.yml/badge.svg)](https://github.com/eeveebot/calculator/actions/workflows/build-image.yml) |
@@ -60,7 +61,7 @@ See [charts/bot/values.yaml](charts/bot/values.yaml) for details on the bot char
 ## Helm install
 
 ```bash
-# The core "eevee" chart brings in "eevee-crds", "eevee-operator", and "eevee-bot" as dependencies
+# The core "eevee" chart brings in "crds", "eevee-operator", and "eevee-bot" as dependencies
 helm upgrade --install eevee eevee/eevee --values eevee-values.yaml
 
 # Alternatively, install the component subcharts on their own
