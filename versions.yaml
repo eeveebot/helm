@@ -2,12 +2,12 @@
 
 operator:
   description: The eevee Operator
-  chart: 2.2.21
-  application: 2.2.21
+  chart: 2.2.22
+  application: 2.2.22
 crds:
   description: The eevee CRDs
-  chart: 2.5.1
-  application: 2.5.1
+  chart: 2.5.2
+  application: 2.5.2
 bot:
   description: A combined deployment of various CR entities that define an eevee bot
   chart: 1.0.4
