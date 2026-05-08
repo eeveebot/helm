@@ -2,8 +2,8 @@ apiVersion: v2
 name: eevee
 description: A Helm chart for eevee.bot ecosystem deployment
 type: application
-version: '0.1.127'
-appVersion: '0.1.127'
+version: '0.1.128'
+appVersion: '0.1.128'
 dependencies:
   - name: operator
     repository: file://../operator
