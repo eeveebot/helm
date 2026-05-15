@@ -226,6 +226,45 @@ rules:
   - delete
   - deletecollection
 - apiGroups:
+  - eevee.bot
+  resources:
+  - s3stores
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - eevee.bot
+  resources:
+  - backupschedules
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - eevee.bot
+  resources:
+  - backuprestores
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
   - ""
   resources:
   - configmaps
@@ -319,6 +358,24 @@ rules:
   - eevee.bot
   resources:
   - botmodules
+  verbs:
+  - watch
+- apiGroups:
+  - eevee.bot
+  resources:
+  - s3stores
+  verbs:
+  - watch
+- apiGroups:
+  - eevee.bot
+  resources:
+  - backupschedules
+  verbs:
+  - watch
+- apiGroups:
+  - eevee.bot
+  resources:
+  - backuprestores
   verbs:
   - watch
 - apiGroups:
@@ -587,6 +644,48 @@ rules:
   - delete
   - deletecollection
 - apiGroups:
+  - eevee.bot
+  resourceNames: []
+  resources:
+  - s3stores
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - eevee.bot
+  resourceNames: []
+  resources:
+  - backupschedules
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - eevee.bot
+  resourceNames: []
+  resources:
+  - backuprestores
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
   - ""
   resourceNames: []
   resources:
@@ -696,6 +795,27 @@ rules:
   resourceNames: []
   resources:
   - botmodules
+  verbs:
+  - watch
+- apiGroups:
+  - eevee.bot
+  resourceNames: []
+  resources:
+  - s3stores
+  verbs:
+  - watch
+- apiGroups:
+  - eevee.bot
+  resourceNames: []
+  resources:
+  - backupschedules
+  verbs:
+  - watch
+- apiGroups:
+  - eevee.bot
+  resourceNames: []
+  resources:
+  - backuprestores
   verbs:
   - watch
 ---
