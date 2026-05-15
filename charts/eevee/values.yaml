@@ -1,9 +1,2 @@
 ---
 # eevee Helm values
-
-# Values for operator chart
-operator:
-  # Enable the operator chart
-  enabled: true
-  operatorApiToken:
-    token: ''
