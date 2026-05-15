@@ -4,8 +4,8 @@ operator:
   application: 2.2.32
 crds:
   description: The eevee CRDs
-  chart: 3.1.8
-  application: 3.1.8
+  chart: 3.1.9
+  application: 3.1.9
 bot:
   description: A combined deployment of various CR entities that define an eevee bot
   chart: 1.0.7
