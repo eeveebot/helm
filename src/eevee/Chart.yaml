@@ -1,15 +1,22 @@
-apiVersion: v2
-name: eevee
-description: A Helm chart for eevee.bot ecosystem deployment
-type: application
-version: '1.0.1'
-appVersion: '1.0.1'
-dependencies:
-  - name: operator
-    repository: file://../operator
-    version: '0.0.0'
-    condition: operator.enabled
-  - name: bot
-    repository: file://../bot
-    version: '0.0.0'
-    condition: bot.enabled
+{
+  "apiVersion": "v2",
+  "name": "eevee",
+  "description": "A Helm chart for eevee.bot ecosystem deployment",
+  "type": "application",
+  "version": "1.0.2",
+  "appVersion": "1.0.2",
+  "dependencies": [
+    {
+      "name": "operator",
+      "repository": "file://../operator",
+      "version": "0.0.0",
+      "condition": "operator.enabled"
+    },
+    {
+      "name": "bot",
+      "repository": "file://../bot",
+      "version": "0.0.0",
+      "condition": "bot.enabled"
+    }
+  ]
+}

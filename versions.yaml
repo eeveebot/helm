@@ -1,16 +1,22 @@
-operator:
-  description: The eevee Operator
-  chart: 2.2.34
-  application: 2.2.34
-crds:
-  description: The eevee CRDs
-  chart: 3.1.9
-  application: 3.1.9
-bot:
-  description: A combined deployment of various CR entities that define an eevee bot
-  chart: 1.0.8
-  application: 1.0.8
-eevee:
-  description: A Helm chart for eevee.bot ecosystem deployment
-  chart: 1.0.1
-  application: 1.0.1
+{
+  "operator": {
+    "description": "The eevee Operator",
+    "chart": "2.2.35",
+    "application": "2.2.35"
+  },
+  "crds": {
+    "description": "The eevee CRDs",
+    "chart": "3.1.9",
+    "application": "3.1.9"
+  },
+  "bot": {
+    "description": "A combined deployment of various CR entities that define an eevee bot",
+    "chart": "1.0.8",
+    "application": "1.0.8"
+  },
+  "eevee": {
+    "description": "A Helm chart for eevee.bot ecosystem deployment",
+    "chart": "1.0.2",
+    "application": "1.0.2"
+  }
+}
