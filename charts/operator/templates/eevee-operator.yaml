@@ -265,6 +265,71 @@ rules:
   - delete
   - deletecollection
 - apiGroups:
+  - eevee.bot
+  resources:
+  - botmodules/status
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - eevee.bot
+  resources:
+  - ipcconfigs/status
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - eevee.bot
+  resources:
+  - s3stores/status
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - eevee.bot
+  resources:
+  - backupschedules/status
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - eevee.bot
+  resources:
+  - backuprestores/status
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
   - ""
   resources:
   - configmaps
@@ -676,6 +741,76 @@ rules:
   resourceNames: []
   resources:
   - backuprestores
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - eevee.bot
+  resourceNames: []
+  resources:
+  - botmodules/status
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - eevee.bot
+  resourceNames: []
+  resources:
+  - ipcconfigs/status
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - eevee.bot
+  resourceNames: []
+  resources:
+  - s3stores/status
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - eevee.bot
+  resourceNames: []
+  resources:
+  - backupschedules/status
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+  - deletecollection
+- apiGroups:
+  - eevee.bot
+  resourceNames: []
+  resources:
+  - backuprestores/status
   verbs:
   - get
   - list
