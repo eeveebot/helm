@@ -10,7 +10,7 @@ const suffix: string = '-operator.yaml';
 
 const namespace: string = 'eevee-system';
 
-const image: string = 'ghcr.io/eeveebot/operator:2.2.30';
+const image: string = 'ghcr.io/eeveebot/operator:2.2.31';
 
 const httpApiPort: number = 9000;
 
@@ -82,6 +82,9 @@ export class Operator extends cdk8s.Chart {
       cdk8splus.ApiResource.INGRESSES,
       new eevee.IpcConfig.ApiResource,
       new eevee.BotModule.ApiResource,
+      new eevee.S3Store.ApiResource,
+      new eevee.BackupSchedule.ApiResource,
+      new eevee.BackupRestore.ApiResource,
     );
 
     operatorRole.allowWatch(
@@ -101,6 +104,9 @@ export class Operator extends cdk8s.Chart {
       cdk8splus.ApiResource.INGRESSES,
       new eevee.IpcConfig.ApiResource,
       new eevee.BotModule.ApiResource,
+      new eevee.S3Store.ApiResource,
+      new eevee.BackupSchedule.ApiResource,
+      new eevee.BackupRestore.ApiResource,
     );
 
     operatorClusterRole.allowReadWrite(
@@ -120,6 +126,9 @@ export class Operator extends cdk8s.Chart {
       cdk8splus.ApiResource.INGRESSES,
       new eevee.IpcConfig.ApiResource,
       new eevee.BotModule.ApiResource,
+      new eevee.S3Store.ApiResource,
+      new eevee.BackupSchedule.ApiResource,
+      new eevee.BackupRestore.ApiResource,
     );
 
     operatorClusterRole.allowWatch(
@@ -139,6 +148,9 @@ export class Operator extends cdk8s.Chart {
       cdk8splus.ApiResource.INGRESSES,
       new eevee.IpcConfig.ApiResource,
       new eevee.BotModule.ApiResource,
+      new eevee.S3Store.ApiResource,
+      new eevee.BackupSchedule.ApiResource,
+      new eevee.BackupRestore.ApiResource,
     );
 
     operatorRole.allowRead(
