@@ -8,8 +8,8 @@ metadata:
   labels:
     {{- include "eevee-bot.labels" $ | nindent 4 }}
 spec:
-  moduleName: {{ .spec.moduleName | required "spec.moduleName is required" . | quote }}
-  image: {{ .spec.image | required "spec.image is required" . | quote }}
+  moduleName: {{ required "spec.moduleName is required" .spec.moduleName | quote }}
+  image: {{ required "spec.image is required" .spec.image | quote }}
   {{- with .spec.size }}
   size: {{ . }}
   {{- end }}
