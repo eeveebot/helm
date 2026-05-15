@@ -1,6 +1,6 @@
 ---
 apiVersion: eevee.bot/v1
-kind: ipcconfig
+kind: IpcConfig
 metadata:
   name: {{ .Values.ipcConfig.name }}
   namespace: {{ include "eevee-bot.botNamespace" $ }}
