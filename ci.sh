@@ -144,6 +144,22 @@ function main() {
       DESCRIPTION=$(yq eval ".${METACHART}.description" $VERSIONS_SRC)
       CHART_VERSION=$(yq eval ".${METACHART}.chart" $VERSIONS_SRC)
       APP_VERSION=$(yq eval ".${METACHART}.application" $VERSIONS_SRC)
+
+      # Guard: if any dependency version changed, the meta-chart version must also change
+      PREV_VERSION=$(git show "HEAD:${CHART_DIR}/${METACHART}/Chart.yaml" 2>/dev/null | yq e '.version' - || echo "")
+      if [[ "${CHART_VERSION}" == "${PREV_VERSION}" ]]; then
+        # Version didn't change — check if deps changed
+        PREV_DEPS=$(git show "HEAD:${CHART_DIR}/${METACHART}/Chart.yaml" 2>/dev/null | yq e '.dependencies' - || echo "")
+        NEW_DEPS=$(yq e '.dependencies' "${CHART_DIR}/${METACHART}/Chart.yaml")
+        if [[ "${PREV_DEPS}" != "${NEW_DEPS}" ]]; then
+          echo "ERROR: ${METACHART} dependencies changed but chart version was not bumped in versions.yaml"
+          echo "  Previous version: ${PREV_VERSION}"
+          echo "  versions.yaml version: ${CHART_VERSION}"
+          echo "  Bump the ${METACHART} version in versions.yaml to fix this."
+          exit 1
+        fi
+      fi
+
       yq e -i ".description = \"${DESCRIPTION}\"" "${CHART_DIR}/${METACHART}/Chart.yaml"
       yq e -i ".version = \"${CHART_VERSION}\"" "${CHART_DIR}/${METACHART}/Chart.yaml"
       yq e -i ".appVersion = \"${APP_VERSION}\"" "${CHART_DIR}/${METACHART}/Chart.yaml"
