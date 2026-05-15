@@ -7,7 +7,7 @@ appVersion: '0.1.129'
 dependencies:
   - name: operator
     repository: file://../operator
-    version: '2.2.25'
+    version: '2.2.27'
     condition: operator.enabled
   - name: bot
     repository: file://../bot
