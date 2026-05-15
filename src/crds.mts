@@ -66,7 +66,7 @@ export class CrdJob extends cdk8s.Chart {
     roleBinding.addSubjects(serviceAccount);
     clusterRoleBinding.addSubjects(serviceAccount);
 
-    const crdJob = new cdk8splus.Job(this, 'crd-job', {
+    new cdk8splus.Job(this, 'crd-job', {
       metadata: {
         labels: {
           'eevee.bot/crds': 'true',
