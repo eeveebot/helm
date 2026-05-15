@@ -1,7 +1,6 @@
 import { Construct } from 'constructs';
 import * as cdk8splus from 'cdk8s-plus-33';
 import * as cdk8s from 'cdk8s';
-import * as crypto from 'crypto';
 
 import { eevee } from '@eeveebot/crds';
 
@@ -10,7 +9,7 @@ const suffix: string = '-operator.yaml';
 
 const namespace: string = 'eevee-system';
 
-const image: string = 'ghcr.io/eeveebot/operator:2.2.31';
+const image: string = 'ghcr.io/eeveebot/operator:2.2.32';
 
 const httpApiPort: number = 9000;
 
