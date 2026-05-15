@@ -11,7 +11,7 @@ eeveeCrdJob:
       kubeInClusterConfig: "true"
     image:
       repository: ghcr.io/eeveebot/crds
-      tag: 3.1.6
+      tag: 3.1.9
     imagePullPolicy: Always
     resources:
       limits:
