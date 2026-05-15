@@ -125,10 +125,6 @@ function main() {
       echo "Processing meta-chart: $CHART"
       cd "${SCRIPT_DIR}" || exit 1
 
-      # Get current version from Chart.yaml
-      METACHART_CHART_VERSION=$(yq e '.version' "${CHART_DIR}/${METACHART}/Chart.yaml")
-      METACHART_APP_VERSION=$(yq e '.appVersion' "${CHART_DIR}/${METACHART}/Chart.yaml")
-
       # Copy chart sources
       mkdir -pv "${CHART_DIR}/${METACHART}"
       cp -R "${CHART_SRC_DIR}/${METACHART}"/* "${CHART_DIR}/${METACHART}"
@@ -143,22 +139,14 @@ function main() {
         yq e -i '(.dependencies[] | select(.name == env(CHART)) | .version) = env(CHART_VERSION)' "${CHART_DIR}/${METACHART}/Chart.yaml"
       done
 
-      echo "Bumping ${METACHART} version"
-      # Increment patch version
-      METACHART_NEW_CHART_VERSION=$(echo "$METACHART_CHART_VERSION" | awk -F. '{print $1"."$2"."$3+1}')
-      if [ $? -ne 0 ] || [ -z "$METACHART_NEW_CHART_VERSION" ]; then
-        echo "Error: Failed to increment chart version"
-        exit 1
-      fi
-      METACHART_NEW_APP_VERSION=$(echo "$METACHART_APP_VERSION" | awk -F. '{print $1"."$2"."$3+1}')
-      if [ $? -ne 0 ] || [ -z "$METACHART_NEW_APP_VERSION" ]; then
-        echo "Error: Failed to increment app version"
-        exit 1
-      fi
-
-      # Update version in Chart.yaml
-      yq e -i '.version = "'"$METACHART_NEW_CHART_VERSION"'"' "${CHART_DIR}/${METACHART}/Chart.yaml"
-      yq e -i '.appVersion = "'"$METACHART_NEW_APP_VERSION"'"' "${CHART_DIR}/${METACHART}/Chart.yaml"
+      echo "Applying version from ${VERSIONS_SRC} for ${METACHART}"
+      # Use versions.yaml for meta-chart versioning (not auto-increment)
+      DESCRIPTION=$(yq eval ".${METACHART}.description" $VERSIONS_SRC)
+      CHART_VERSION=$(yq eval ".${METACHART}.chart" $VERSIONS_SRC)
+      APP_VERSION=$(yq eval ".${METACHART}.application" $VERSIONS_SRC)
+      yq e -i ".description = \"${DESCRIPTION}\"" "${CHART_DIR}/${METACHART}/Chart.yaml"
+      yq e -i ".version = \"${CHART_VERSION}\"" "${CHART_DIR}/${METACHART}/Chart.yaml"
+      yq e -i ".appVersion = \"${APP_VERSION}\"" "${CHART_DIR}/${METACHART}/Chart.yaml"
 
       PRE_COMMIT_HOOK="pre_commit_hook_${METACHART}"
       if declare -f "$PRE_COMMIT_HOOK" > /dev/null; then

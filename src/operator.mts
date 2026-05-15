@@ -9,7 +9,7 @@ const suffix: string = '-operator.yaml';
 
 const namespace: string = 'eevee-system';
 
-const image: string = 'ghcr.io/eeveebot/operator:2.2.32';
+const image: string = 'ghcr.io/eeveebot/operator:2.2.33';
 
 const httpApiPort: number = 9000;
 
@@ -86,6 +86,14 @@ export class Operator extends cdk8s.Chart {
       new eevee.BackupRestore.ApiResource,
     );
 
+    operatorRole.allowReadWrite(
+      cdk8splus.ApiResource.custom({ apiGroup: 'eevee.bot', resourceType: 'botmodules/status' }),
+      cdk8splus.ApiResource.custom({ apiGroup: 'eevee.bot', resourceType: 'ipcconfigs/status' }),
+      cdk8splus.ApiResource.custom({ apiGroup: 'eevee.bot', resourceType: 's3stores/status' }),
+      cdk8splus.ApiResource.custom({ apiGroup: 'eevee.bot', resourceType: 'backupschedules/status' }),
+      cdk8splus.ApiResource.custom({ apiGroup: 'eevee.bot', resourceType: 'backuprestores/status' }),
+    );
+
     operatorRole.allowWatch(
       cdk8splus.ApiResource.CONFIG_MAPS,
       cdk8splus.ApiResource.CRON_JOBS,
@@ -128,6 +136,14 @@ export class Operator extends cdk8s.Chart {
       new eevee.S3Store.ApiResource,
       new eevee.BackupSchedule.ApiResource,
       new eevee.BackupRestore.ApiResource,
+    );
+
+    operatorClusterRole.allowReadWrite(
+      cdk8splus.ApiResource.custom({ apiGroup: 'eevee.bot', resourceType: 'botmodules/status' }),
+      cdk8splus.ApiResource.custom({ apiGroup: 'eevee.bot', resourceType: 'ipcconfigs/status' }),
+      cdk8splus.ApiResource.custom({ apiGroup: 'eevee.bot', resourceType: 's3stores/status' }),
+      cdk8splus.ApiResource.custom({ apiGroup: 'eevee.bot', resourceType: 'backupschedules/status' }),
+      cdk8splus.ApiResource.custom({ apiGroup: 'eevee.bot', resourceType: 'backuprestores/status' }),
     );
 
     operatorClusterRole.allowWatch(
