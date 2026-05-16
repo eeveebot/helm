@@ -1,8 +1,8 @@
 {
   "operator": {
     "description": "The eevee Operator",
-    "chart": "2.2.35",
-    "application": "2.2.35"
+    "chart": "2.3.0",
+    "application": "2.3.0"
   },
   "crds": {
     "description": "The eevee CRDs",
@@ -16,7 +16,7 @@
   },
   "eevee": {
     "description": "A Helm chart for eevee.bot ecosystem deployment",
-    "chart": "1.0.2",
-    "application": "1.0.2"
+    "chart": "1.0.3",
+    "application": "1.0.3"
   }
 }
